@@ -249,7 +249,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
   <div class="nav-right">
     <button class="btn-kod" onclick="openKodModal()">🎟️ %20 Kodum</button>
     <button class="btn-ilan" onclick="ilanVerClick()">+ İlan Ver</button>
-    <button class="btn-giris" id="navGirisBtn" onclick="window.location.href='/login.html'">Giriş Yap</button>
+    <button class="btn-giris" id="navGirisBtn" onclick="window.location.href='/Voilago/login.html'">Giriş Yap</button>
     <button class="btn-cikis" id="navCikisBtn" onclick="cikisYap()">Çıkış Yap</button>
   </div>
 </nav>
@@ -408,7 +408,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
         <div class="icon">🔒</div>
         <h3>Giriş Yapmanız Gerekiyor</h3>
         <p id="girisGerekliMsg">Bu işlemi yapabilmek için giriş yapmanız gerekiyor.</p>
-        <button onclick="window.location.href='login.html'">Giriş Yap / Kayıt Ol</button>
+        <button onclick="window.location.href='/Voilago/login.html'">Giriş Yap / Kayıt Ol</button>
       </div>
     </div>
   </div>
@@ -831,7 +831,7 @@ async function submitIlan() {
 async function openKodModal() {
   document.getElementById('kodOverlay').classList.add('open');
   const body=document.getElementById('kodBody');
-  if(!currentUser){body.innerHTML=`<div class="kod-giris"><p>İndirim kodunuzu görmek için giriş yapmanız gerekiyor.</p><button onclick="window.location.href='login.html'">Giriş Yap / Kayıt Ol</button></div>`; return;}
+  if(!currentUser){body.innerHTML=`<div class="kod-giris"><p>İndirim kodunuzu görmek için giriş yapmanız gerekiyor.</p><button onclick="window.location.href='/Voilago/login.html'">Giriş Yap / Kayıt Ol</button></div>`; return;}
   body.innerHTML='<div class="loading">Kod yükleniyor...</div>';
   let {data:profile}=await sb.from('profiles').select('discount_code').eq('id',currentUser.id).single();
   let code;
