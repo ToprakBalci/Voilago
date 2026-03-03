@@ -13,6 +13,7 @@
   --dark: #1a1a1a; --gray: #f4f4f2; --border: #e0e0da; --muted: #888;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
+html { touch-action: pan-x pan-y; }
 body { font-family: 'DM Sans', sans-serif; background: var(--gray); color: #222; min-height: 100vh; }
 nav { background: var(--dark); padding: 0 1.2rem; display: flex; align-items: center; height: 52px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.3); gap: 0.5rem; }
 .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: #fff; letter-spacing: 0.1em; margin-right: 0.5rem; white-space: nowrap; cursor: pointer; }
@@ -861,6 +862,17 @@ function copyKod() {
 ['detayOverlay','ilanOverlay','kodOverlay','detayliAramaOverlay','silOverlay','girisGerekliOverlay','mesajGonderOverlay','sohbetOverlay'].forEach(id=>{
   document.getElementById(id).addEventListener('click',e=>{if(e.target===e.currentTarget) closeOverlay(id);});
 });
+</script>
+<script>
+document.addEventListener('touchstart', function(e) {
+  if(e.touches.length > 1) e.preventDefault();
+}, {passive: false});
+var lastTouch = 0;
+document.addEventListener('touchend', function(e) {
+  var now = Date.now();
+  if(now - lastTouch < 300) e.preventDefault();
+  lastTouch = now;
+}, {passive: false});
 </script>
 </body>
 </html>
