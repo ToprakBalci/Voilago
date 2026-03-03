@@ -227,7 +227,8 @@ main { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
   .route-city { flex: none; padding: 0.35rem 0.45rem; font-size: 0.72rem; }
   .route-city strong { font-size: 0.78rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .route-city span { font-size: 0.62rem; }
-  .route-arrow { text-align: center; font-size: 0.9rem; color: #aaa; padding: 0.1rem 0; line-height: 1; }
+  .route-arrow { text-align: center; color: #aaa; padding: 0.1rem 0; line-height: 1; font-size: 0 !important; }
+  .route-arrow::after { content: "\2193"; font-size: 0.9rem; }
   .card-footer { display: flex; padding: 0.3rem 0.5rem; font-size: 0.62rem; border-top: 1px solid var(--border); }
   .card-footer span:last-child { display: none; }
   .overlay { align-items: flex-end; padding: 0; }
@@ -528,7 +529,6 @@ function renderIlanlar() {
     <div class="card" onclick="openDetay(${i.id})">
       <div class="card-header ${i.type==='is'?'green':'orange'}"><span>${i.type==='is'?'İŞİM VAR ARAÇ ARIYORUM':'ARACIM VAR İŞ ARIYORUM'}</span><span>Detay →</span></div>
       <div class="card-body">
-        <div class="card-desc">${i.aciklama||''}</div>
         <div class="route">
           <div class="route-city"><strong>${i.nereden_ilce||'-'}</strong><span>${i.nereden_sehir||''}</span></div>
           <span class="route-arrow">→</span>
