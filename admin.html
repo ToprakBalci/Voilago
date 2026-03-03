@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Voilago – Admin Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root { --green: #3a7d44; --green2: #4caf50; --red: #ff5252; --orange: #ff9800; --blue: #2196f3; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: #0f0f0f; color: #eee; min-height: 100vh; }
+
+.lock-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+.lock-box { background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 2.5rem; text-align: center; max-width: 340px; width: 100%; }
+.lock-icon { font-size: 3rem; margin-bottom: 1rem; }
+.lock-box h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: #fff; margin-bottom: 0.3rem; }
+.lock-box p { color: #888; font-size: 0.85rem; margin-bottom: 1.5rem; }
+.lock-box input { width: 100%; padding: 0.75rem 1rem; background: #2a2a2a; border: 1.5px solid #444; border-radius: 8px; color: #fff; font-size: 0.9rem; font-family: inherit; outline: none; margin-bottom: 0.8rem; transition: border-color 0.2s; }
+.lock-box input:focus { border-color: var(--green2); }
+.lock-box button { width: 100%; padding: 0.82rem; background: var(--green); color: #fff; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 700; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+.lock-box button:hover { background: var(--green2); }
+.lock-error { color: var(--red); font-size: 0.82rem; margin-top: 0.5rem; min-height: 1.2rem; }
+.lock-loading { color: #888; font-size: 0.82rem; margin-top: 0.5rem; }
+
+.admin-wrap { display: none; }
+nav { background: #111; padding: 0 1.5rem; display: flex; align-items: center; height: 54px; position: sticky; top: 0; border-bottom: 1px solid #2a2a2a; gap: 1rem; z-index: 100; }
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: #fff; }
+.nav-logo span { color: var(--green2); }
+.nav-badge { background: var(--red); color: #fff; font-size: 0.65rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 20px; }
+.nav-right { margin-left: auto; display: flex; align-items: center; gap: 1rem; }
+.nav-email { color: #888; font-size: 0.8rem; }
+.btn-logout { background: #2a2a2a; color: var(--red); border: 1px solid #3a2a2a; padding: 0.35rem 0.8rem; border-radius: 6px; font-size: 0.78rem; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+.btn-logout:hover { background: #3a1a1a; }
+
+.tabs-bar { display: flex; gap: 0.4rem; padding: 1.5rem 1.5rem 0; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid #2a2a2a; }
+.tab-btn { padding: 0.55rem 1.2rem; background: transparent; border: 1px solid transparent; border-bottom: none; border-radius: 8px 8px 0 0; color: #666; font-size: 0.85rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+.tab-btn.active { background: #1a1a1a; border-color: #2a2a2a; color: #fff; margin-bottom: -1px; }
+.tab-btn:hover:not(.active) { color: #aaa; }
+
+main { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+h1 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 0.3rem; }
+.subtitle { color: #666; font-size: 0.85rem; margin-bottom: 2rem; }
+
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+.stat-card { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 10px; padding: 1.2rem; transition: border-color 0.2s; }
+.stat-card:hover { border-color: #3a3a3a; }
+.stat-card .icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.stat-card .num { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--green2); }
+.stat-card .num.red { color: var(--red); }
+.stat-card .num.orange { color: var(--orange); }
+.stat-card .num.blue { color: var(--blue); }
+.stat-card .label { font-size: 0.75rem; color: #666; text-transform: uppercase; margin-top: 0.2rem; }
+
+.section-header { display: flex; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+.section-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: #ccc; display: flex; align-items: center; gap: 0.6rem; }
+.section-title span { background: #2a2a2a; color: #888; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 20px; font-family: 'DM Sans', sans-serif; }
+.section-actions { margin-left: auto; display: flex; gap: 0.5rem; }
+.refresh-btn { background: #2a2a2a; color: #aaa; border: 1px solid #333; padding: 0.4rem 0.9rem; border-radius: 6px; font-size: 0.78rem; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+.refresh-btn:hover { background: #333; }
+
+.filters { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+.filter-input { padding: 0.45rem 0.9rem; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 6px; color: #eee; font-size: 0.82rem; font-family: inherit; outline: none; min-width: 180px; }
+.filter-input:focus { border-color: var(--green2); }
+.filter-select { padding: 0.45rem 0.9rem; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 6px; color: #eee; font-size: 0.82rem; font-family: inherit; outline: none; cursor: pointer; }
+
+.table-wrap { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 10px; overflow: hidden; margin-bottom: 2rem; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+thead { background: #222; }
+thead th { padding: 0.75rem 1rem; text-align: left; color: #888; font-size: 0.72rem; text-transform: uppercase; font-weight: 600; border-bottom: 1px solid #2a2a2a; white-space: nowrap; cursor: pointer; user-select: none; }
+thead th:hover { color: #ccc; }
+tbody td { padding: 0.75rem 1rem; border-bottom: 1px solid #222; color: #ccc; vertical-align: middle; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: #222; }
+
+.badge { display: inline-block; font-size: 0.68rem; font-weight: 700; padding: 0.15rem 0.55rem; border-radius: 20px; text-transform: uppercase; }
+.badge-green { background: #1b5e20; color: #a5d6a7; }
+.badge-orange { background: #4e2900; color: #ffcc80; }
+.badge-blue { background: #0d3a6e; color: #90caf9; }
+.badge-red { background: #4a1010; color: #ff8a8a; }
+
+.btn-sil { padding: 0.3rem 0.7rem; background: #2a1a1a; color: var(--red); border: 1px solid #3a2a2a; border-radius: 5px; font-size: 0.75rem; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+.btn-sil:hover { background: #3a1a1a; }
+.btn-ban { padding: 0.3rem 0.7rem; background: #2a1a00; color: var(--orange); border: 1px solid #3a2a00; border-radius: 5px; font-size: 0.75rem; cursor: pointer; font-family: inherit; transition: background 0.2s; margin-left: 4px; }
+.btn-ban:hover { background: #3a2a00; }
+
+.sure-bar { display: flex; align-items: center; gap: 0.5rem; }
+.sure-label { font-size: 0.8rem; color: #888; white-space: nowrap; }
+.sure-dot { width: 8px; height: 8px; border-radius: 50%; background: #333; flex-shrink: 0; }
+.sure-dot.green { background: var(--green2); }
+.sure-dot.orange { background: var(--orange); }
+.sure-dot.red { background: var(--red); }
+
+.log-item { display: flex; align-items: flex-start; gap: 0.8rem; padding: 0.75rem 0; border-bottom: 1px solid #1e1e1e; }
+.log-item:last-child { border-bottom: none; }
+.log-icon { font-size: 1rem; width: 28px; height: 28px; background: #2a2a2a; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.log-text { flex: 1; font-size: 0.82rem; color: #aaa; line-height: 1.5; }
+.log-text strong { color: #eee; }
+.log-time { font-size: 0.72rem; color: #555; white-space: nowrap; }
+
+.empty-row td { text-align: center; padding: 2rem; color: #555; }
+
+.toast { position: fixed; bottom: 1.5rem; right: 1.5rem; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 0.8rem 1.2rem; font-size: 0.85rem; color: #eee; z-index: 999; display: none; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+.toast.show { display: block; animation: slideIn 0.3s ease; }
+@keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; align-items: center; justify-content: center; }
+.modal-bg.show { display: flex; }
+.modal { background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 1.5rem; max-width: 480px; width: 90%; }
+.modal h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; margin-bottom: 0.5rem; }
+.modal p { font-size: 0.85rem; color: #888; margin-bottom: 1.2rem; line-height: 1.6; }
+.modal-row { display: flex; gap: 0.5rem; justify-content: flex-end; }
+.modal .btn-cancel { padding: 0.55rem 1rem; background: #2a2a2a; color: #aaa; border: 1px solid #333; border-radius: 6px; font-size: 0.85rem; cursor: pointer; font-family: inherit; }
+.modal .btn-confirm { padding: 0.55rem 1rem; background: #4a1010; color: var(--red); border: 1px solid #6a2020; border-radius: 6px; font-size: 0.85rem; cursor: pointer; font-family: inherit; font-weight: 700; }
+
+/* GRAFİK */
+.chart-container { padding: 1.2rem; }
+.chart-bars { display: flex; gap: 6px; align-items: flex-end; height: 80px; }
+.chart-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.bar { background: var(--green); border-radius: 3px 3px 0 0; width: 100%; opacity: 0.75; transition: opacity 0.2s; min-height: 4px; }
+.bar:hover { opacity: 1; }
+.bar.today { background: var(--green2); opacity: 1; }
+.chart-day-count { font-size: 0.65rem; color: #4caf50; font-weight: 700; font-family: 'Bebas Neue', sans-serif; min-height: 14px; }
+.chart-day-count.zero { color: #444; }
+.chart-labels { display: flex; gap: 6px; margin-top: 2px; }
+.chart-label { flex: 1; text-align: center; font-size: 0.65rem; color: #555; }
+.chart-label.today { color: #4caf50; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- LOCK SCREEN -->
+<div class="lock-screen" id="lockScreen">
+  <div class="lock-box">
+    <div class="lock-icon">🔐</div>
+    <h2>Admin Panel</h2>
+    <p>Bu sayfa sadece yetkili kişilere özeldir.</p>
+    <input type="email" id="adminEmail" placeholder="E-posta adresiniz" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <input type="password" id="adminPass" placeholder="Şifreniz" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <button onclick="doLogin()" id="loginBtn">Giriş Yap</button>
+    <div class="lock-error" id="lockError"></div>
+    <div class="lock-loading" id="lockLoading" style="display:none">Oturum kontrol ediliyor...</div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-wrap" id="adminWrap">
+  <nav>
+    <span class="nav-logo">VOI<span>LAGO</span></span>
+    <span class="nav-badge">🛡️ Admin</span>
+    <div class="nav-right">
+      <span class="nav-email" id="adminName"></span>
+      <button class="btn-logout" onclick="doLogout()">Çıkış Yap</button>
+    </div>
+  </nav>
+
+  <div class="tabs-bar">
+    <button class="tab-btn active" onclick="switchTab('genel', this)">📊 Genel Bakış</button>
+    <button class="tab-btn" onclick="switchTab('uyeler', this)">👥 Üyeler</button>
+    <button class="tab-btn" onclick="switchTab('ilanlar', this)">📋 İlanlar</button>
+    <button class="tab-btn" onclick="switchTab('aktivite', this)">🕒 Aktivite</button>
+  </div>
+
+  <main>
+
+    <!-- TAB: GENEL -->
+    <div class="tab-content active" id="tab-genel">
+      <h1>Admin Paneli</h1>
+      <div class="subtitle" id="lastUpdate"></div>
+
+      <div class="stats-grid">
+        <div class="stat-card"><div class="icon">👥</div><div class="num" id="statUye">-</div><div class="label">Kayıtlı Üye</div></div>
+        <div class="stat-card"><div class="icon">🆕</div><div class="num" id="statYeniUye">-</div><div class="label">Bu Ay Üye</div></div>
+        <div class="stat-card"><div class="icon">📋</div><div class="num" id="statIlan">-</div><div class="label">Toplam İlan</div></div>
+        <div class="stat-card"><div class="icon">🟢</div><div class="num" id="statIs">-</div><div class="label">İş İlanı</div></div>
+        <div class="stat-card"><div class="icon">🟠</div><div class="num" id="statArac">-</div><div class="label">Araç İlanı</div></div>
+        <div class="stat-card"><div class="icon">📅</div><div class="num blue" id="statBugun">-</div><div class="label">Bugün Eklenen</div></div>
+        <div class="stat-card"><div class="icon">📅</div><div class="num orange" id="statBuHafta">-</div><div class="label">Bu Hafta</div></div>
+        <div class="stat-card"><div class="icon">⏱️</div><div class="num" id="statOrtSure">-</div><div class="label">Ort. Üyelik (Gün)</div></div>
+      </div>
+
+      <div class="section-header">
+        <div class="section-title">📈 Son 7 Gün İlan Aktivitesi</div>
+      </div>
+      <div class="table-wrap">
+        <div class="chart-container">
+          <div class="chart-bars" id="chartBars"></div>
+          <div class="chart-labels" id="chartLabels"></div>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <div class="section-title">🔴 Son Silinen İlanlar <span id="silinCount">0</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>İlan</th><th>Silen</th><th>Zaman</th></tr></thead>
+          <tbody id="silinTable"><tr class="empty-row"><td colspan="3">Henüz silinen ilan yok</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB: ÜYELER -->
+    <div class="tab-content" id="tab-uyeler">
+      <div class="section-header">
+        <div class="section-title">👥 Tüm Üyeler <span id="uyeCount">0</span></div>
+        <div class="section-actions">
+          <button class="refresh-btn" onclick="loadData()">🔄 Yenile</button>
+        </div>
+      </div>
+      <div class="filters">
+        <input class="filter-input" id="uyeSearch" placeholder="🔍 İsim veya e-posta ara..." oninput="filterUyeler()"/>
+        <select class="filter-select" id="uyeSort" onchange="filterUyeler()">
+          <option value="yeni">En Yeni Üye</option>
+          <option value="eski">En Eski Üye</option>
+          <option value="ilan">En Çok İlan</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Ad / E-posta</th>
+              <th>Kayıt Tarihi</th>
+              <th>Üyelik Süresi</th>
+              <th>Son Giriş</th>
+              <th>İlan Sayısı</th>
+              <th>Telefon</th>
+              <th>İşlem</th>
+            </tr>
+          </thead>
+          <tbody id="uyeTable"><tr class="empty-row"><td colspan="7">Yükleniyor...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB: İLANLAR -->
+    <div class="tab-content" id="tab-ilanlar">
+      <div class="section-header">
+        <div class="section-title">📋 Tüm İlanlar <span id="ilanCount">0</span></div>
+        <div class="section-actions">
+          <button class="refresh-btn" onclick="loadData()">🔄 Yenile</button>
+        </div>
+      </div>
+      <div class="filters">
+        <input class="filter-input" id="ilanSearch" placeholder="🔍 İlan ara..." oninput="filterIlanlar()"/>
+        <select class="filter-select" id="ilanTur" onchange="filterIlanlar()">
+          <option value="">Tümü</option>
+          <option value="is">İş İlanları</option>
+          <option value="arac">Araç İlanları</option>
+        </select>
+        <select class="filter-select" id="ilanSort" onchange="filterIlanlar()">
+          <option value="yeni">En Yeni</option>
+          <option value="eski">En Eski</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Tür</th>
+              <th>Açıklama</th>
+              <th>Güzergah</th>
+              <th>İlan Veren</th>
+              <th>Telefon</th>
+              <th>Tarih</th>
+              <th>Sil</th>
+            </tr>
+          </thead>
+          <tbody id="ilanTable"><tr class="empty-row"><td colspan="7">Yükleniyor...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB: AKTİVİTE -->
+    <div class="tab-content" id="tab-aktivite">
+      <div class="section-header">
+        <div class="section-title">🕒 Aktivite Günlüğü</div>
+        <div class="section-actions">
+          <button class="refresh-btn" onclick="loadData()">🔄 Yenile</button>
+        </div>
+      </div>
+      <div class="table-wrap" style="padding:0.5rem 1rem;">
+        <div id="aktiviteLog"><p style="color:#555;padding:1rem;text-align:center;">Yükleniyor...</p></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- SİLME MODAL -->
+<div class="modal-bg" id="deleteModal">
+  <div class="modal">
+    <h3>🗑️ İlanı Sil</h3>
+    <p>Bu ilanı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.</p>
+    <div class="modal-row">
+      <button class="btn-cancel" onclick="closeModal()">İptal</button>
+      <button class="btn-confirm" id="confirmSilBtn">Evet, Sil</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const ADMIN_EMAIL = 'ttoprakbalci@gmail.com';
+const { createClient } = supabase;
+const sb = createClient('https://mvecoktdgcalobeeesjz.supabase.co','sb_publishable_DJ3IS9dzeavUfKm5xP_5hA_qBCDg1NF');
+
+let allIlanlar = [];
+let allProfiles = [];
+let allAuthUsers = []; // gerçek auth.users
+let silinmisler = JSON.parse(localStorage.getItem('silinmis_ilanlar') || '[]');
+let bekleyenSilId = null;
+
+window.addEventListener('load', async () => {
+  document.getElementById('lockLoading').style.display = 'block';
+  const { data: { session } } = await sb.auth.getSession();
+  document.getElementById('lockLoading').style.display = 'none';
+  if (session && session.user.email === ADMIN_EMAIL) {
+    showPanel(session.user.email);
+  }
+});
+
+async function doLogin() {
+  const email = document.getElementById('adminEmail').value.trim();
+  const pass = document.getElementById('adminPass').value;
+  const err = document.getElementById('lockError');
+  const btn = document.getElementById('loginBtn');
+  err.textContent = '';
+  if (email !== ADMIN_EMAIL) { err.textContent = '⛔ Bu panele erişim yetkiniz yok.'; return; }
+  btn.textContent = 'Giriş yapılıyor...'; btn.disabled = true;
+  const { error } = await sb.auth.signInWithPassword({ email, password: pass });
+  btn.textContent = 'Giriş Yap'; btn.disabled = false;
+  if (error) { err.textContent = '❌ E-posta veya şifre hatalı.'; return; }
+  showPanel(email);
+}
+
+async function doLogout() {
+  await sb.auth.signOut();
+  document.getElementById('adminWrap').style.display = 'none';
+  document.getElementById('lockScreen').style.display = 'flex';
+  document.getElementById('adminPass').value = '';
+}
+
+function showPanel(email) {
+  document.getElementById('lockScreen').style.display = 'none';
+  document.getElementById('adminWrap').style.display = 'block';
+  document.getElementById('adminName').textContent = '👤 ' + email;
+  loadData();
+}
+
+async function loadData() {
+  // İlanları çek
+  const { data: ilanlar } = await sb.from('ilanlar').select('*').order('created_at', { ascending: false });
+  allIlanlar = ilanlar || [];
+
+  // Profiles çek
+  const { data: profiles } = await sb.from('profiles').select('*').order('created_at', { ascending: false });
+  allProfiles = profiles || [];
+
+  // Auth users sayısını profiles üzerinden hesapla (admin API olmadan)
+  // profiles tablosu her kayıt olan kullanıcıyı içeriyor
+  allAuthUsers = allProfiles;
+
+  renderStats();
+  renderIlanlar();
+  renderUyeler();
+  renderChart();
+  renderAktivite();
+  document.getElementById('lastUpdate').textContent = 'Son güncelleme: ' + new Date().toLocaleString('tr-TR');
+}
+
+function renderStats() {
+  const list = allIlanlar;
+  const bugun = new Date().toISOString().split('T')[0];
+  const haftaOnce = new Date(Date.now() - 7 * 864e5).toISOString();
+  const ayOnce = new Date(Date.now() - 30 * 864e5).toISOString();
+
+  document.getElementById('statIlan').textContent = list.length;
+  document.getElementById('statIs').textContent = list.filter(i => i.type === 'is').length;
+  document.getElementById('statArac').textContent = list.filter(i => i.type === 'arac').length;
+  document.getElementById('statBugun').textContent = list.filter(i => i.created_at?.startsWith(bugun)).length;
+  document.getElementById('statBuHafta').textContent = list.filter(i => i.created_at > haftaOnce).length;
+
+  // Üye sayısı: profiles tablosundaki gerçek kayıtlı kullanıcılar
+  document.getElementById('statUye').textContent = allProfiles.length;
+  document.getElementById('statYeniUye').textContent = allProfiles.filter(p => p.created_at > ayOnce).length;
+
+  const sureler = allProfiles.filter(p => p.created_at).map(p =>
+    Math.floor((Date.now() - new Date(p.created_at)) / 864e5));
+  const ort = sureler.length ? Math.round(sureler.reduce((a,b) => a+b, 0) / sureler.length) : 0;
+  document.getElementById('statOrtSure').textContent = ort;
+
+  document.getElementById('silinCount').textContent = silinmisler.length;
+  document.getElementById('silinTable').innerHTML = silinmisler.length ?
+    silinmisler.slice(0,10).map(s => `<tr>
+      <td><span class="badge badge-red">SİLİNDİ</span> ${s.aciklama || '-'}</td>
+      <td>${s.silen || 'Admin'}</td>
+      <td style="white-space:nowrap;color:#555;">${s.zaman}</td>
+    </tr>`).join('') :
+    '<tr class="empty-row"><td colspan="3">Henüz silinen ilan yok</td></tr>';
+}
+
+function renderIlanlar(liste) {
+  const list = liste || allIlanlar;
+  document.getElementById('ilanCount').textContent = list.length;
+  document.getElementById('ilanTable').innerHTML = list.length ? list.map(i => `
+    <tr id="irow-${i.id}">
+      <td><span class="badge ${i.type==='is'?'badge-green':'badge-orange'}">${i.type==='is'?'İŞ':'ARAÇ'}</span></td>
+      <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${i.aciklama||''}">${i.aciklama||'-'}</td>
+      <td style="white-space:nowrap;">${i.nereden_ilce||'-'} → ${i.nereye_ilce||'-'}</td>
+      <td>${i.ilan_veren||'Anonim'}</td>
+      <td>${i.telefon||'-'}</td>
+      <td style="white-space:nowrap;">${new Date(i.created_at).toLocaleDateString('tr-TR')}</td>
+      <td><button class="btn-sil" onclick="openDeleteModal(${i.id},'${(i.aciklama||'').replace(/'/g,'')}','${i.ilan_veren||'Anonim'}')">🗑️ Sil</button></td>
+    </tr>`).join('') :
+    '<tr class="empty-row"><td colspan="7">Henüz ilan yok</td></tr>';
+}
+
+function renderUyeler(liste) {
+  const profList = liste || allProfiles;
+  const ilanSayilari = {};
+  allIlanlar.forEach(i => { if(i.user_id) ilanSayilari[i.user_id] = (ilanSayilari[i.user_id]||0)+1; });
+  document.getElementById('uyeCount').textContent = profList.length;
+  document.getElementById('uyeTable').innerHTML = profList.length ? profList.map(p => {
+    const sure = p.created_at ? Math.floor((Date.now()-new Date(p.created_at))/864e5) : 0;
+    const sureDot = sure<7?'green':sure<30?'orange':'red';
+    const sureText = sure<1?'Bugün':sure===1?'1 gün':sure<30?`${sure} gün`:sure<365?`${Math.floor(sure/30)} ay`:`${Math.floor(sure/365)} yıl`;
+    const sonGiris = p.last_sign_in ? new Date(p.last_sign_in).toLocaleDateString('tr-TR') : '-';
+    return `<tr>
+      <td>
+        <div style="font-weight:600;color:#eee;">${p.full_name||p.email?.split('@')[0]||'İsimsiz'}</div>
+        <div style="font-size:0.75rem;color:#666;">${p.email||'-'}</div>
+      </td>
+      <td style="white-space:nowrap;">${p.created_at?new Date(p.created_at).toLocaleDateString('tr-TR'):'-'}</td>
+      <td><div class="sure-bar"><div class="sure-dot ${sureDot}"></div><span class="sure-label">${sureText}</span></div></td>
+      <td style="white-space:nowrap;">${sonGiris}</td>
+      <td style="font-family:'Bebas Neue';font-size:1.1rem;color:#4caf50;">${ilanSayilari[p.id]||0}</td>
+      <td>${p.phone||p.telefon||'-'}</td>
+      <td><button class="btn-ban" onclick="banUye('${p.id}','${p.email||''}')">🚫 Sil</button></td>
+    </tr>`;
+  }).join('') : '<tr class="empty-row"><td colspan="7">Henüz üye yok</td></tr>';
+}
+
+// ── GRAFİK — her çubuğun üstünde ilan sayısı yazar ──
+function renderChart() {
+  const barsEl = document.getElementById('chartBars');
+  const labelsEl = document.getElementById('chartLabels');
+  barsEl.innerHTML = '';
+  labelsEl.innerHTML = '';
+
+  const bugun = new Date().toISOString().split('T')[0];
+  const gunler = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date(Date.now() - i * 864e5);
+    gunler.push(d);
+  }
+
+  const counts = gunler.map(d => {
+    const str = d.toISOString().split('T')[0];
+    return allIlanlar.filter(il => il.created_at?.startsWith(str)).length;
+  });
+
+  const max = Math.max(...counts, 1);
+
+  gunler.forEach((d, idx) => {
+    const str = d.toISOString().split('T')[0];
+    const isToday = str === bugun;
+    const pct = Math.max((counts[idx] / max) * 100, 5);
+
+    // Çubuk wrap (sayı + çubuk birlikte)
+    const wrap = document.createElement('div');
+    wrap.className = 'chart-bar-wrap';
+
+    // Üstteki sayı
+    const countEl = document.createElement('div');
+    countEl.className = 'chart-day-count' + (counts[idx] === 0 ? ' zero' : '');
+    countEl.textContent = counts[idx] > 0 ? counts[idx] : '–';
+    countEl.title = `${d.toLocaleDateString('tr-TR')}: ${counts[idx]} ilan`;
+    wrap.appendChild(countEl);
+
+    // Çubuk
+    const bar = document.createElement('div');
+    bar.className = 'bar' + (isToday ? ' today' : '');
+    bar.style.height = pct + '%';
+    bar.title = `${d.toLocaleDateString('tr-TR')}: ${counts[idx]} ilan`;
+    wrap.appendChild(bar);
+
+    barsEl.appendChild(wrap);
+
+    // Alt etiket
+    const lbl = document.createElement('div');
+    lbl.className = 'chart-label' + (isToday ? ' today' : '');
+    lbl.textContent = isToday ? 'Bugün' : d.toLocaleDateString('tr-TR', { day:'2-digit', month:'2-digit' });
+    labelsEl.appendChild(lbl);
+  });
+}
+
+function renderAktivite() {
+  const log = document.getElementById('aktiviteLog');
+  const events = [];
+  allIlanlar.slice(0,15).forEach(i => {
+    events.push({ icon: i.type==='is'?'🟢':'🟠', text:`<strong>${i.ilan_veren||'Anonim'}</strong> yeni bir <strong>${i.type==='is'?'iş':'araç'}</strong> ilanı ekledi → ${i.nereden_ilce||''} ${i.nereye_ilce?'→ '+i.nereye_ilce:''}`, time:new Date(i.created_at).toLocaleString('tr-TR'), ts:new Date(i.created_at).getTime() });
+  });
+  allProfiles.slice(0,10).forEach(p => {
+    if(p.created_at) events.push({ icon:'👤', text:`<strong>${p.full_name||p.email?.split('@')[0]||'Yeni üye'}</strong> sisteme katıldı`, time:new Date(p.created_at).toLocaleString('tr-TR'), ts:new Date(p.created_at).getTime() });
+  });
+  silinmisler.forEach(s => {
+    events.push({ icon:'🗑️', text:`Admin <strong>${s.aciklama||'bir ilan'}</strong> sildi`, time:s.zaman, ts:new Date(s.zamanTs||0).getTime() });
+  });
+  events.sort((a,b) => b.ts-a.ts);
+  log.innerHTML = events.length ? events.map(e=>`
+    <div class="log-item">
+      <div class="log-icon">${e.icon}</div>
+      <div class="log-text">${e.text}</div>
+      <div class="log-time">${e.time}</div>
+    </div>`).join('') : '<p style="color:#555;padding:1rem;text-align:center;">Henüz aktivite yok</p>';
+}
+
+function filterIlanlar() {
+  const q = document.getElementById('ilanSearch').value.toLowerCase();
+  const tur = document.getElementById('ilanTur').value;
+  const sort = document.getElementById('ilanSort').value;
+  let list = [...allIlanlar];
+  if(tur) list = list.filter(i=>i.type===tur);
+  if(q) list = list.filter(i=>(i.aciklama||'').toLowerCase().includes(q)||(i.ilan_veren||'').toLowerCase().includes(q)||(i.telefon||'').includes(q));
+  if(sort==='eski') list.reverse();
+  renderIlanlar(list);
+}
+
+function filterUyeler() {
+  const q = document.getElementById('uyeSearch').value.toLowerCase();
+  const sort = document.getElementById('uyeSort').value;
+  const ilanSayilari = {};
+  allIlanlar.forEach(i=>{ if(i.user_id) ilanSayilari[i.user_id]=(ilanSayilari[i.user_id]||0)+1; });
+  let list = [...allProfiles];
+  if(q) list = list.filter(p=>(p.email||'').toLowerCase().includes(q)||(p.full_name||'').toLowerCase().includes(q));
+  if(sort==='eski') list.reverse();
+  if(sort==='ilan') list.sort((a,b)=>(ilanSayilari[b.id]||0)-(ilanSayilari[a.id]||0));
+  renderUyeler(list);
+}
+
+function openDeleteModal(id, aciklama, ilanVeren) {
+  bekleyenSilId = id;
+  document.getElementById('deleteModal').classList.add('show');
+  document.getElementById('confirmSilBtn').onclick = () => adminSil(id, aciklama, ilanVeren);
+}
+function closeModal() {
+  document.getElementById('deleteModal').classList.remove('show');
+  bekleyenSilId = null;
+}
+
+async function adminSil(id, aciklama, ilanVeren) {
+  closeModal();
+  const { error } = await sb.from('ilanlar').delete().eq('id', id);
+  if(error){ showToast('❌ Hata: '+error.message); return; }
+  silinmisler.unshift({ id, aciklama, ilan_veren:ilanVeren, silen:ADMIN_EMAIL, zaman:new Date().toLocaleString('tr-TR'), zamanTs:Date.now() });
+  if(silinmisler.length>50) silinmisler=silinmisler.slice(0,50);
+  localStorage.setItem('silinmis_ilanlar', JSON.stringify(silinmisler));
+  document.getElementById('irow-'+id)?.remove();
+  allIlanlar = allIlanlar.filter(i=>i.id!==id);
+  renderStats(); renderAktivite();
+  showToast('✅ İlan başarıyla silindi');
+}
+
+async function banUye(id, email) {
+  if(!confirm(`"${email}" kullanıcısının profilini silmek istediğinizden emin misiniz?`)) return;
+  const { error } = await sb.from('profiles').delete().eq('id', id);
+  if(error){ showToast('❌ Hata: '+error.message); return; }
+  allProfiles = allProfiles.filter(p=>p.id!==id);
+  renderUyeler(); renderStats();
+  showToast('✅ Üye profili silindi');
+}
+
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  btn.classList.add('active');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3000);
+}
+
+document.getElementById('deleteModal').addEventListener('click', function(e) {
+  if(e.target===this) closeModal();
+});
+</script>
+</body>
+</html>
