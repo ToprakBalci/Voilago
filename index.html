@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <meta http-equiv="Content-Security-Policy" content="default-src *; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'; img-src * data:; connect-src *;"/>
 <title>Voilago – Servis İlan Platformu</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -195,8 +195,49 @@ main { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
 .giris-gerekli p { color: #666; font-size: 0.88rem; margin-bottom: 1.2rem; }
 .giris-gerekli button { background: var(--green); color: #fff; border: none; padding: 0.75rem 2rem; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; font-family: inherit; width: 100%; }
 
+/* ARAÇ BİLGİSİ SATIRI */
+.card-car-row { font-size: 0.75rem; color: #555; margin-top: 0.5rem; font-weight: 600; }
+
+/* MOBİL */
+@media (max-width: 600px) {
+  nav { padding: 0 0.7rem; height: 48px; }
+  .nav-links { display: none; }
+  .nav-right { gap: 0.4rem; }
+  .btn-ilan { padding: 0.38rem 0.7rem; font-size: 0.75rem; }
+  .btn-giris, .btn-cikis { padding: 0.38rem 0.7rem; font-size: 0.75rem; }
+  .hero { padding: 1.5rem 1rem 1.2rem; }
+  .hero h1 { font-size: 1.6rem; }
+  .toggle-wrap { display: flex; flex-direction: column; width: 100%; max-width: 340px; }
+  .toggle-btn { width: 100%; padding: 0.6rem 1rem; font-size: 0.82rem; }
+  .search-bar { flex-direction: row; }
+  .grid { grid-template-columns: 1fr; gap: 0.8rem; }
+  main { padding: 1rem; }
+  /* Mobil alt bar */
+  .mobile-bottom-bar { display: flex !important; }
+  body { padding-bottom: 60px; }
+}
+@media (min-width: 601px) {
+  .mobile-bottom-bar { display: none !important; }
+}
+
 /* FORM BÖLÜM BAŞLIĞI */
 .form-section-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 1rem 0 0.6rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+
+.mobile-bottom-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--dark); border-top: 1px solid #333;
+  display: none; z-index: 150;
+  height: 56px;
+}
+.mobile-bottom-bar a {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  color: #aaa; font-size: 0.58rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.04em; gap: 2px; cursor: pointer; transition: color 0.15s;
+  text-decoration: none;
+}
+.mobile-bottom-bar a .icon { font-size: 1.2rem; line-height: 1; }
+.mobile-bottom-bar a.active { color: var(--green2); }
+.mobile-bottom-bar a:hover { color: #fff; }
 </style>
 </head>
 <body>
@@ -209,7 +250,6 @@ main { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
     <a id="navBenim" onclick="goPage('benim')">Benim Sayfam</a>
   </div>
   <div class="nav-right">
-    <button class="btn-kod" onclick="openKodModal()">🎟️ %20 Kodum</button>
     <button class="btn-ilan" onclick="ilanVerClick()">+ İlan Ver</button>
     <button class="btn-giris" id="navGirisBtn" onclick="window.location.href='/login.html'">Giriş Yap</button>
     <button class="btn-cikis" id="navCikisBtn" onclick="cikisYap()">Çıkış Yap</button>
@@ -386,6 +426,15 @@ main { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
   </div>
 </div>
 
+<!-- MOBİL ALT BAR -->
+<div class="mobile-bottom-bar" id="mobileBar">
+  <a id="mBarAna" onclick="goPage('home')" class="active"><span class="icon">🏠</span>Ana</a>
+  <a id="mBarAra" onclick="scrollToSearch()"><span class="icon">🔍</span>Ara</a>
+  <a onclick="ilanVerClick()"><span class="icon">➕</span>İlan Ver</a>
+  <a onclick="openDetayliArama()"><span class="icon">⚙️</span>Filtre</a>
+  <a id="mBarProfil" onclick="goPage('benim')"><span class="icon">👤</span>Profil</a>
+</div>
+
 <script>
 const { createClient } = supabase;
 const sb = createClient(
@@ -502,12 +551,11 @@ function renderIlanlar() {
     return;
   }
   grid.innerHTML = filtered.map(i => {
-    // Araç bilgisi tag'leri
-    const carTags = [
-      i.arac_marka ? `<span class="car-tag">🚗 ${i.arac_marka}</span>` : '',
-      i.arac_model ? `<span class="car-tag">${i.arac_model}</span>` : '',
-      i.arac_kapasite ? `<span class="car-tag">👥 ${i.arac_kapasite} kişilik</span>` : ''
-    ].filter(Boolean).join('');
+    const carInfo = [
+      i.arac_marka || '',
+      i.arac_model || '',
+      i.arac_kapasite ? i.arac_kapasite + ' kişilik' : ''
+    ].filter(Boolean).join(' · ');
 
     return `
     <div class="card" onclick="openDetay(${i.id})">
@@ -516,14 +564,13 @@ function renderIlanlar() {
         <span>Detay →</span>
       </div>
       <div class="card-body">
-        <div class="card-desc">${i.aciklama || ''}</div>
         <div class="route">
           <div class="route-city"><strong>${i.nereden_ilce || '-'}</strong><span>${i.nereden_sehir || ''}</span></div>
           <span class="route-arrow">→</span>
           <div class="route-city"><strong>${i.nereye_ilce || '-'}</strong><span>${i.nereye_sehir || ''}</span></div>
         </div>
+        ${carInfo ? `<div class="card-car-row">🚗 ${carInfo}</div>` : ''}
       </div>
-      ${carTags ? `<div class="card-car-info">${carTags}</div>` : ''}
       <div class="card-footer">
         <span>${new Date(i.created_at).toLocaleDateString('tr-TR')}</span>
         <span>${i.ilan_veren || 'Anonim'}</span>
