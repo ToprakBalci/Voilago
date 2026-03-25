@@ -8,18 +8,94 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'DM Sans', sans-serif; background: #f4f4f2; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem; }
-.card { background: #fff; border-radius: 14px; padding: 2.5rem 2rem; width: 100%; max-width: 420px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
-.logo { text-align: center; font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 0.12em; margin-bottom: 0.3rem; color: #1a1a1a; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #f4f4f2;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+.logo {
+  text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.3rem;
+  color: #1a1a1a;
+}
 .logo span { color: #3a7d44; }
 h1 { text-align: center; font-size: 1.35rem; font-weight: 700; color: #111; margin-bottom: 1.6rem; }
 .form-group { margin-bottom: 1rem; }
-.input-wrap { position: relative; }
-input[type="email"], input[type="password"] { width: 100%; padding: 0.85rem 2.8rem 0.85rem 1rem; border: 1.5px solid #ddd; border-radius: 8px; font-size: 0.95rem; color: #111; outline: none; background: #f8f8f6; transition: border-color 0.2s, background 0.2s; font-family: inherit; }
+.input-wrap { position: relative; display: flex; }
+.phone-prefix {
+  padding: 0.85rem 0.75rem;
+  border: 1.5px solid #ddd;
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  background: #f0f0ee;
+  font-size: 0.95rem;
+  color: #444;
+  font-family: inherit;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+input[type="tel"] {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1.5px solid #ddd;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95rem;
+  color: #111;
+  outline: none;
+  background: #f8f8f6;
+  transition: border-color 0.2s, background 0.2s;
+  font-family: inherit;
+}
+input[type="email"], input[type="password"] {
+  width: 100%;
+  padding: 0.85rem 2.8rem 0.85rem 1rem;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #111;
+  outline: none;
+  background: #f8f8f6;
+  transition: border-color 0.2s, background 0.2s;
+  font-family: inherit;
+}
+input[type="text"].otp-input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  letter-spacing: 0.4em;
+  text-align: center;
+  color: #111;
+  outline: none;
+  background: #f8f8f6;
+  transition: border-color 0.2s, background 0.2s;
+  font-family: inherit;
+}
 input:focus { border-color: #3a7d44; background: #fff; }
-input.error { border-color: #e53935; }
+input.error { border-color: #e53935 !important; }
 input::placeholder { color: #bbb; }
-.pw-toggle { position: absolute; right: 0.8rem; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #aaa; display: flex; align-items: center; }
+.pw-toggle {
+  position: absolute; right: 0.8rem; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer; color: #aaa; display: flex; align-items: center;
+}
 .pw-toggle svg { width: 20px; height: 20px; }
 .error-msg { color: #e53935; font-size: 0.78rem; margin-top: 0.3rem; display: none; }
 .row { display: flex; align-items: center; justify-content: space-between; margin: 0.2rem 0 1.2rem; }
@@ -27,7 +103,11 @@ input::placeholder { color: #bbb; }
 .remember input[type="checkbox"] { width: 15px; height: 15px; accent-color: #3a7d44; }
 .forgot { font-size: 0.84rem; color: #3a7d44; text-decoration: none; }
 .forgot:hover { text-decoration: underline; }
-.btn-primary { width: 100%; padding: 0.9rem; background: #3a7d44; color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background 0.15s; font-family: inherit; }
+.btn-primary {
+  width: 100%; padding: 0.9rem; background: #3a7d44; color: #fff; border: none;
+  border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer;
+  transition: background 0.15s; font-family: inherit;
+}
 .btn-primary:hover { background: #4caf50; }
 .btn-primary:disabled { background: #a5d6a7; cursor: not-allowed; }
 .register-row { text-align: center; font-size: 0.88rem; color: #555; margin: 1rem 0; }
@@ -35,44 +115,67 @@ input::placeholder { color: #bbb; }
 .register-row a:hover { text-decoration: underline; }
 .divider { display: flex; align-items: center; gap: 0.8rem; color: #bbb; font-size: 0.75rem; margin: 0.8rem 0; text-transform: uppercase; letter-spacing: 0.05em; }
 .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #eee; }
-.btn-social { width: 100%; padding: 0.75rem; background: #fff; border: 1.5px solid #ddd; border-radius: 8px; font-size: 0.92rem; font-weight: 500; color: #333; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.6rem; margin-bottom: 0.7rem; transition: background 0.15s, border-color 0.15s; font-family: inherit; }
+.btn-social {
+  width: 100%; padding: 0.75rem; background: #fff; border: 1.5px solid #ddd; border-radius: 8px;
+  font-size: 0.92rem; font-weight: 500; color: #333; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+  margin-bottom: 0.7rem; transition: background 0.15s, border-color 0.15s; font-family: inherit;
+}
 .btn-social:hover { background: #f7f7f7; border-color: #bbb; }
 .btn-social svg { width: 20px; height: 20px; }
 .alert { border-radius: 8px; padding: 0.7rem 1rem; font-size: 0.83rem; margin-top: 0.8rem; display: none; line-height: 1.5; }
 .alert.error { background: #fff0f0; border: 1px solid #ffcdd2; color: #c62828; }
 .alert.success { background: #f0fff4; border: 1px solid #c8e6c9; color: #1b5e20; }
+
+/* OTP aşaması */
+#otpStep { display: none; }
+.otp-info { text-align: center; color: #666; font-size: 0.85rem; margin-bottom: 1.2rem; line-height: 1.5; }
+.otp-info strong { color: #3a7d44; }
+.resend-row { text-align: center; margin-top: 0.8rem; font-size: 0.84rem; color: #888; }
+.resend-row a { color: #3a7d44; font-weight: 600; text-decoration: none; cursor: pointer; }
+.resend-row a:hover { text-decoration: underline; }
+
 #registerSection, #forgotSection { display: none; }
 </style>
 </head>
 <body>
 <div class="card">
+
+  <!-- GİRİŞ -->
   <div id="loginSection">
     <div class="logo">VOI<span>LAGO</span></div>
     <h1>Giriş yap</h1>
-    <div class="form-group">
-      <div class="input-wrap">
-        <input type="email" id="email" placeholder="E-posta adresi" autocomplete="email"/>
+
+    <!-- TELEFON ADIMI -->
+    <div id="phoneStep">
+      <div class="form-group">
+        <div class="input-wrap">
+          <span class="phone-prefix">🇹🇷 +90</span>
+          <input type="tel" id="phone" placeholder="5XX XXX XX XX" maxlength="10" autocomplete="tel"/>
+        </div>
+        <div class="error-msg" id="phoneError">Geçerli bir telefon numarası girin.</div>
       </div>
-      <div class="error-msg" id="emailError">E-posta adresinizi girin.</div>
-    </div>
-    <div class="form-group">
-      <div class="input-wrap">
-        <input type="password" id="password" placeholder="Şifre" autocomplete="current-password"/>
-        <button class="pw-toggle" onclick="togglePw('password','eyeIcon')" type="button">
-          <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
-          </svg>
-        </button>
+      <div class="row">
+        <label class="remember"><input type="checkbox" id="remember"/> Oturumum açık kalsın</label>
       </div>
-      <div class="error-msg" id="passwordError">Şifrenizi girin.</div>
+      <button class="btn-primary" id="sendOtpBtn" onclick="handleSendOtp()">📱 SMS Kodu Gönder</button>
+      <div class="alert error" id="phoneAlertError"></div>
+      <div class="alert success" id="phoneAlertSuccess"></div>
     </div>
-    <div class="row">
-      <label class="remember"><input type="checkbox" id="remember"/> Oturumum açık kalsın</label>
-      <a href="#" class="forgot" onclick="showForgot(event)">Şifremi unuttum</a>
+
+    <!-- OTP ADIMI -->
+    <div id="otpStep">
+      <p class="otp-info">📲 <strong id="otpPhoneDisplay"></strong> numarasına 6 haneli doğrulama kodu gönderdik.</p>
+      <div class="form-group">
+        <input type="text" class="otp-input" id="otpCode" placeholder="_ _ _ _ _ _" maxlength="6" inputmode="numeric"/>
+        <div class="error-msg" id="otpError">6 haneli kodu girin.</div>
+      </div>
+      <button class="btn-primary" id="verifyOtpBtn" onclick="handleVerifyOtp()">✅ Kodu Doğrula ve Giriş Yap</button>
+      <div class="alert error" id="otpAlertError"></div>
+      <div class="resend-row">Kod gelmedi mi? <a onclick="handleResend()">Tekrar gönder</a></div>
+      <p class="register-row"><a href="#" onclick="backToPhone(event)">← Numarayı değiştir</a></p>
     </div>
-    <button class="btn-primary" id="loginBtn" onclick="handleLogin()">E-posta ile giriş yap</button>
-    <div class="alert error" id="loginError"></div>
-    <div class="alert success" id="loginSuccess"></div>
+
     <p class="register-row">Henüz hesabın yok mu? <a href="#" onclick="showRegister(event)">Hesap aç ►</a></p>
     <div class="divider">VEYA</div>
     <button class="btn-social" onclick="handleGoogle()">
@@ -81,11 +184,14 @@ input::placeholder { color: #bbb; }
     </button>
   </div>
 
+  <!-- KAYIT -->
   <div id="registerSection">
     <div class="logo">VOI<span>LAGO</span></div>
     <h1>Hesap aç</h1>
     <div class="form-group">
-      <div class="input-wrap"><input type="email" id="regEmail" placeholder="E-posta adresi"/></div>
+      <div class="input-wrap">
+        <input type="email" id="regEmail" placeholder="E-posta adresi"/>
+      </div>
       <div class="error-msg" id="regEmailError"></div>
     </div>
     <div class="form-group">
@@ -110,40 +216,143 @@ input::placeholder { color: #bbb; }
     </button>
   </div>
 
+  <!-- ŞİFRE SIFIRLA -->
   <div id="forgotSection">
     <div class="logo">VOI<span>LAGO</span></div>
     <h1>Şifremi Unuttum</h1>
     <p style="text-align:center;color:#888;font-size:0.85rem;margin-bottom:1.5rem;">E-postana sıfırlama bağlantısı gönderelim</p>
-    <div class="form-group"><input type="email" id="forgotEmail" placeholder="E-posta adresi"/></div>
+    <div class="form-group">
+      <input type="email" id="forgotEmail" placeholder="E-posta adresi"/>
+    </div>
     <button class="btn-primary" onclick="handleForgot()">Sıfırlama Bağlantısı Gönder</button>
     <div class="alert error" id="forgotError"></div>
     <div class="alert success" id="forgotSuccess"></div>
     <p class="register-row"><a href="#" onclick="showLogin(event)">← Geri dön</a></p>
   </div>
+
 </div>
 
 <script>
 const { createClient } = supabase;
-const sb = createClient('https://mvecoktdgcalobeeesjz.supabase.co','sb_publishable_DJ3IS9dzeavUfKm5xP_5hA_qBCDg1NF');
-const BASE = '/Voilago';
+const sb = createClient(
+  'https://mvecoktdgcalobeeesjz.supabase.co',
+  'sb_publishable_DJ3IS9dzeavUfKm5xP_5hA_qBCDg1NF'
+);
 
 window.addEventListener('load', async () => {
   const { data: { session } } = await sb.auth.getSession();
-  if (session) window.location.href = BASE + '/index.html';
+  if (session) window.location.href = 'index.html';
 });
 
-async function handleLogin() {
-  const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value;
-  const btn = document.getElementById('loginBtn');
-  clearErrors();
-  if (!email) { showInputErr('email','emailError','E-posta girin.'); return; }
-  if (!password) { showInputErr('password','passwordError','Şifre girin.'); return; }
-  btn.textContent = 'Giriş yapılıyor...'; btn.disabled = true;
-  const { error } = await sb.auth.signInWithPassword({ email, password });
-  btn.textContent = 'E-posta ile giriş yap'; btn.disabled = false;
-  if (error) { showAlert('loginError', 'E-posta veya şifre hatalı.'); return; }
-  window.location.href = BASE + '/index.html';
+// Sadece rakam girilsin
+document.addEventListener('DOMContentLoaded', () => {
+  const phoneInput = document.getElementById('phone');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', () => {
+      phoneInput.value = phoneInput.value.replace(/\D/g, '');
+    });
+  }
+  const otpInput = document.getElementById('otpCode');
+  if (otpInput) {
+    otpInput.addEventListener('input', () => {
+      otpInput.value = otpInput.value.replace(/\D/g, '');
+    });
+  }
+});
+
+let currentPhone = '';
+
+async function handleSendOtp() {
+  const rawPhone = document.getElementById('phone').value.trim();
+  const btn = document.getElementById('sendOtpBtn');
+
+  clearEl('phoneAlertError');
+  clearEl('phoneAlertSuccess');
+  document.getElementById('phone').classList.remove('error');
+  document.getElementById('phoneError').style.display = 'none';
+
+  if (!rawPhone || rawPhone.length < 10) {
+    document.getElementById('phone').classList.add('error');
+    document.getElementById('phoneError').style.display = 'block';
+    return;
+  }
+
+  // Başında 0 varsa at, +90 ekle
+  const digits = rawPhone.replace(/^0+/, '');
+  currentPhone = '+90' + digits;
+
+  btn.textContent = 'Gönderiliyor...';
+  btn.disabled = true;
+
+  const { error } = await sb.auth.signInWithOtp({ phone: currentPhone });
+
+  btn.textContent = '📱 SMS Kodu Gönder';
+  btn.disabled = false;
+
+  if (error) {
+    showAlert('phoneAlertError', '❌ SMS gönderilemedi: ' + error.message);
+    return;
+  }
+
+  // OTP adımına geç
+  document.getElementById('otpPhoneDisplay').textContent = currentPhone;
+  document.getElementById('phoneStep').style.display = 'none';
+  document.getElementById('otpStep').style.display = 'block';
+}
+
+async function handleVerifyOtp() {
+  const token = document.getElementById('otpCode').value.trim();
+  const btn = document.getElementById('verifyOtpBtn');
+
+  clearEl('otpAlertError');
+  document.getElementById('otpCode').classList.remove('error');
+  document.getElementById('otpError').style.display = 'none';
+
+  if (token.length !== 6) {
+    document.getElementById('otpCode').classList.add('error');
+    document.getElementById('otpError').style.display = 'block';
+    return;
+  }
+
+  btn.textContent = 'Doğrulanıyor...';
+  btn.disabled = true;
+
+  const { error } = await sb.auth.verifyOtp({
+    phone: currentPhone,
+    token,
+    type: 'sms'
+  });
+
+  btn.textContent = '✅ Kodu Doğrula ve Giriş Yap';
+  btn.disabled = false;
+
+  if (error) {
+    showAlert('otpAlertError', '❌ Kod hatalı veya süresi dolmuş. Tekrar deneyin.');
+    return;
+  }
+
+  window.location.href = 'index.html';
+}
+
+async function handleResend() {
+  const { error } = await sb.auth.signInWithOtp({ phone: currentPhone });
+  if (!error) {
+    document.getElementById('otpCode').value = '';
+    clearEl('otpAlertError');
+    const resendRow = document.querySelector('.resend-row');
+    resendRow.innerHTML = '✅ Kod tekrar gönderildi!';
+    setTimeout(() => {
+      resendRow.innerHTML = 'Kod gelmedi mi? <a onclick="handleResend()">Tekrar gönder</a>';
+    }, 4000);
+  }
+}
+
+function backToPhone(e) {
+  e?.preventDefault();
+  document.getElementById('otpStep').style.display = 'none';
+  document.getElementById('phoneStep').style.display = 'block';
+  document.getElementById('otpCode').value = '';
+  clearEl('otpAlertError');
 }
 
 async function handleRegister() {
@@ -152,9 +361,11 @@ async function handleRegister() {
   const btn = document.getElementById('registerBtn');
   if (!email) { showInputErr('regEmail','regEmailError','E-posta girin.'); return; }
   if (password.length < 6) { showInputErr('regPassword','regPasswordError','Şifre en az 6 karakter olmalı.'); return; }
-  btn.textContent = 'Hesap oluşturuluyor...'; btn.disabled = true;
+  btn.textContent = 'Hesap oluşturuluyor...';
+  btn.disabled = true;
   const { error } = await sb.auth.signUp({ email, password });
-  btn.textContent = 'E-posta ile hesap aç'; btn.disabled = false;
+  btn.textContent = 'E-posta ile hesap aç';
+  btn.disabled = false;
   if (error) { showAlert('registerError', error.message.includes('already') ? 'Bu e-posta zaten kayıtlı.' : 'Hata oluştu.'); return; }
   showAlert('registerSuccess', '✅ Hesabın oluşturuldu! E-postanı doğrula, sonra giriş yap.', true);
   setTimeout(() => showLogin(), 3000);
@@ -163,9 +374,7 @@ async function handleRegister() {
 async function handleForgot() {
   const email = document.getElementById('forgotEmail').value.trim();
   if (!email) return;
-  const { error } = await sb.auth.resetPasswordForEmail(email, {
-    redirectTo: window.location.origin + BASE + '/index.html'
-  });
+  const { error } = await sb.auth.resetPasswordForEmail(email);
   if (error) showAlert('forgotError', 'Hata oluştu.');
   else showAlert('forgotSuccess', '✅ Sıfırlama bağlantısı gönderildi!', true);
 }
@@ -173,7 +382,7 @@ async function handleForgot() {
 async function handleGoogle() {
   await sb.auth.signInWithOAuth({
     provider: 'google',
-    options: { redirectTo: window.location.origin + BASE + '/index.html' }
+    options: { redirectTo: window.location.origin + '/index.html' }
   });
 }
 
@@ -194,23 +403,27 @@ function showLogin(e) { e?.preventDefault(); hide('registerSection'); hide('forg
 function showForgot(e) { e?.preventDefault(); hide('loginSection'); show('forgotSection'); }
 function show(id) { document.getElementById(id).style.display = 'block'; }
 function hide(id) { document.getElementById(id).style.display = 'none'; }
+function clearEl(id) { const el = document.getElementById(id); if (el) el.style.display = 'none'; }
 function showAlert(id, msg, success = false) {
   const el = document.getElementById(id);
-  el.textContent = msg; el.className = 'alert ' + (success ? 'success' : 'error'); el.style.display = 'block';
+  el.textContent = msg;
+  el.className = 'alert ' + (success ? 'success' : 'error');
+  el.style.display = 'block';
 }
 function showInputErr(inputId, errId, msg) {
   document.getElementById(inputId)?.classList.add('error');
   const el = document.getElementById(errId);
   if (el) { el.textContent = msg; el.style.display = 'block'; }
 }
-function clearErrors() {
-  ['email','password'].forEach(id => document.getElementById(id)?.classList.remove('error'));
-  ['emailError','passwordError','loginError','loginSuccess'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
-}
+
 document.addEventListener('keydown', e => {
   if (e.key !== 'Enter') return;
-  if (document.getElementById('loginSection').style.display !== 'none') handleLogin();
-  else if (document.getElementById('registerSection').style.display !== 'none') handleRegister();
+  const otpVisible = document.getElementById('otpStep').style.display === 'block';
+  if (otpVisible) { handleVerifyOtp(); return; }
+  const loginVisible = document.getElementById('loginSection').style.display !== 'none';
+  if (loginVisible) { handleSendOtp(); return; }
+  const registerVisible = document.getElementById('registerSection').style.display !== 'none';
+  if (registerVisible) { handleRegister(); }
 });
 </script>
 </body>
