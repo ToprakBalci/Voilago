@@ -222,7 +222,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
     <h1>Servis İlan Platformu</h1>
     <p>İş ilanı ver, araç bul. Araç ilanı ver, iş bul.</p>
     <div class="toggle-wrap">
-      <button class="toggle-btn active-green" id="toggleIs" onclick="setFilter('is')">🟢 İşim Var Araç Arıyorum</button>
+      <button class="toggle-btn" id="toggleIs" onclick="setFilter('is')">🟢 İşim Var Araç Arıyorum</button>
       <button class="toggle-btn" id="toggleArac" onclick="setFilter('arac')">🟠 Aracım Var İş Arıyorum</button>
     </div>
     <div class="search-bar">
@@ -232,7 +232,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
   </div>
   <main>
     <div class="section-header">
-      <span class="section-title" id="sectionTitle">İşim Var – Araç Aranıyor</span>
+      <span class="section-title" id="sectionTitle">Tüm İlanlar</span>
       <span class="count-badge" id="countBadge">0 İlan</span>
     </div>
     <div class="active-filters" id="activeFilters"></div>
@@ -329,6 +329,12 @@ main { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
         <div class="form-group"><label>Giriş Saatine Kadar</label><input type="time" id="fGirisSaatiMax"/></div>
       </div>
       <div class="form-group"><label>Servis Türü</label><input type="text" id="fServisTuruFilter" placeholder="Turizm, Şehirler Arası..."/></div>
+      <div class="filter-grid">
+        <div class="form-group"><label>Araç Markası</label><input type="text" id="fAracMarkaFilter" placeholder="Mercedes"/></div>
+        <div class="form-group"><label>Araç Modeli</label><input type="text" id="fAracModelFilter" placeholder="Sprinter"/></div>
+        <div class="form-group"><label>Min. Koltuk Sayısı</label><input type="number" id="fAracKapasiteMin" placeholder="10" min="1"/></div>
+        <div class="form-group"><label>Max. Koltuk Sayısı</label><input type="number" id="fAracKapasiteMax" placeholder="50" min="1"/></div>
+      </div>
       <div class="form-group">
         <label>İlan Türü</label>
         <select id="fTypeFilter">
@@ -387,7 +393,7 @@ const sb = createClient(
   'sb_publishable_DJ3IS9dzeavUfKm5xP_5hA_qBCDg1NF'
 );
 
-let currentFilter = 'is';
+let currentFilter = '';
 let selectedType = 'is';
 let allIlanlar = [];
 let currentUser = null;
@@ -453,17 +459,24 @@ async function loadIlanlar() {
 }
 
 function setFilter(type) {
-  currentFilter = type;
-  document.getElementById('toggleIs').className = 'toggle-btn' + (type === 'is' ? ' active-green' : '');
-  document.getElementById('toggleArac').className = 'toggle-btn' + (type === 'arac' ? ' active-orange' : '');
-  document.getElementById('sectionTitle').textContent = type === 'is' ? 'İşim Var – Araç Aranıyor' : 'Aracım Var – İş Aranıyor';
+  if (currentFilter === type) {
+    currentFilter = '';
+    document.getElementById('toggleIs').className = 'toggle-btn';
+    document.getElementById('toggleArac').className = 'toggle-btn';
+    document.getElementById('sectionTitle').textContent = 'Tüm İlanlar';
+  } else {
+    currentFilter = type;
+    document.getElementById('toggleIs').className = 'toggle-btn' + (type === 'is' ? ' active-green' : '');
+    document.getElementById('toggleArac').className = 'toggle-btn' + (type === 'arac' ? ' active-orange' : '');
+    document.getElementById('sectionTitle').textContent = type === 'is' ? 'İşim Var – Araç Aranıyor' : 'Aracım Var – İş Aranıyor';
+  }
   renderIlanlar();
 }
 
 function renderIlanlar() {
   const q = (document.getElementById('searchInput').value || '').toLowerCase();
   const filtered = allIlanlar.filter(i => {
-    const typeCheck = activeFilters.type ? i.type === activeFilters.type : i.type === currentFilter;
+    const typeCheck = activeFilters.type ? i.type === activeFilters.type : (currentFilter ? i.type === currentFilter : true);
     if (!typeCheck) return false;
     if (q && ![i.aciklama, i.nereden_ilce, i.nereden_sehir, i.nereye_ilce, i.nereye_sehir, i.ilan_veren].some(f => f && f.toLowerCase().includes(q))) return false;
     if (activeFilters.neredenSehir && !(i.nereden_sehir||'').toLowerCase().includes(activeFilters.neredenSehir.toLowerCase())) return false;
@@ -473,6 +486,10 @@ function renderIlanlar() {
     if (activeFilters.servisTuru && !(i.servis_turu||'').toLowerCase().includes(activeFilters.servisTuru.toLowerCase())) return false;
     if (activeFilters.girisSaatiMin && i.giris_saati && i.giris_saati < activeFilters.girisSaatiMin) return false;
     if (activeFilters.girisSaatiMax && i.giris_saati && i.giris_saati > activeFilters.girisSaatiMax) return false;
+    if (activeFilters.aracMarka && !(i.arac_marka||'').toLowerCase().includes(activeFilters.aracMarka.toLowerCase())) return false;
+    if (activeFilters.aracModel && !(i.arac_model||'').toLowerCase().includes(activeFilters.aracModel.toLowerCase())) return false;
+    if (activeFilters.aracKapasiteMin && i.arac_kapasite && i.arac_kapasite < parseInt(activeFilters.aracKapasiteMin)) return false;
+    if (activeFilters.aracKapasiteMax && i.arac_kapasite && i.arac_kapasite > parseInt(activeFilters.aracKapasiteMax)) return false;
     return true;
   });
 
@@ -526,7 +543,7 @@ function removeFilter(key) { delete activeFilters[key]; renderIlanlar(); }
 
 function applyFilters() {
   activeFilters = {};
-  const ids = { neredenSehir:'fNeredenSehirFilter', nereyeSehir:'fNereyeSehirFilter', neredenIlce:'fNeredenIlceFilter', nereyeIlce:'fNereyeIlceFilter', servisTuru:'fServisTuruFilter', girisSaatiMin:'fGirisSaatiMin', girisSaatiMax:'fGirisSaatiMax', type:'fTypeFilter' };
+  const ids = { neredenSehir:'fNeredenSehirFilter', nereyeSehir:'fNereyeSehirFilter', neredenIlce:'fNeredenIlceFilter', nereyeIlce:'fNereyeIlceFilter', servisTuru:'fServisTuruFilter', girisSaatiMin:'fGirisSaatiMin', girisSaatiMax:'fGirisSaatiMax', type:'fTypeFilter', aracMarka:'fAracMarkaFilter', aracModel:'fAracModelFilter', aracKapasiteMin:'fAracKapasiteMin', aracKapasiteMax:'fAracKapasiteMax' };
   Object.entries(ids).forEach(([k,id]) => { const v = document.getElementById(id).value.trim(); if (v) activeFilters[k] = v; });
   closeOverlay('detayliAramaOverlay');
   goPage('home');
@@ -536,7 +553,7 @@ function applyFilters() {
 
 function clearFilters() {
   activeFilters = {};
-  ['fNeredenSehirFilter','fNereyeSehirFilter','fNeredenIlceFilter','fNereyeIlceFilter','fServisTuruFilter','fGirisSaatiMin','fGirisSaatiMax'].forEach(id => document.getElementById(id).value = '');
+  ['fNeredenSehirFilter','fNereyeSehirFilter','fNeredenIlceFilter','fNereyeIlceFilter','fServisTuruFilter','fGirisSaatiMin','fGirisSaatiMax','fAracMarkaFilter','fAracModelFilter','fAracKapasiteMin','fAracKapasiteMax'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('fTypeFilter').value = '';
   renderIlanlar();
 }
