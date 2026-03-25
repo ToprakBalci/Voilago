@@ -52,10 +52,13 @@ nav {
 .hero { background: var(--dark); padding: 2.5rem 1.5rem 2rem; text-align: center; }
 .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem, 6vw, 3.2rem); color: #fff; letter-spacing: 0.06em; margin-bottom: 0.4rem; }
 .hero p { color: #aaa; font-size: 0.9rem; margin-bottom: 1.8rem; }
-.toggle-wrap { display: inline-flex; background: #2a2a2a; border-radius: 8px; padding: 4px; gap: 4px; margin-bottom: 1.5rem; }
-.toggle-btn { padding: 0.55rem 1.4rem; border: none; border-radius: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; color: #aaa; background: transparent; font-family: inherit; }
+
+/* Toggle butonları YAN YANA */
+.toggle-wrap { display: inline-flex; background: #2a2a2a; border-radius: 8px; padding: 4px; gap: 4px; margin-bottom: 1.5rem; flex-direction: row; }
+.toggle-btn { padding: 0.55rem 1.4rem; border: none; border-radius: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; color: #aaa; background: transparent; font-family: inherit; white-space: nowrap; }
 .toggle-btn.active-green { background: var(--green); color: #fff; }
 .toggle-btn.active-orange { background: var(--orange); color: #fff; }
+
 .search-bar { display: flex; max-width: 560px; margin: 0 auto; }
 .search-bar input { flex: 1; padding: 0.72rem 1rem; border: none; border-radius: 6px 0 0 6px; font-size: 0.9rem; outline: none; font-family: inherit; }
 .search-bar button { padding: 0.72rem 1.3rem; background: var(--green); color: #fff; border: none; border-radius: 0 6px 6px 0; font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: background 0.15s; font-family: inherit; }
@@ -79,7 +82,6 @@ main { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
 .route-city span { color: var(--muted); font-size: 0.7rem; }
 .route-arrow { color: var(--muted); }
 .card-footer { border-top: 1px solid var(--border); padding: 0.55rem 1rem; display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--muted); }
-/* ARABA BİLGİLERİ KARTI */
 .card-car-info { border-top: 1px solid var(--border); padding: 0.5rem 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
 .car-tag { background: #f4f4f2; border-radius: 4px; padding: 0.2rem 0.6rem; font-size: 0.7rem; font-weight: 600; color: #555; }
 .empty { text-align: center; padding: 3rem 1rem; color: var(--muted); grid-column: 1/-1; }
@@ -95,18 +97,41 @@ main { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
 .modal-head.gold { background: linear-gradient(135deg, #f5a623, #f7c34a); color: #333; }
 .modal-head.blue { background: #1565c0; color: #fff; }
 .modal-head.red { background: #c62828; color: #fff; }
+.modal-head.teal { background: #00796b; color: #fff; }
 .modal-close { background: none; border: none; color: inherit; font-size: 1.4rem; cursor: pointer; line-height: 1; opacity: 0.8; }
 .modal-close:hover { opacity: 1; }
 .modal-body { padding: 1.4rem; }
 
+/* DETAY MODALİ */
 .detail-desc { background: #f8f8f6; border-left: 3px solid var(--green); padding: 1rem; border-radius: 0 8px 8px 0; font-size: 0.88rem; line-height: 1.7; margin-bottom: 1.4rem; color: #333; }
 .detail-desc.orange { border-left-color: var(--orange); }
 .detail-route { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0.8rem; align-items: center; margin-bottom: 1.4rem; text-align: center; }
 .detail-city { background: #f4f4f2; border-radius: 8px; padding: 0.8rem; }
+.detail-city .time-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-bottom: 0.25rem; }
 .detail-city .time { font-size: 1.3rem; font-weight: 700; }
 .detail-city .name { font-size: 0.9rem; font-weight: 700; margin: 0.2rem 0; }
 .detail-city .sub { font-size: 0.72rem; color: var(--muted); }
 .detail-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.8rem; color: #555; border-top: 1px solid var(--border); padding-top: 1rem; }
+
+/* ARA / MESAJ GÖNDER BUTONLARI */
+.detail-actions { display: flex; gap: 0.7rem; margin-top: 1.2rem; }
+.btn-ara { flex: 1; padding: 0.82rem; background: #1565c0; color: #fff; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 700; cursor: pointer; font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: background 0.15s; }
+.btn-ara:hover { background: #1976d2; }
+.btn-mesaj { flex: 1; padding: 0.82rem; background: #00796b; color: #fff; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 700; cursor: pointer; font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: background 0.15s; }
+.btn-mesaj:hover { background: #00897b; }
+
+/* MESAJLAŞMA MODAL */
+.chat-box { display: flex; flex-direction: column; gap: 0.7rem; max-height: 340px; overflow-y: auto; margin-bottom: 1rem; padding: 0.5rem; background: #f4f4f2; border-radius: 8px; }
+.chat-msg { max-width: 80%; padding: 0.6rem 0.9rem; border-radius: 12px; font-size: 0.85rem; line-height: 1.5; }
+.chat-msg.mine { background: #00796b; color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; }
+.chat-msg.theirs { background: #fff; color: #222; align-self: flex-start; border-bottom-left-radius: 2px; border: 1px solid var(--border); }
+.chat-msg .msg-time { font-size: 0.65rem; opacity: 0.7; margin-top: 0.2rem; }
+.chat-input-row { display: flex; gap: 0.5rem; }
+.chat-input-row input { flex: 1; padding: 0.65rem 0.9rem; border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.88rem; font-family: inherit; outline: none; }
+.chat-input-row input:focus { border-color: #00796b; }
+.btn-send { padding: 0.65rem 1.1rem; background: #00796b; color: #fff; border: none; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; font-family: inherit; }
+.btn-send:hover { background: #00897b; }
+.chat-empty { text-align: center; color: var(--muted); font-size: 0.83rem; padding: 1rem 0; }
 
 .type-select { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 1.1rem; }
 .type-opt { padding: 0.75rem; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; text-align: center; font-size: 0.83rem; font-weight: 600; transition: all 0.15s; color: #555; }
@@ -188,17 +213,14 @@ main { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
 .btn-confirm-sil { flex: 1; padding: 0.75rem; background: #c62828; color: #fff; border: none; border-radius: 6px; font-size: 0.88rem; font-weight: 700; cursor: pointer; font-family: inherit; }
 .btn-confirm-sil:hover { background: #b71c1c; }
 
-/* GİRİŞ GEREKLİ UYARI MODAL */
 .giris-gerekli { text-align: center; padding: 1.5rem 0; }
 .giris-gerekli .icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
 .giris-gerekli h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
 .giris-gerekli p { color: #666; font-size: 0.88rem; margin-bottom: 1.2rem; }
 .giris-gerekli button { background: var(--green); color: #fff; border: none; padding: 0.75rem 2rem; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; font-family: inherit; width: 100%; }
 
-/* ARAÇ BİLGİSİ SATIRI */
 .card-car-row { font-size: 0.75rem; color: #555; margin-top: 0.5rem; font-weight: 600; }
 
-/* MOBİL */
 @media (max-width: 600px) {
   nav { padding: 0 0.7rem; height: 48px; }
   .nav-links { display: none; }
@@ -207,20 +229,21 @@ main { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
   .btn-giris, .btn-cikis { padding: 0.38rem 0.7rem; font-size: 0.75rem; }
   .hero { padding: 1.5rem 1rem 1.2rem; }
   .hero h1 { font-size: 1.6rem; }
-  .toggle-wrap { display: flex; flex-direction: column; width: 100%; max-width: 340px; }
-  .toggle-btn { width: 100%; padding: 0.6rem 1rem; font-size: 0.82rem; }
+  /* Toggle mobilde de yan yana */
+  .toggle-wrap { display: flex; flex-direction: row; width: 100%; max-width: 380px; }
+  .toggle-btn { flex: 1; padding: 0.6rem 0.5rem; font-size: 0.75rem; }
   .search-bar { flex-direction: row; }
   .grid { grid-template-columns: 1fr; gap: 0.8rem; }
   main { padding: 1rem; }
-  /* Mobil alt bar */
   .mobile-bottom-bar { display: flex !important; }
   body { padding-bottom: 60px; }
+  .detail-actions { flex-direction: row; }
+  .btn-ara, .btn-mesaj { font-size: 0.85rem; padding: 0.72rem; }
 }
 @media (min-width: 601px) {
   .mobile-bottom-bar { display: none !important; }
 }
 
-/* FORM BÖLÜM BAŞLIĞI */
 .form-section-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 1rem 0 0.6rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
 
 .mobile-bottom-bar {
@@ -296,6 +319,25 @@ main { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
   </div>
 </div>
 
+<!-- MESAJLAŞMA MODAL -->
+<div class="overlay" id="mesajOverlay">
+  <div class="modal" style="max-width:460px;">
+    <div class="modal-head teal">
+      <span id="mesajModalBaslik">💬 Mesaj Gönder</span>
+      <button class="modal-close" onclick="closeOverlay('mesajOverlay')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="chat-box" id="chatBox">
+        <div class="chat-empty">Henüz mesaj yok. İlk mesajı sen gönder!</div>
+      </div>
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" placeholder="Mesajınızı yazın..." onkeydown="if(event.key==='Enter') sendMessage()"/>
+        <button class="btn-send" onclick="sendMessage()">Gönder</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- İLAN VER MODAL -->
 <div class="overlay" id="ilanOverlay">
   <div class="modal">
@@ -323,7 +365,6 @@ main { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
       </div>
       <div class="form-group"><label>Servis Türü</label><input type="text" id="fServisTuru" placeholder="Turizm, Şehirler Arası, Diğer"/></div>
 
-      <!-- ARAÇ BİLGİLERİ -->
       <div class="form-section-title">🚗 Araç Bilgileri</div>
       <div class="form-row-3">
         <div class="form-group"><label>Araç Markası</label><input type="text" id="fAracMarka" placeholder="Mercedes"/></div>
@@ -448,6 +489,12 @@ let allIlanlar = [];
 let currentUser = null;
 let activeFilters = {};
 let silecekId = null;
+
+// Mesajlaşma için basit in-memory store (kullanıcı bazlı)
+// Format: { ilanId_userId: [ {text, mine, time} ] }
+let chatStore = {};
+let currentChatIlanId = null;
+let currentChatTelefon = null;
 
 // ─── BAŞLANGIÇ ─────────────────────────────────
 window.addEventListener('load', async () => {
@@ -709,31 +756,105 @@ function openDetayliArama() { document.getElementById('detayliAramaOverlay').cla
 function openIlanModal() { document.getElementById('ilanOverlay').classList.add('open'); }
 function closeOverlay(id) { document.getElementById(id).classList.remove('open'); }
 
+// ─── DETAY MODAL ───────────────────────────────
 function openDetay(id) {
   const i = allIlanlar.find(x => x.id === id);
   if (!i) return;
   const isIs = i.type === 'is';
   document.getElementById('detayHead').className = 'modal-head ' + (isIs ? 'green' : 'orange');
   document.getElementById('detayType').textContent = isIs ? 'İŞİM VAR ARAÇ ARIYORUM' : 'ARACIM VAR İŞ ARIYORUM';
+
+  const telefon = i.telefon || '';
+  const ilanVeren = i.ilan_veren || 'Anonim';
+
   document.getElementById('detayBody').innerHTML = `
     <div class="detail-desc ${isIs ? '' : 'orange'}">ℹ️ İlan Açıklaması<br/><br/>${i.aciklama || '-'}</div>
     <div class="detail-route">
-      <div class="detail-city"><div class="time">${i.giris_saati || '--:--'}</div><div class="name">${i.nereden_ilce || '-'}</div><div class="sub">${i.nereden_sehir || ''}</div></div>
+      <div class="detail-city">
+        <div class="time-label">Giriş Saati</div>
+        <div class="time">${i.giris_saati || '--:--'}</div>
+        <div class="name">${i.nereden_ilce || '-'}</div>
+        <div class="sub">${i.nereden_sehir || ''}</div>
+      </div>
       <div style="font-size:1.4rem;color:#aaa;">→</div>
-      <div class="detail-city"><div class="time">${i.cikis_saati || '--:--'}</div><div class="name">${i.nereye_ilce || '-'}</div><div class="sub">${i.nereye_sehir || ''}</div></div>
+      <div class="detail-city">
+        <div class="time-label">Çıkış Saati</div>
+        <div class="time">${i.cikis_saati || '--:--'}</div>
+        <div class="name">${i.nereye_ilce || '-'}</div>
+        <div class="sub">${i.nereye_sehir || ''}</div>
+      </div>
     </div>
     <div class="detail-meta">
-      <span>İlan Tarihi: <strong>${new Date(i.created_at).toLocaleDateString('tr-TR')}</strong></span>
-      <span>İlan Veren: <strong>${i.ilan_veren || 'Anonim'}</strong></span>
-      <span>Telefon: <strong>${i.telefon || '-'}</strong></span>
-      <span>Servis Türü: <strong>${i.servis_turu || '-'}</strong></span>
+      <span>İlan Veren: <strong>${ilanVeren}</strong></span>
       ${i.arac_marka ? `<span>Araç Markası: <strong>${i.arac_marka}</strong></span>` : ''}
       ${i.arac_model ? `<span>Araç Modeli: <strong>${i.arac_model}</strong></span>` : ''}
       ${i.arac_kapasite ? `<span>Kaç Kişilik: <strong>${i.arac_kapasite} kişilik</strong></span>` : ''}
+    </div>
+    <div class="detail-actions">
+      <button class="btn-ara" onclick="araClick('${telefon}')">📞 Ara</button>
+      <button class="btn-mesaj" onclick="mesajClick(${i.id}, '${ilanVeren}')">💬 Mesaj Gönder</button>
     </div>`;
+
   document.getElementById('detayOverlay').classList.add('open');
 }
 
+// ─── ARA ───────────────────────────────────────
+function araClick(telefon) {
+  if (!telefon || telefon === '-') {
+    alert('Bu ilanda telefon numarası belirtilmemiş.');
+    return;
+  }
+  // Telefonu temizle, sadece rakam bırak
+  const temiz = telefon.replace(/\D/g, '');
+  window.location.href = 'tel:' + temiz;
+}
+
+// ─── MESAJ GÖNDER ──────────────────────────────
+function mesajClick(ilanId, ilanVeren) {
+  if (!requireLogin('Mesaj gönderebilmek için giriş yapmanız gerekiyor.')) return;
+  currentChatIlanId = ilanId;
+  document.getElementById('mesajModalBaslik').textContent = '💬 ' + ilanVeren + ' ile Mesajlaş';
+  renderChatBox();
+  closeOverlay('detayOverlay');
+  document.getElementById('mesajOverlay').classList.add('open');
+  setTimeout(() => document.getElementById('chatInput').focus(), 200);
+}
+
+function getChatKey() {
+  return 'chat_' + currentChatIlanId + '_' + (currentUser?.id || 'guest');
+}
+
+function renderChatBox() {
+  const key = getChatKey();
+  const mesajlar = chatStore[key] || [];
+  const box = document.getElementById('chatBox');
+  if (!mesajlar.length) {
+    box.innerHTML = '<div class="chat-empty">Henüz mesaj yok. İlk mesajı sen gönder!</div>';
+    return;
+  }
+  box.innerHTML = mesajlar.map(m => `
+    <div class="chat-msg ${m.mine ? 'mine' : 'theirs'}">
+      ${m.text}
+      <div class="msg-time">${m.time}</div>
+    </div>
+  `).join('');
+  box.scrollTop = box.scrollHeight;
+}
+
+function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  const key = getChatKey();
+  if (!chatStore[key]) chatStore[key] = [];
+  const now = new Date();
+  const time = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+  chatStore[key].push({ text, mine: true, time });
+  input.value = '';
+  renderChatBox();
+}
+
+// ─── İLAN VER ──────────────────────────────────
 function selectType(type) {
   selectedType = type;
   document.getElementById('optIs').className = 'type-opt' + (type === 'is' ? ' sel-green' : '');
@@ -816,7 +937,7 @@ function copyKod() {
   setTimeout(() => btn.textContent = '📋 Kopyala', 2000);
 }
 
-['detayOverlay','ilanOverlay','kodOverlay','detayliAramaOverlay','silOverlay','girisGerekliOverlay'].forEach(id => {
+['detayOverlay','ilanOverlay','kodOverlay','detayliAramaOverlay','silOverlay','girisGerekliOverlay','mesajOverlay'].forEach(id => {
   document.getElementById(id).addEventListener('click', e => {
     if (e.target === e.currentTarget) closeOverlay(id);
   });
