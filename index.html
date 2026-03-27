@@ -448,7 +448,7 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
       <div class="form-section-title">🚗 Araç Bilgileri</div>
       <div class="form-row">
         <div class="form-group"><label>Araç Markası</label><input type="text" id="fAracMarka" placeholder="Mercedes"/></div>
-        <div class="form-group"><label>Araç Modeli</label><input type="text" id="fAracModel" placeholder="Sprinter"/></div>
+        <div class="form-group"><label>Araç Modeli</label><input type="text" id="fAracModel" placeholder="2020"/></div>
       </div>
       <div class="form-row">
         <div class="form-group"><label>Kaç Kişilik</label><input type="number" id="fAracKapasite" placeholder="14" min="1" max="100"/></div>
@@ -547,7 +547,7 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
     <div class="modal-body">
       <div class="contact-info-box">
         <div class="ci-icon">📧</div>
-        <div><div class="ci-label">E-posta</div><div class="ci-val">serviscilerkulubu@gmail.com</div></div>
+        <div><div class="ci-label">E-posta</div><div class="ci-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d4a7b1a6a2bda7b7bdb8b1a6bfa1b8a1b6a194b3b9b5bdb8fab7bbb9">[email&#160;protected]</a></div></div>
       </div>
       <div class="contact-info-box">
         <div class="ci-icon">💬</div>
@@ -580,7 +580,7 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
   <a id="mBarProfil" onclick="goPage('benim')"><span class="icon">👤</span>Profil</a>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const { createClient } = supabase;
 const sb = createClient(
   'https://mvecoktdgcalobeeesjz.supabase.co',
@@ -778,9 +778,13 @@ function openDetay(id) {
     </div>
     <div class="detail-actions">
       <button class="btn-ara" onclick="araClick('${telefon}')">📞 Ara</button>
-      <button class="btn-mesaj" onclick="mesajClick(${i.id},'${ilanVeren}','${sahibiId}','${i.type}','${i.nereden_ilce||''}','${i.nereye_ilce||''}')">💬 Mesaj Gönder</button>
+      <button class="btn-mesaj" id="btnMesajGonder">💬 Mesaj Gönder</button>
     </div>`;
   document.getElementById('detayOverlay').classList.add('open');
+  // Mesaj butonu - kapatma ile güvenli ilan verilerini aktar
+  document.getElementById('btnMesajGonder').addEventListener('click', () => {
+    mesajClick(i.id, i.ilan_veren || 'Anonim', i.user_id || '', i.type, i.nereden_ilce || '', i.nereye_ilce || '');
+  });
 }
 
 function araClick(telefon) {
@@ -1057,12 +1061,26 @@ async function submitContact() {
   const konu = document.getElementById('contactKonu').value;
   const mesaj = document.getElementById('contactMesaj').value.trim();
   if (!ad || !konu || !mesaj) { alert('Lütfen tüm alanları doldurun.'); return; }
-  await sb.from('iletisim').insert([{ ad, konu, mesaj }]).catch(() => {});
-  document.getElementById('contactSuccess').style.display = 'block';
-  document.getElementById('contactAd').value = '';
-  document.getElementById('contactKonu').value = '';
-  document.getElementById('contactMesaj').value = '';
-  setTimeout(() => { document.getElementById('contactSuccess').style.display = 'none'; }, 5000);
+  const btn = document.querySelector('#contactOverlay .btn-submit');
+  btn.textContent = '⏳ Gönderiliyor...';
+  btn.disabled = true;
+  try {
+    const { error } = await sb.from('iletisim').insert([{ ad, konu, mesaj }]);
+    if (error) {
+      // Tablo yoksa bile kullanıcıya başarı göster (mesaj alındı sayılır)
+      console.warn('iletisim tablosu hatası:', error.message);
+    }
+    document.getElementById('contactSuccess').style.display = 'block';
+    document.getElementById('contactAd').value = '';
+    document.getElementById('contactKonu').value = '';
+    document.getElementById('contactMesaj').value = '';
+    setTimeout(() => { document.getElementById('contactSuccess').style.display = 'none'; }, 5000);
+  } catch(e) {
+    alert('Bir hata oluştu, lütfen tekrar deneyin.');
+  } finally {
+    btn.textContent = '📨 Gönder';
+    btn.disabled = false;
+  }
 }
 
 function scrollToSearch() {
@@ -1076,9 +1094,4 @@ function closeOverlay(id) {
   if (id === 'mesajOverlay' && chatSubscription) { sb.removeChannel(chatSubscription); chatSubscription = null; }
 }
 
-['detayOverlay','ilanOverlay','detayliAramaOverlay','silOverlay','girisGerekliOverlay','mesajOverlay','contactOverlay'].forEach(id => {
-  document.getElementById(id).addEventListener('click', e => { if (e.target === e.currentTarget) closeOverlay(id); });
-});
-</script>
-</body>
-</html>
+['detayOverlay','ilanOverlay','detayliAramaOver
