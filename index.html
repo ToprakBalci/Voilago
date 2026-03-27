@@ -1094,4 +1094,9 @@ function closeOverlay(id) {
   if (id === 'mesajOverlay' && chatSubscription) { sb.removeChannel(chatSubscription); chatSubscription = null; }
 }
 
-['detayOverlay','ilanOverlay','detayliAramaOver
+['detayOverlay','ilanOverlay','detayliAramaOverlay','silOverlay','girisGerekliOverlay','mesajOverlay','contactOverlay'].forEach(id => {
+  document.getElementById(id).addEventListener('click', e => { if (e.target === e.currentTarget) closeOverlay(id); });
+});
+</script>
+</body>
+</html>
