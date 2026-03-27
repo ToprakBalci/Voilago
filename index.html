@@ -58,8 +58,9 @@ nav {
 .hero h1 { font-size:clamp(1rem,3.5vw,1.5rem); color:var(--text2); font-weight:300; margin-bottom:0.3rem; }
 .hero p { color:var(--muted); font-size:0.85rem; margin-bottom:1.5rem; }
 
-.toggle-wrap { display:inline-flex; background:var(--dark3); border:1px solid var(--border); border-radius:8px; padding:4px; gap:4px; margin-bottom:1.4rem; }
-.toggle-btn { padding:0.52rem 1.3rem; border:none; border-radius:6px; font-size:0.83rem; font-weight:600; cursor:pointer; transition:all 0.2s; color:var(--muted); background:transparent; font-family:inherit; white-space:nowrap; }
+/* Toggle - her zaman yan yana */
+.toggle-wrap { display:inline-flex; flex-direction:row; background:var(--dark3); border:1px solid var(--border); border-radius:8px; padding:4px; gap:4px; margin-bottom:1.4rem; }
+.toggle-btn { padding:0.52rem 1.3rem; border:none; border-radius:6px; font-size:0.83rem; font-weight:600; cursor:pointer; transition:all 0.2s; color:var(--muted); background:transparent; font-family:inherit; white-space:nowrap; flex:1; }
 .toggle-btn.active-green { background:var(--green-dim); color:var(--green-text); border:1px solid #2d5a33; }
 .toggle-btn.active-orange { background:var(--orange-dim); color:var(--orange2); border:1px solid #5a3020; }
 
@@ -116,7 +117,9 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
 .detail-city .sub { font-size:0.72rem; color:var(--muted); }
 .detail-meta { display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; font-size:0.8rem; color:var(--muted); border-top:1px solid var(--border); padding-top:1rem; }
 .detail-meta span strong { color:var(--text); }
-.detail-actions { display:flex; gap:0.7rem; margin-top:1.2rem; }
+
+/* Ara/Mesaj - her zaman yan yana */
+.detail-actions { display:flex; flex-direction:row; gap:0.7rem; margin-top:1.2rem; }
 .btn-ara { flex:1; padding:0.82rem; background:#0d1f3a; color:#64b5f6; border:1.5px solid #1565c0; border-radius:8px; font-size:0.95rem; font-weight:700; cursor:pointer; font-family:inherit; display:flex; align-items:center; justify-content:center; gap:0.5rem; transition:background 0.15s; }
 .btn-ara:hover { background:#1565c0; color:#fff; }
 .btn-mesaj { flex:1; padding:0.82rem; background:#0d2a28; color:#4db6ac; border:1.5px solid #00796b; border-radius:8px; font-size:0.95rem; font-weight:700; cursor:pointer; font-family:inherit; display:flex; align-items:center; justify-content:center; gap:0.5rem; transition:background 0.15s; }
@@ -143,7 +146,6 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
 .form-group select option { background:var(--dark2); }
 .form-group textarea { resize:vertical; min-height:80px; }
 .form-row { display:grid; grid-template-columns:1fr 1fr; gap:0.7rem; }
-.form-row-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.7rem; }
 .form-section-title { font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); margin:1rem 0 0.6rem; padding-bottom:0.4rem; border-bottom:1px solid var(--border); }
 .btn-submit { width:100%; padding:0.85rem; border:none; border-radius:6px; font-size:0.95rem; font-weight:800; cursor:pointer; font-family:inherit; }
 .btn-submit.green { background:linear-gradient(135deg,#2d7a35,#4caf50); color:#fff; }
@@ -241,14 +243,22 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
   .btn-ilan,.btn-giris,.btn-cikis { padding:0.38rem 0.7rem; font-size:0.75rem; }
   .hero { padding:1.5rem 1rem 1.2rem; }
   .hero-logo img { width:65px; height:65px; }
-  .toggle-wrap { width:100%; max-width:380px; }
-  .toggle-btn { flex:1; padding:0.55rem 0.4rem; font-size:0.75rem; }
+  /* Toggle mobilde yan yana küçük font */
+  .toggle-wrap { width:100%; max-width:400px; }
+  .toggle-btn { font-size:0.72rem; padding:0.52rem 0.3rem; }
   .grid { grid-template-columns:1fr; gap:0.8rem; }
   main { padding:1rem; }
   .mobile-bottom-bar { display:flex !important; }
   body { padding-bottom:60px; }
-  .detail-actions { flex-direction:row; }
-  .btn-ara,.btn-mesaj { font-size:0.85rem; padding:0.72rem; }
+  /* Modal mobilde alttan açılır */
+  .overlay { padding:0; align-items:flex-end; }
+  .modal { border-radius:16px 16px 0 0; max-height:92vh; }
+  .modal-body { padding:1rem; }
+  .type-opt { font-size:0.78rem; padding:0.6rem 0.3rem; }
+  /* Ara/Mesaj butonları mobilde küçük ama yan yana */
+  .btn-ara,.btn-mesaj { font-size:0.8rem; padding:0.7rem 0.4rem; gap:0.3rem; }
+  /* Form rows mobilde yan yana kalır */
+  .form-row { grid-template-columns:1fr 1fr; }
 }
 @media(min-width:601px) { .mobile-bottom-bar { display:none !important; } }
 </style>
@@ -357,12 +367,14 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
         <div class="form-group"><label>Giriş Saati</label><input type="time" id="fGiris"/></div>
         <div class="form-group"><label>Çıkış Saati</label><input type="time" id="fCikis"/></div>
       </div>
-      <div class="form-group"><label>Servis Türü</label><input type="text" id="fServisTuru" placeholder="Turizm, Şehirler Arası, Diğer"/></div>
       <div class="form-section-title">🚗 Araç Bilgileri</div>
-      <div class="form-row-3">
+      <div class="form-row">
         <div class="form-group"><label>Araç Markası</label><input type="text" id="fAracMarka" placeholder="Mercedes"/></div>
         <div class="form-group"><label>Araç Modeli</label><input type="text" id="fAracModel" placeholder="Sprinter"/></div>
+      </div>
+      <div class="form-row">
         <div class="form-group"><label>Kaç Kişilik</label><input type="number" id="fAracKapasite" placeholder="14" min="1" max="100"/></div>
+        <div class="form-group"><label>Servis Türü</label><input type="text" id="fServisTuru" placeholder="Turizm, Şehirler Arası..."/></div>
       </div>
       <div class="form-row">
         <div class="form-group"><label>İlan Veren</label><input type="text" id="fIlanVeren" placeholder="Firma veya isminiz"/></div>
@@ -555,7 +567,7 @@ function goPage(page) {
 }
 
 async function loadIlanlar() {
-  const { data, error } = await sb.from('ilanlar').select('*').order('created_at', { ascending: false });
+  const { data } = await sb.from('ilanlar').select('*').order('created_at', { ascending: false });
   allIlanlar = data || [];
   renderIlanlar();
 }
@@ -667,7 +679,7 @@ function openDetay(id) {
     </div>
     <div class="detail-meta">
       <span>İlan Veren: <strong>${ilanVeren}</strong></span>
-      ${i.arac_marka?`<span>Araç: <strong>${i.arac_marka} ${i.arac_model||''}</strong></span>`:''}
+      ${i.arac_marka||i.arac_model?`<span>Araç: <strong>${[i.arac_marka,i.arac_model].filter(Boolean).join(' ')}</strong></span>`:''}
       ${i.arac_kapasite?`<span>Kapasite: <strong>${i.arac_kapasite} kişilik</strong></span>`:''}
       ${i.servis_turu?`<span>Servis: <strong>${i.servis_turu}</strong></span>`:''}
     </div>
@@ -747,7 +759,6 @@ async function sendMessage() {
     mesaj: text
   }).select().single();
   if (error) { console.error(error); input.value = text; return; }
-  // Realtime yoksa manuel ekle
   if (data) appendChatMsg(data);
 }
 
@@ -824,7 +835,7 @@ async function switchProfileTab(tab, ilanlarData) {
         <div class="ilan-item-footer">
           <span>📞 ${i.telefon||'-'}</span>
           <span>🕐 ${i.giris_saati||'--:--'} → ${i.cikis_saati||'--:--'}</span>
-          <span>🚌 ${i.servis_turu||'-'}</span>
+          ${i.servis_turu?`<span>🚌 ${i.servis_turu}</span>`:''}
           ${i.arac_marka?`<span>🚗 ${[i.arac_marka,i.arac_model,i.arac_kapasite?i.arac_kapasite+' kişilik':''].filter(Boolean).join(' ')}</span>`:''}
         </div>
       </div>`).join('')}</div>`;
@@ -840,7 +851,6 @@ async function switchProfileTab(tab, ilanlarData) {
       return;
     }
 
-    // Konuşmaları grupla
     const konusmalar = {};
     mesajlar.forEach(m => {
       const karsitaraf = m.gonderen_id === currentUser.id ? m.alici_id : m.gonderen_id;
@@ -853,11 +863,11 @@ async function switchProfileTab(tab, ilanlarData) {
       const ilan = k.ilan;
       const ilanBaslik = ilan ? `${ilan.nereden_ilce||'?'} → ${ilan.nereye_ilce||'?'}` : 'İlan';
       const ilanVeren = ilan?.ilan_veren || 'Kullanıcı';
-      const initials = ilanVeren.substring(0,2).toUpperCase();
+      const ini = ilanVeren.substring(0,2).toUpperCase();
       const time = new Date(k.created_at).toLocaleDateString('tr-TR');
       const preview = (k.mesaj||'').substring(0,50) + (k.mesaj?.length > 50 ? '...' : '');
       return `<div class="konusma-item" onclick="openKonusmaFromProfile(${k.ilan_id},'${k.karsitaraf}','${ilanVeren}')">
-        <div class="konusma-avatar">${initials}</div>
+        <div class="konusma-avatar">${ini}</div>
         <div class="konusma-info">
           <div class="konusma-name">${ilanVeren}</div>
           <div class="konusma-preview">📍 ${ilanBaslik} · ${preview||'...'}</div>
