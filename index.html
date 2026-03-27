@@ -58,7 +58,6 @@ nav {
 .hero h1 { font-size:clamp(1rem,3.5vw,1.5rem); color:var(--text2); font-weight:300; margin-bottom:0.3rem; }
 .hero p { color:var(--muted); font-size:0.85rem; margin-bottom:1.5rem; }
 
-/* Toggle - her zaman yan yana */
 .toggle-wrap { display:inline-flex; flex-direction:row; background:var(--dark3); border:1px solid var(--border); border-radius:8px; padding:4px; gap:4px; margin-bottom:1.4rem; }
 .toggle-btn { padding:0.52rem 1.3rem; border:none; border-radius:6px; font-size:0.83rem; font-weight:600; cursor:pointer; transition:all 0.2s; color:var(--muted); background:transparent; font-family:inherit; white-space:nowrap; flex:1; }
 .toggle-btn.active-green { background:var(--green-dim); color:var(--green-text); border:1px solid #2d5a33; }
@@ -99,6 +98,10 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
 .modal-head { padding:1rem 1.2rem; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; display:flex; justify-content:space-between; align-items:center; border-radius:14px 14px 0 0; border-bottom:1px solid var(--border); }
 .modal-head.green { background:var(--green-dim); color:var(--green-text); }
 .modal-head.orange { background:var(--orange-dim); color:var(--orange2); }
+
+/* FIX: İlan ver header - site temasına uygun altın/koyu */
+.modal-head.ilan-ver { background: linear-gradient(135deg, #2a1f08, #3a2d10); color: var(--gold); border-bottom: 1px solid rgba(197,160,80,0.25); }
+
 .modal-head.gold { background:linear-gradient(135deg,#2a1f08,#3a2d10); color:var(--gold); }
 .modal-head.blue { background:#0d1f3a; color:#64b5f6; }
 .modal-head.red { background:#3a0d0d; color:#ef9a9a; }
@@ -118,18 +121,26 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
 .detail-meta { display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; font-size:0.8rem; color:var(--muted); border-top:1px solid var(--border); padding-top:1rem; }
 .detail-meta span strong { color:var(--text); }
 
-/* Ara/Mesaj - her zaman yan yana */
 .detail-actions { display:flex; flex-direction:row; gap:0.7rem; margin-top:1.2rem; }
 .btn-ara { flex:1; padding:0.82rem; background:#0d1f3a; color:#64b5f6; border:1.5px solid #1565c0; border-radius:8px; font-size:0.95rem; font-weight:700; cursor:pointer; font-family:inherit; display:flex; align-items:center; justify-content:center; gap:0.5rem; transition:background 0.15s; }
 .btn-ara:hover { background:#1565c0; color:#fff; }
 .btn-mesaj { flex:1; padding:0.82rem; background:#0d2a28; color:#4db6ac; border:1.5px solid #00796b; border-radius:8px; font-size:0.95rem; font-weight:700; cursor:pointer; font-family:inherit; display:flex; align-items:center; justify-content:center; gap:0.5rem; transition:background 0.15s; }
 .btn-mesaj:hover { background:#00796b; color:#fff; }
 
-.chat-box { display:flex; flex-direction:column; gap:0.7rem; max-height:340px; overflow-y:auto; margin-bottom:1rem; padding:0.8rem; background:var(--dark3); border-radius:10px; border:1px solid var(--border); }
+/* Mesaj overlay - tam ekran mobilde */
+.mesaj-overlay-inner { display:flex; flex-direction:column; background:var(--dark2); border:1px solid rgba(197,160,80,0.2); border-radius:14px; width:100%; max-width:520px; height:85vh; max-height:700px; box-shadow:0 20px 60px rgba(0,0,0,0.7); overflow:hidden; }
+.mesaj-head { padding:1rem 1.2rem; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); background:#0d2a28; color:#4db6ac; flex-shrink:0; }
+.mesaj-ilan-info { background:var(--dark3); border-bottom:1px solid var(--border); padding:0.65rem 1rem; display:flex; align-items:center; gap:0.6rem; flex-shrink:0; }
+.mesaj-ilan-badge { font-size:0.68rem; font-weight:700; padding:0.2rem 0.6rem; border-radius:4px; white-space:nowrap; }
+.mesaj-ilan-badge.green { background:var(--green-dim); color:var(--green-text); border:1px solid #2d5a33; }
+.mesaj-ilan-badge.orange { background:var(--orange-dim); color:var(--orange2); border:1px solid #5a3020; }
+.mesaj-ilan-route { font-size:0.78rem; color:var(--text2); flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.chat-box { flex:1; display:flex; flex-direction:column; gap:0.7rem; overflow-y:auto; padding:1rem; background:var(--dark3); }
 .chat-msg { max-width:80%; padding:0.6rem 0.9rem; border-radius:12px; font-size:0.85rem; line-height:1.5; }
 .chat-msg.mine { background:linear-gradient(135deg,#b8902a,#c5a050); color:#0f1117; align-self:flex-end; border-bottom-right-radius:2px; font-weight:600; }
 .chat-msg.theirs { background:var(--dark2); color:var(--text); align-self:flex-start; border-bottom-left-radius:2px; border:1px solid var(--border); }
 .chat-msg .msg-time { font-size:0.65rem; opacity:0.65; margin-top:0.2rem; }
+.chat-input-area { padding:0.8rem 1rem; border-top:1px solid var(--border); background:var(--dark2); flex-shrink:0; }
 .chat-input-row { display:flex; gap:0.5rem; }
 .chat-input-row input { flex:1; padding:0.65rem 0.9rem; border:1.5px solid var(--border); border-radius:8px; font-size:0.88rem; font-family:inherit; outline:none; background:#1e2030; color:var(--text); transition:border-color 0.2s; }
 .chat-input-row input::placeholder { color:#3e4060; }
@@ -159,6 +170,26 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
 .type-opt.sel-green { border-color:#2d7a35; background:var(--green-dim); color:var(--green-text); }
 .type-opt.sel-orange { border-color:#c06020; background:var(--orange-dim); color:var(--orange2); }
 .ilan-alert { display:none; padding:0.7rem; border-radius:6px; font-size:0.83rem; margin-bottom:0.8rem; background:rgba(229,57,53,0.1); border:1px solid rgba(229,57,53,0.3); color:#ef9a9a; }
+
+/* FIX: Nereden/Nereye yan yana, ok ile birleştirilmiş blok */
+.rota-group { margin-bottom:0.9rem; }
+.rota-group label { display:block; font-size:0.72rem; font-weight:700; margin-bottom:0.5rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; }
+.rota-row { display:grid; grid-template-columns:1fr auto 1fr; gap:0; align-items:stretch; background:var(--dark3); border:1.5px solid var(--border); border-radius:8px; overflow:hidden; transition:border-color 0.2s; }
+.rota-row:focus-within { border-color:var(--gold); }
+.rota-col { display:flex; flex-direction:column; gap:0; }
+.rota-col .rota-city-label { font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); padding:0.45rem 0.75rem 0; }
+.rota-col input { background:transparent; border:none; outline:none; padding:0.25rem 0.75rem 0.55rem; font-size:0.88rem; font-family:inherit; color:var(--text); width:100%; }
+.rota-col input::placeholder { color:#3e4060; }
+.rota-divider-line { width:1px; background:var(--border); align-self:stretch; flex-shrink:0; }
+.rota-arrow-center { display:flex; align-items:center; justify-content:center; padding:0 0.5rem; color:var(--gold); font-size:1rem; flex-shrink:0; background:rgba(197,160,80,0.05); }
+
+/* FIX: Saat alanları - text input, el yazısı */
+.saat-row { display:grid; grid-template-columns:1fr 1fr; gap:0.7rem; margin-bottom:0.9rem; }
+.saat-group label { display:block; font-size:0.72rem; font-weight:700; margin-bottom:0.3rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; }
+.saat-group input[type="text"] { width:100%; padding:0.65rem 0.9rem; border:1.5px solid var(--border); border-radius:6px; font-size:0.88rem; font-family:inherit; outline:none; transition:border-color 0.2s; background:#1e2030; color:var(--text); }
+.saat-group input[type="text"]::placeholder { color:#3e4060; }
+.saat-group input[type="text"]:focus { border-color:var(--gold); }
+.saat-hint { font-size:0.65rem; color:var(--muted); margin-top:0.2rem; }
 
 .profile-header { background:var(--dark3); border-bottom:1px solid rgba(197,160,80,0.15); padding:2rem 1.5rem; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap; }
 .profile-header-left { display:flex; align-items:center; gap:1.5rem; }
@@ -230,11 +261,15 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
 .contact-info-box .ci-val { font-size:0.88rem; color:var(--text); }
 .alert-success { background:rgba(197,160,80,0.1); border:1px solid rgba(197,160,80,0.3); color:var(--gold); padding:0.8rem 1rem; border-radius:8px; font-size:0.85rem; display:none; margin-bottom:0.8rem; }
 
-.mobile-bottom-bar { position:fixed; bottom:0; left:0; right:0; background:var(--dark3); border-top:1px solid rgba(197,160,80,0.15); display:none; z-index:150; height:56px; }
-.mobile-bottom-bar a { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--muted); font-size:0.56rem; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; gap:2px; cursor:pointer; transition:color 0.15s; text-decoration:none; }
-.mobile-bottom-bar a .icon { font-size:1.2rem; line-height:1; }
+/* FIX: Mobil alt bar - "Bize Ulaş" eklendi ve görünür */
+.mobile-bottom-bar { position:fixed; bottom:0; left:0; right:0; background:var(--dark3); border-top:1px solid rgba(197,160,80,0.15); display:none; z-index:150; height:60px; }
+.mobile-bottom-bar a { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--muted); font-size:0.52rem; font-weight:600; text-transform:uppercase; letter-spacing:0.03em; gap:2px; cursor:pointer; transition:color 0.15s; text-decoration:none; }
+.mobile-bottom-bar a .icon { font-size:1.15rem; line-height:1; }
 .mobile-bottom-bar a.active { color:var(--gold); }
 .mobile-bottom-bar a:hover { color:var(--text); }
+
+/* Mobil Bize Ulaş floating butonu */
+.mobile-contact-fab { display:none; position:fixed; bottom:68px; right:12px; z-index:140; background:linear-gradient(135deg,#b8902a,#c5a050); color:#0f1117; border:none; border-radius:50px; padding:0.6rem 1rem; font-size:0.75rem; font-weight:800; cursor:pointer; font-family:inherit; box-shadow:0 4px 20px rgba(197,160,80,0.3); align-items:center; gap:0.4rem; }
 
 @media(max-width:600px) {
   nav { padding:0 0.7rem; height:48px; }
@@ -243,24 +278,24 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
   .btn-ilan,.btn-giris,.btn-cikis { padding:0.38rem 0.7rem; font-size:0.75rem; }
   .hero { padding:1.5rem 1rem 1.2rem; }
   .hero-logo img { width:65px; height:65px; }
-  /* Toggle mobilde yan yana küçük font */
   .toggle-wrap { width:100%; max-width:400px; }
   .toggle-btn { font-size:0.72rem; padding:0.52rem 0.3rem; }
   .grid { grid-template-columns:1fr; gap:0.8rem; }
   main { padding:1rem; }
   .mobile-bottom-bar { display:flex !important; }
-  body { padding-bottom:60px; }
+  .mobile-contact-fab { display:flex !important; }
+  body { padding-bottom:65px; }
   /* Modal mobilde alttan açılır */
   .overlay { padding:0; align-items:flex-end; }
   .modal { border-radius:16px 16px 0 0; max-height:92vh; }
   .modal-body { padding:1rem; }
   .type-opt { font-size:0.78rem; padding:0.6rem 0.3rem; }
-  /* Ara/Mesaj butonları mobilde küçük ama yan yana */
   .btn-ara,.btn-mesaj { font-size:0.8rem; padding:0.7rem 0.4rem; gap:0.3rem; }
-  /* Form rows mobilde yan yana kalır */
   .form-row { grid-template-columns:1fr 1fr; }
+  /* Mesaj overlay mobilde tam ekran */
+  .mesaj-overlay-inner { border-radius:16px 16px 0 0; height:92vh; max-height:none; }
 }
-@media(min-width:601px) { .mobile-bottom-bar { display:none !important; } }
+@media(min-width:601px) { .mobile-bottom-bar { display:none !important; } .mobile-contact-fab { display:none !important; } }
 </style>
 </head>
 <body>
@@ -325,15 +360,18 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
   </div>
 </div>
 
-<!-- MESAJ -->
+<!-- MESAJ - yeniden yapılandırıldı, tam ekran sohbet deneyimi -->
 <div class="overlay" id="mesajOverlay">
-  <div class="modal" style="max-width:480px;">
-    <div class="modal-head teal">
+  <div class="mesaj-overlay-inner">
+    <div class="mesaj-head">
       <span id="mesajModalBaslik">💬 Mesajlaş</span>
-      <button class="modal-close" onclick="closeOverlay('mesajOverlay')">×</button>
+      <button class="modal-close" onclick="closeOverlay('mesajOverlay')" style="color:#4db6ac;">×</button>
     </div>
-    <div class="modal-body">
-      <div class="chat-box" id="chatBox"><div class="chat-empty">Henüz mesaj yok. İlk mesajı sen gönder!</div></div>
+    <div class="mesaj-ilan-info" id="mesajIlanInfo"></div>
+    <div class="chat-box" id="chatBox">
+      <div class="chat-empty">Henüz mesaj yok. İlk mesajı sen gönder!</div>
+    </div>
+    <div class="chat-input-area">
       <div class="chat-input-row">
         <input type="text" id="chatInput" placeholder="Mesajınızı yazın..." onkeydown="if(event.key==='Enter') sendMessage()"/>
         <button class="btn-send" onclick="sendMessage()">Gönder</button>
@@ -345,8 +383,9 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
 <!-- İLAN VER -->
 <div class="overlay" id="ilanOverlay">
   <div class="modal">
-    <div class="modal-head green">
-      <span>İlan Ver</span>
+    <!-- FIX: Header rengi site temasına uygun altın/koyu yapıldı -->
+    <div class="modal-head ilan-ver">
+      <span>✦ İlan Ver</span>
       <button class="modal-close" onclick="closeOverlay('ilanOverlay')">×</button>
     </div>
     <div class="modal-body">
@@ -354,19 +393,58 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
         <div class="type-opt sel-green" id="optIs" onclick="selectType('is')">🟢 İşim Var<br/>Araç Arıyorum</div>
         <div class="type-opt" id="optArac" onclick="selectType('arac')">🟠 Aracım Var<br/>İş Arıyorum</div>
       </div>
-      <div class="form-group"><label>İlan Açıklaması *</label><textarea id="fAciklama" placeholder="Detaylı açıklama yazın..."></textarea></div>
-      <div class="form-row">
-        <div class="form-group"><label>Nereden (İlçe/Mahalle)</label><input type="text" id="fNeredenIlce" placeholder="Akçaburgaz Mah."/></div>
-        <div class="form-group"><label>Nereden (Şehir)</label><input type="text" id="fNeredenSehir" placeholder="İstanbul"/></div>
+
+      <div class="form-group">
+        <label>İlan Açıklaması *</label>
+        <textarea id="fAciklama" placeholder="Detaylı açıklama yazın..."></textarea>
       </div>
-      <div class="form-row">
-        <div class="form-group"><label>Nereye (İlçe/Mahalle)</label><input type="text" id="fNereyeIlce" placeholder="İkitelli OSB"/></div>
-        <div class="form-group"><label>Nereye (Şehir)</label><input type="text" id="fNereyeSehir" placeholder="İstanbul"/></div>
+
+      <!-- FIX: Nereden - yan yana birleşik blok -->
+      <div class="rota-group">
+        <label>📍 Nereden</label>
+        <div class="rota-row">
+          <div class="rota-col">
+            <span class="rota-city-label">İlçe / Mahalle</span>
+            <input type="text" id="fNeredenIlce" placeholder="Akçaburgaz Mah."/>
+          </div>
+          <div class="rota-divider-line"></div>
+          <div class="rota-col">
+            <span class="rota-city-label">Şehir</span>
+            <input type="text" id="fNeredenSehir" placeholder="İstanbul"/>
+          </div>
+        </div>
       </div>
-      <div class="form-row">
-        <div class="form-group"><label>Giriş Saati</label><input type="time" id="fGiris"/></div>
-        <div class="form-group"><label>Çıkış Saati</label><input type="time" id="fCikis"/></div>
+
+      <!-- FIX: Nereye - yan yana birleşik blok -->
+      <div class="rota-group">
+        <label>🏁 Nereye</label>
+        <div class="rota-row">
+          <div class="rota-col">
+            <span class="rota-city-label">İlçe / Mahalle</span>
+            <input type="text" id="fNereyeIlce" placeholder="İkitelli OSB"/>
+          </div>
+          <div class="rota-divider-line"></div>
+          <div class="rota-col">
+            <span class="rota-city-label">Şehir</span>
+            <input type="text" id="fNereyeSehir" placeholder="İstanbul"/>
+          </div>
+        </div>
       </div>
+
+      <!-- FIX: Saat alanları - text input, elle yazılsın -->
+      <div class="saat-row">
+        <div class="saat-group">
+          <label>🕐 Giriş Saati</label>
+          <input type="text" id="fGiris" placeholder="08:00" maxlength="5" oninput="saatFormat(this)"/>
+          <div class="saat-hint">Örnek: 08:30</div>
+        </div>
+        <div class="saat-group">
+          <label>🕔 Çıkış Saati</label>
+          <input type="text" id="fCikis" placeholder="18:00" maxlength="5" oninput="saatFormat(this)"/>
+          <div class="saat-hint">Örnek: 17:45</div>
+        </div>
+      </div>
+
       <div class="form-section-title">🚗 Araç Bilgileri</div>
       <div class="form-row">
         <div class="form-group"><label>Araç Markası</label><input type="text" id="fAracMarka" placeholder="Mercedes"/></div>
@@ -399,8 +477,8 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
         <div class="form-group"><label>Nereye (Şehir)</label><input type="text" id="fNereyeSehirFilter" placeholder="Ankara"/></div>
         <div class="form-group"><label>Nereden (İlçe)</label><input type="text" id="fNeredenIlceFilter" placeholder="Kadıköy"/></div>
         <div class="form-group"><label>Nereye (İlçe)</label><input type="text" id="fNereyeIlceFilter" placeholder="Beşiktaş"/></div>
-        <div class="form-group"><label>Giriş Saatinden</label><input type="time" id="fGirisSaatiMin"/></div>
-        <div class="form-group"><label>Giriş Saatine Kadar</label><input type="time" id="fGirisSaatiMax"/></div>
+        <div class="form-group"><label>Giriş Saatinden</label><input type="text" id="fGirisSaatiMin" placeholder="07:00" maxlength="5" oninput="saatFormat(this)"/></div>
+        <div class="form-group"><label>Giriş Saatine Kadar</label><input type="text" id="fGirisSaatiMax" placeholder="09:00" maxlength="5" oninput="saatFormat(this)"/></div>
       </div>
       <div class="form-group"><label>Servis Türü</label><input type="text" id="fServisTuruFilter" placeholder="Turizm, Şehirler Arası..."/></div>
       <div class="filter-grid">
@@ -492,12 +570,13 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
   </div>
 </div>
 
-<!-- MOBİL ALT BAR -->
+<!-- MOBİL ALT BAR - Bize Ulaş eklendi -->
 <div class="mobile-bottom-bar" id="mobileBar">
   <a id="mBarAna" onclick="goPage('home')" class="active"><span class="icon">🏠</span>Ana</a>
   <a onclick="scrollToSearch()"><span class="icon">🔍</span>Ara</a>
   <a onclick="ilanVerClick()"><span class="icon">➕</span>İlan Ver</a>
   <a onclick="openDetayliArama()"><span class="icon">⚙️</span>Filtre</a>
+  <a onclick="openContact()"><span class="icon">📬</span>İletişim</a>
   <a id="mBarProfil" onclick="goPage('benim')"><span class="icon">👤</span>Profil</a>
 </div>
 
@@ -516,8 +595,16 @@ let activeFilters = {};
 let silecekId = null;
 let currentChatIlanId = null;
 let currentChatAliciId = null;
+let currentChatIlan = null;
 let chatSubscription = null;
 let activeProfileTab = 'ilanlar';
+
+// FIX: Saat formatı otomatik ":" ekle
+function saatFormat(input) {
+  let v = input.value.replace(/\D/g, '');
+  if (v.length >= 3) v = v.substring(0,2) + ':' + v.substring(2,4);
+  input.value = v;
+}
 
 window.addEventListener('load', async () => {
   const { data: { session } } = await sb.auth.getSession();
@@ -612,7 +699,7 @@ function renderIlanlar() {
   if (!filtered.length) { grid.innerHTML = `<div class="empty"><div class="empty-icon">📋</div><p>Henüz ilan yok.</p></div>`; return; }
   grid.innerHTML = filtered.map(i => {
     const carInfo = [i.arac_marka||'', i.arac_model||'', i.arac_kapasite ? i.arac_kapasite+' kişilik' : ''].filter(Boolean).join(' · ');
-    return `<div class="card" onclick="openDetay(${i.id})">
+    return `<div class="card" onclick="cardClick(${i.id})">
       <div class="card-header ${i.type==='is'?'green':'orange'}">
         <span>${i.type==='is'?'İŞİM VAR ARAÇ ARIYORUM':'ARACIM VAR İŞ ARIYORUM'}</span>
         <span>Detay →</span>
@@ -631,6 +718,12 @@ function renderIlanlar() {
       </div>
     </div>`;
   }).join('');
+}
+
+// FIX: Karta tıklayınca giriş zorunlu
+function cardClick(id) {
+  if (!requireLogin('İlan detaylarını görmek için giriş yapmanız gerekiyor.')) return;
+  openDetay(id);
 }
 
 function renderFilterTags() {
@@ -685,7 +778,7 @@ function openDetay(id) {
     </div>
     <div class="detail-actions">
       <button class="btn-ara" onclick="araClick('${telefon}')">📞 Ara</button>
-      <button class="btn-mesaj" onclick="mesajClick(${i.id},'${ilanVeren}','${sahibiId}')">💬 Mesaj Gönder</button>
+      <button class="btn-mesaj" onclick="mesajClick(${i.id},'${ilanVeren}','${sahibiId}','${i.type}','${i.nereden_ilce||''}','${i.nereye_ilce||''}')">💬 Mesaj Gönder</button>
     </div>`;
   document.getElementById('detayOverlay').classList.add('open');
 }
@@ -695,11 +788,21 @@ function araClick(telefon) {
   window.location.href = 'tel:' + telefon.replace(/\D/g,'');
 }
 
-async function mesajClick(ilanId, ilanVeren, aliciId) {
+// FIX: Mesaj - hangi ilana tıklandıysa o ilanın bilgisi gösterilsin
+async function mesajClick(ilanId, ilanVeren, aliciId, ilanType, neredenIlce, nereyeIlce) {
   if (!requireLogin('Mesaj gönderebilmek için giriş yapmanız gerekiyor.')) return;
   if (!aliciId || aliciId === currentUser.id) { alert('Kendi ilanınıza mesaj gönderemezsiniz.'); return; }
   currentChatIlanId = ilanId;
   currentChatAliciId = aliciId;
+  currentChatIlan = { ilanVeren, ilanType, neredenIlce, nereyeIlce };
+
+  // İlan bilgisi şeridini güncelle
+  const badge = ilanType === 'is' ? 'green' : 'orange';
+  const badgeText = ilanType === 'is' ? 'İŞİM VAR' : 'ARACIM VAR';
+  document.getElementById('mesajIlanInfo').innerHTML = `
+    <span class="mesaj-ilan-badge ${badge}">${badgeText}</span>
+    <span class="mesaj-ilan-route">📍 ${neredenIlce||'?'} → ${nereyeIlce||'?'} · ${ilanVeren}</span>`;
+
   document.getElementById('mesajModalBaslik').textContent = '💬 ' + ilanVeren + ' ile Mesajlaş';
   closeOverlay('detayOverlay');
   document.getElementById('mesajOverlay').classList.add('open');
@@ -842,7 +945,7 @@ async function switchProfileTab(tab, ilanlarData) {
   } else {
     tabContent.innerHTML = '<div class="chat-loading">Mesajlar yükleniyor...</div>';
     const { data: mesajlar } = await sb.from('mesajlar')
-      .select('*, ilan:ilanlar(id, nereden_ilce, nereye_ilce, ilan_veren, user_id)')
+      .select('*, ilan:ilanlar(id, nereden_ilce, nereye_ilce, ilan_veren, user_id, type)')
       .or(`gonderen_id.eq.${currentUser.id},alici_id.eq.${currentUser.id}`)
       .order('created_at', { ascending: false });
 
@@ -863,10 +966,13 @@ async function switchProfileTab(tab, ilanlarData) {
       const ilan = k.ilan;
       const ilanBaslik = ilan ? `${ilan.nereden_ilce||'?'} → ${ilan.nereye_ilce||'?'}` : 'İlan';
       const ilanVeren = ilan?.ilan_veren || 'Kullanıcı';
+      const ilanType = ilan?.type || 'is';
       const ini = ilanVeren.substring(0,2).toUpperCase();
       const time = new Date(k.created_at).toLocaleDateString('tr-TR');
       const preview = (k.mesaj||'').substring(0,50) + (k.mesaj?.length > 50 ? '...' : '');
-      return `<div class="konusma-item" onclick="openKonusmaFromProfile(${k.ilan_id},'${k.karsitaraf}','${ilanVeren}')">
+      const neredenIlce = ilan?.nereden_ilce || '';
+      const nereyeIlce = ilan?.nereye_ilce || '';
+      return `<div class="konusma-item" onclick="openKonusmaFromProfile(${k.ilan_id},'${k.karsitaraf}','${ilanVeren}','${ilanType}','${neredenIlce}','${nereyeIlce}')">
         <div class="konusma-avatar">${ini}</div>
         <div class="konusma-info">
           <div class="konusma-name">${ilanVeren}</div>
@@ -878,9 +984,17 @@ async function switchProfileTab(tab, ilanlarData) {
   }
 }
 
-async function openKonusmaFromProfile(ilanId, aliciId, ilanVeren) {
+async function openKonusmaFromProfile(ilanId, aliciId, ilanVeren, ilanType, neredenIlce, nereyeIlce) {
   currentChatIlanId = ilanId;
   currentChatAliciId = aliciId;
+
+  // İlan bilgisi şeridini profilden açılırken de doldur
+  const badge = ilanType === 'is' ? 'green' : 'orange';
+  const badgeText = ilanType === 'is' ? 'İŞİM VAR' : 'ARACIM VAR';
+  document.getElementById('mesajIlanInfo').innerHTML = `
+    <span class="mesaj-ilan-badge ${badge}">${badgeText}</span>
+    <span class="mesaj-ilan-route">📍 ${neredenIlce||'?'} → ${nereyeIlce||'?'} · ${ilanVeren}</span>`;
+
   document.getElementById('mesajModalBaslik').textContent = '💬 ' + ilanVeren + ' ile Mesajlaş';
   document.getElementById('mesajOverlay').classList.add('open');
   await loadChat();
@@ -921,8 +1035,8 @@ async function submitIlan() {
     nereden_sehir: document.getElementById('fNeredenSehir').value.trim(),
     nereye_ilce: document.getElementById('fNereyeIlce').value.trim(),
     nereye_sehir: document.getElementById('fNereyeSehir').value.trim(),
-    giris_saati: document.getElementById('fGiris').value,
-    cikis_saati: document.getElementById('fCikis').value,
+    giris_saati: document.getElementById('fGiris').value.trim(),
+    cikis_saati: document.getElementById('fCikis').value.trim(),
     servis_turu: document.getElementById('fServisTuru').value.trim(),
     arac_marka: document.getElementById('fAracMarka').value.trim(),
     arac_model: document.getElementById('fAracModel').value.trim(),
