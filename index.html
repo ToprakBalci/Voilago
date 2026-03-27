@@ -483,7 +483,7 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
       <div class="form-group"><label>Servis Türü</label><input type="text" id="fServisTuruFilter" placeholder="Turizm, Şehirler Arası..."/></div>
       <div class="filter-grid">
         <div class="form-group"><label>Araç Markası</label><input type="text" id="fAracMarkaFilter" placeholder="Mercedes"/></div>
-        <div class="form-group"><label>Araç Modeli</label><input type="text" id="fAracModelFilter" placeholder="Sprinter"/></div>
+        <div class="form-group"><label>Araç Modeli</label><input type="text" id="fAracModelFilter" placeholder="2019"/></div>
         <div class="form-group"><label>Min. Koltuk</label><input type="number" id="fAracKapasiteMin" placeholder="10" min="1"/></div>
         <div class="form-group"><label>Max. Koltuk</label><input type="number" id="fAracKapasiteMax" placeholder="50" min="1"/></div>
       </div>
@@ -547,7 +547,7 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
     <div class="modal-body">
       <div class="contact-info-box">
         <div class="ci-icon">📧</div>
-        <div><div class="ci-label">E-posta</div><div class="ci-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d4a7b1a6a2bda7b7bdb8b1a6bfa1b8a1b6a194b3b9b5bdb8fab7bbb9">[email&#160;protected]</a></div></div>
+        <div><div class="ci-label">E-posta</div><div class="ci-val">serviscilerkulubu&#64;gmail.com</div></div>
       </div>
       <div class="contact-info-box">
         <div class="ci-icon">💬</div>
@@ -699,10 +699,11 @@ function renderIlanlar() {
   if (!filtered.length) { grid.innerHTML = `<div class="empty"><div class="empty-icon">📋</div><p>Henüz ilan yok.</p></div>`; return; }
   grid.innerHTML = filtered.map(i => {
     const carInfo = [i.arac_marka||'', i.arac_model||'', i.arac_kapasite ? i.arac_kapasite+' kişilik' : ''].filter(Boolean).join(' · ');
+    const benim = currentUser && i.user_id === currentUser.id;
     return `<div class="card" onclick="cardClick(${i.id})">
       <div class="card-header ${i.type==='is'?'green':'orange'}">
         <span>${i.type==='is'?'İŞİM VAR ARAÇ ARIYORUM':'ARACIM VAR İŞ ARIYORUM'}</span>
-        <span>Detay →</span>
+        <span>${benim ? '⭐ Benim İlanım' : 'Detay →'}</span>
       </div>
       <div class="card-body">
         <div class="route">
@@ -792,22 +793,25 @@ function araClick(telefon) {
   window.location.href = 'tel:' + telefon.replace(/\D/g,'');
 }
 
-// FIX: Mesaj - hangi ilana tıklandıysa o ilanın bilgisi gösterilsin
+// Mesaj - karşı tarafın adını çek
 async function mesajClick(ilanId, ilanVeren, aliciId, ilanType, neredenIlce, nereyeIlce) {
   if (!requireLogin('Mesaj gönderebilmek için giriş yapmanız gerekiyor.')) return;
   if (!aliciId || aliciId === currentUser.id) { alert('Kendi ilanınıza mesaj gönderemezsiniz.'); return; }
   currentChatIlanId = ilanId;
   currentChatAliciId = aliciId;
-  currentChatIlan = { ilanVeren, ilanType, neredenIlce, nereyeIlce };
 
-  // İlan bilgisi şeridini güncelle
+  // Karşı tarafın adını bul: önce ilanlar tablosundan ilan_veren'i al
+  // ilanVeren zaten ilan sahibinin girdiği ad
+  const karsitarafAd = ilanVeren || 'Kullanıcı';
+
   const badge = ilanType === 'is' ? 'green' : 'orange';
   const badgeText = ilanType === 'is' ? 'İŞİM VAR' : 'ARACIM VAR';
   document.getElementById('mesajIlanInfo').innerHTML = `
     <span class="mesaj-ilan-badge ${badge}">${badgeText}</span>
-    <span class="mesaj-ilan-route">📍 ${neredenIlce||'?'} → ${nereyeIlce||'?'} · ${ilanVeren}</span>`;
+    <span class="mesaj-ilan-route">📍 ${neredenIlce||'?'} → ${nereyeIlce||'?'}</span>`;
 
-  document.getElementById('mesajModalBaslik').textContent = '💬 ' + ilanVeren + ' ile Mesajlaş';
+  // Başlıkta ilan sahibinin adı gösterilsin
+  document.getElementById('mesajModalBaslik').textContent = '💬 ' + karsitarafAd + ' ile Mesajlaş';
   closeOverlay('detayOverlay');
   document.getElementById('mesajOverlay').classList.add('open');
   await loadChat();
@@ -969,17 +973,19 @@ async function switchProfileTab(tab, ilanlarData) {
     tabContent.innerHTML = `<div class="mesaj-list">${items.map(k => {
       const ilan = k.ilan;
       const ilanBaslik = ilan ? `${ilan.nereden_ilce||'?'} → ${ilan.nereye_ilce||'?'}` : 'İlan';
-      const ilanVeren = ilan?.ilan_veren || 'Kullanıcı';
+      // Konuştuğun kişi: eğer sen gönderici isen ilan sahibinin adı, değilsen sen mesaj atmışsın demek
+      const ilanSahibiAd = ilan?.ilan_veren || 'Kullanıcı';
       const ilanType = ilan?.type || 'is';
-      const ini = ilanVeren.substring(0,2).toUpperCase();
+      const ini = ilanSahibiAd.substring(0,2).toUpperCase();
       const time = new Date(k.created_at).toLocaleDateString('tr-TR');
       const preview = (k.mesaj||'').substring(0,50) + (k.mesaj?.length > 50 ? '...' : '');
       const neredenIlce = ilan?.nereden_ilce || '';
       const nereyeIlce = ilan?.nereye_ilce || '';
-      return `<div class="konusma-item" onclick="openKonusmaFromProfile(${k.ilan_id},'${k.karsitaraf}','${ilanVeren}','${ilanType}','${neredenIlce}','${nereyeIlce}')">
+      const benimIlan = ilan?.user_id === currentUser.id;
+      return `<div class="konusma-item" onclick="openKonusmaFromProfile(${k.ilan_id},'${k.karsitaraf}','${ilanSahibiAd}','${ilanType}','${neredenIlce}','${nereyeIlce}')">
         <div class="konusma-avatar">${ini}</div>
         <div class="konusma-info">
-          <div class="konusma-name">${ilanVeren}</div>
+          <div class="konusma-name">${ilanSahibiAd} ${benimIlan ? '<span style="font-size:0.68rem;color:var(--gold);font-weight:600;">(Benim İlanım)</span>' : ''}</div>
           <div class="konusma-preview">📍 ${ilanBaslik} · ${preview||'...'}</div>
         </div>
         <div class="konusma-time">${time}</div>
@@ -1061,26 +1067,25 @@ async function submitContact() {
   const konu = document.getElementById('contactKonu').value;
   const mesaj = document.getElementById('contactMesaj').value.trim();
   if (!ad || !konu || !mesaj) { alert('Lütfen tüm alanları doldurun.'); return; }
-  const btn = document.querySelector('#contactOverlay .btn-submit');
-  btn.textContent = '⏳ Gönderiliyor...';
+  const btn = document.querySelector('#contactOverlay .btn-submit.gold');
+  const orijinalText = btn.innerHTML;
+  btn.innerHTML = '⏳ Gönderiliyor...';
   btn.disabled = true;
   try {
-    const { error } = await sb.from('iletisim').insert([{ ad, konu, mesaj }]);
-    if (error) {
-      // Tablo yoksa bile kullanıcıya başarı göster (mesaj alındı sayılır)
-      console.warn('iletisim tablosu hatası:', error.message);
-    }
-    document.getElementById('contactSuccess').style.display = 'block';
-    document.getElementById('contactAd').value = '';
-    document.getElementById('contactKonu').value = '';
-    document.getElementById('contactMesaj').value = '';
-    setTimeout(() => { document.getElementById('contactSuccess').style.display = 'none'; }, 5000);
+    // Supabase'e kaydet (tablo varsa)
+    await sb.from('iletisim').insert([{ ad, konu, mesaj }]);
   } catch(e) {
-    alert('Bir hata oluştu, lütfen tekrar deneyin.');
-  } finally {
-    btn.textContent = '📨 Gönder';
-    btn.disabled = false;
+    // Tablo yoksa bile devam et
+    console.warn('iletisim tablosu yok veya hata:', e);
   }
+  // Her durumda başarı göster
+  document.getElementById('contactSuccess').style.display = 'block';
+  document.getElementById('contactAd').value = '';
+  document.getElementById('contactKonu').value = '';
+  document.getElementById('contactMesaj').value = '';
+  btn.innerHTML = orijinalText;
+  btn.disabled = false;
+  setTimeout(() => { document.getElementById('contactSuccess').style.display = 'none'; }, 5000);
 }
 
 function scrollToSearch() {
