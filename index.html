@@ -1032,6 +1032,27 @@ function selectType(type) {
   document.getElementById('submitBtn').className = 'btn-submit ' + (type==='arac'?'orange':'green');
 }
 
+function resetIlanForm() {
+  selectedType = 'is';
+  document.getElementById('optIs').className = 'type-opt sel-green';
+  document.getElementById('optArac').className = 'type-opt';
+  document.getElementById('submitBtn').className = 'btn-submit green';
+  document.getElementById('fAciklama').value = '';
+  document.getElementById('fNeredenIlce').value = '';
+  document.getElementById('fNeredenSehir').value = '';
+  document.getElementById('fNereyeIlce').value = '';
+  document.getElementById('fNereyeSehir').value = '';
+  document.getElementById('fGiris').value = '';
+  document.getElementById('fCikis').value = '';
+  document.getElementById('fAracMarka').value = '';
+  document.getElementById('fAracModel').value = '';
+  document.getElementById('fAracKapasite').value = '';
+  document.getElementById('fServisTuru').value = '';
+  document.getElementById('fIlanVeren').value = '';
+  document.getElementById('fTelefon').value = '';
+  document.getElementById('ilanAlert').style.display = 'none';
+}
+
 async function submitIlan() {
   const aciklama = document.getElementById('fAciklama').value.trim();
   const alertEl = document.getElementById('ilanAlert');
@@ -1057,6 +1078,7 @@ async function submitIlan() {
   }]);
   btn.textContent='İlanı Yayınla'; btn.disabled=false;
   if (error) { alertEl.style.display='block'; alertEl.textContent='Hata: '+error.message; return; }
+  resetIlanForm();
   closeOverlay('ilanOverlay');
   loadIlanlar();
 }
@@ -1093,7 +1115,7 @@ function scrollToSearch() {
   setTimeout(() => { document.getElementById('heroSection').scrollIntoView({ behavior:'smooth' }); setTimeout(() => document.getElementById('searchInput').focus(), 400); }, 50);
 }
 function openDetayliArama() { document.getElementById('detayliAramaOverlay').classList.add('open'); }
-function openIlanModal() { document.getElementById('ilanOverlay').classList.add('open'); }
+function openIlanModal() { resetIlanForm(); document.getElementById('ilanOverlay').classList.add('open'); }
 function closeOverlay(id) {
   document.getElementById(id).classList.remove('open');
   if (id === 'mesajOverlay' && chatSubscription) { sb.removeChannel(chatSubscription); chatSubscription = null; }
