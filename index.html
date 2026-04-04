@@ -271,6 +271,31 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
 /* Mobil Bize Ulaş floating butonu */
 .mobile-contact-fab { display:none; position:fixed; bottom:68px; right:12px; z-index:140; background:linear-gradient(135deg,#b8902a,#c5a050); color:#0f1117; border:none; border-radius:50px; padding:0.6rem 1rem; font-size:0.75rem; font-weight:800; cursor:pointer; font-family:inherit; box-shadow:0 4px 20px rgba(197,160,80,0.3); align-items:center; gap:0.4rem; }
 
+/* === ARACIM VAR MODU - Özel Form Alanları === */
+/* Çalışma Bölgesi ve İstenen İstikamet - gizli/görünür toggle */
+.arac-only { display: none; }
+.is-only { display: block; }
+.form-group.arac-only { display: none; }
+.rota-group.arac-only { display: none; }
+.rota-group.is-only { display: block; }
+.form-group.is-only { display: block; }
+.saat-row.arac-only { display: none; }
+.saat-row.is-only { display: grid; }
+.form-section-title.arac-only { display: none; }
+.form-row.arac-only { display: none; }
+
+/* "Aracım Var" aktifken */
+body.mod-arac .arac-only { display: block !important; }
+body.mod-arac .is-only { display: none !important; }
+body.mod-arac .rota-group.arac-only { display: block !important; }
+body.mod-arac .rota-group.is-only { display: none !important; }
+body.mod-arac .form-group.arac-only { display: block !important; }
+body.mod-arac .form-group.is-only { display: none !important; }
+body.mod-arac .saat-row.arac-only { display: grid !important; }
+body.mod-arac .saat-row.is-only { display: none !important; }
+body.mod-arac .form-section-title.arac-only { display: block !important; }
+body.mod-arac .form-row.arac-only { display: grid !important; }
+
 @media(max-width:600px) {
   nav { padding:0 0.7rem; height:48px; }
   .nav-links { display:none; }
@@ -399,8 +424,8 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
         <textarea id="fAciklama" placeholder="Detaylı açıklama yazın..."></textarea>
       </div>
 
-      <!-- FIX: Nereden - yan yana birleşik blok -->
-      <div class="rota-group">
+      <!-- İŞİM VAR MODU: Nereden - yan yana birleşik blok -->
+      <div class="rota-group is-only">
         <label>📍 Nereden</label>
         <div class="rota-row">
           <div class="rota-col">
@@ -415,8 +440,8 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
         </div>
       </div>
 
-      <!-- FIX: Nereye - yan yana birleşik blok -->
-      <div class="rota-group">
+      <!-- İŞİM VAR MODU: Nereye - yan yana birleşik blok -->
+      <div class="rota-group is-only">
         <label>🏁 Nereye</label>
         <div class="rota-row">
           <div class="rota-col">
@@ -431,8 +456,40 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
         </div>
       </div>
 
+      <!-- ARACIM VAR MODU: Çalışma Bölgesi - yan yana birleşik blok -->
+      <div class="rota-group arac-only">
+        <label>📍 Çalışma Bölgesi</label>
+        <div class="rota-row">
+          <div class="rota-col">
+            <span class="rota-city-label">İlçe / Mahalle</span>
+            <input type="text" id="fCalismaIlce" placeholder="Akçaburgaz Mah."/>
+          </div>
+          <div class="rota-divider-line"></div>
+          <div class="rota-col">
+            <span class="rota-city-label">Şehir</span>
+            <input type="text" id="fCalismaSehir" placeholder="İstanbul"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARACIM VAR MODU: İstenen İstikamet - yan yana birleşik blok -->
+      <div class="rota-group arac-only">
+        <label>🏁 İstenen İstikamet</label>
+        <div class="rota-row">
+          <div class="rota-col">
+            <span class="rota-city-label">İlçe / Mahalle</span>
+            <input type="text" id="fIstikametIlce" placeholder="İkitelli OSB"/>
+          </div>
+          <div class="rota-divider-line"></div>
+          <div class="rota-col">
+            <span class="rota-city-label">Şehir</span>
+            <input type="text" id="fIstikametSehir" placeholder="İstanbul"/>
+          </div>
+        </div>
+      </div>
+
       <!-- FIX: Saat alanları - text input, elle yazılsın -->
-      <div class="saat-row">
+      <div class="saat-row is-only">
         <div class="saat-group">
           <label>🕐 Giriş Saati</label>
           <input type="text" id="fGiris" placeholder="08:00" maxlength="5" oninput="saatFormat(this)"/>
@@ -445,15 +502,46 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
         </div>
       </div>
 
-      <div class="form-section-title">🚗 Araç Bilgileri</div>
-      <div class="form-row">
+      <!-- ARACIM VAR MODU: Saat alanları -->
+      <div class="saat-row arac-only">
+        <div class="saat-group">
+          <label>🕐 Giriş Saati</label>
+          <input type="text" id="fGirisArac" placeholder="08:00" maxlength="5" oninput="saatFormat(this)"/>
+          <div class="saat-hint">Örnek: 08:30</div>
+        </div>
+        <div class="saat-group">
+          <label>🕔 Çıkış Saati</label>
+          <input type="text" id="fCikisArac" placeholder="18:00" maxlength="5" oninput="saatFormat(this)"/>
+          <div class="saat-hint">Örnek: 17:45</div>
+        </div>
+      </div>
+
+      <!-- İŞİM VAR MODU: Araç Bilgileri -->
+      <div class="form-section-title is-only">🚗 Araç Bilgileri</div>
+      <div class="form-row is-only">
         <div class="form-group"><label>Araç Markası</label><input type="text" id="fAracMarka" placeholder="Mercedes"/></div>
         <div class="form-group"><label>Araç Modeli</label><input type="text" id="fAracModel" placeholder="2020"/></div>
       </div>
-      <div class="form-row">
+      <div class="form-row is-only">
         <div class="form-group"><label>Kaç Kişilik</label><input type="number" id="fAracKapasite" placeholder="14" min="1" max="100"/></div>
         <div class="form-group"><label>Servis Türü</label><input type="text" id="fServisTuru" placeholder="Turizm, Şehirler Arası..."/></div>
       </div>
+
+      <!-- ARACIM VAR MODU: Araç Bilgileri (Plaka + Özellikler) -->
+      <div class="form-section-title arac-only">🚗 Araç Bilgileri</div>
+      <div class="form-row arac-only">
+        <div class="form-group"><label>Araç Markası</label><input type="text" id="fAracMarkaArac" placeholder="Mercedes"/></div>
+        <div class="form-group"><label>Araç Plakası</label><input type="text" id="fAracPlaka" placeholder="34 ABC 123" style="text-transform:uppercase;"/></div>
+      </div>
+      <div class="form-row arac-only">
+        <div class="form-group"><label>Araç Modeli</label><input type="text" id="fAracModelArac" placeholder="2020"/></div>
+        <div class="form-group"><label>Araç Özellikleri</label><input type="text" id="fAracOzellikler" placeholder="Klima, WiFi, USB..."/></div>
+      </div>
+      <div class="form-row arac-only">
+        <div class="form-group"><label>Kaç Kişilik</label><input type="number" id="fAracKapasiteArac" placeholder="14" min="1" max="100"/></div>
+        <div class="form-group"><label>Servis Türü</label><input type="text" id="fServisTuruArac" placeholder="Turizm, Şehirler Arası..."/></div>
+      </div>
+
       <div class="form-row">
         <div class="form-group"><label>İlan Veren</label><input type="text" id="fIlanVeren" placeholder="Firma veya isminiz"/></div>
         <div class="form-group"><label>Telefon</label><input type="tel" id="fTelefon" placeholder="05XX XXX XX XX"/></div>
@@ -776,6 +864,8 @@ function openDetay(id) {
       ${i.arac_marka||i.arac_model?`<span>Araç: <strong>${[i.arac_marka,i.arac_model].filter(Boolean).join(' ')}</strong></span>`:''}
       ${i.arac_kapasite?`<span>Kapasite: <strong>${i.arac_kapasite} kişilik</strong></span>`:''}
       ${i.servis_turu?`<span>Servis: <strong>${i.servis_turu}</strong></span>`:''}
+      ${i.arac_plaka?`<span>Plaka: <strong>${i.arac_plaka}</strong></span>`:''}
+      ${i.arac_ozellikler?`<span>Özellikler: <strong>${i.arac_ozellikler}</strong></span>`:''}
     </div>
     <div class="detail-actions">
       <button class="btn-ara" onclick="araClick('${telefon}')">📞 Ara</button>
@@ -948,6 +1038,8 @@ async function switchProfileTab(tab, ilanlarData) {
           <span>🕐 ${i.giris_saati||'--:--'} → ${i.cikis_saati||'--:--'}</span>
           ${i.servis_turu?`<span>🚌 ${i.servis_turu}</span>`:''}
           ${i.arac_marka?`<span>🚗 ${[i.arac_marka,i.arac_model,i.arac_kapasite?i.arac_kapasite+' kişilik':''].filter(Boolean).join(' ')}</span>`:''}
+          ${i.arac_plaka?`<span>🔢 ${i.arac_plaka}</span>`:''}
+          ${i.arac_ozellikler?`<span>✨ ${i.arac_ozellikler}</span>`:''}
         </div>
       </div>`).join('')}</div>`;
   } else {
@@ -1030,10 +1122,18 @@ function selectType(type) {
   document.getElementById('optIs').className = 'type-opt' + (type==='is'?' sel-green':'');
   document.getElementById('optArac').className = 'type-opt' + (type==='arac'?' sel-orange':'');
   document.getElementById('submitBtn').className = 'btn-submit ' + (type==='arac'?'orange':'green');
+
+  // Aracım Var moduna göre form alanlarını göster/gizle
+  if (type === 'arac') {
+    document.body.classList.add('mod-arac');
+  } else {
+    document.body.classList.remove('mod-arac');
+  }
 }
 
 function resetIlanForm() {
   selectedType = 'is';
+  document.body.classList.remove('mod-arac');
   document.getElementById('optIs').className = 'type-opt sel-green';
   document.getElementById('optArac').className = 'type-opt';
   document.getElementById('submitBtn').className = 'btn-submit green';
@@ -1048,6 +1148,19 @@ function resetIlanForm() {
   document.getElementById('fAracModel').value = '';
   document.getElementById('fAracKapasite').value = '';
   document.getElementById('fServisTuru').value = '';
+  // Aracım Var alanlarını da sıfırla
+  document.getElementById('fCalismaIlce').value = '';
+  document.getElementById('fCalismaSehir').value = '';
+  document.getElementById('fIstikametIlce').value = '';
+  document.getElementById('fIstikametSehir').value = '';
+  document.getElementById('fGirisArac').value = '';
+  document.getElementById('fCikisArac').value = '';
+  document.getElementById('fAracMarkaArac').value = '';
+  document.getElementById('fAracPlaka').value = '';
+  document.getElementById('fAracModelArac').value = '';
+  document.getElementById('fAracOzellikler').value = '';
+  document.getElementById('fAracKapasiteArac').value = '';
+  document.getElementById('fServisTuruArac').value = '';
   document.getElementById('fIlanVeren').value = '';
   document.getElementById('fTelefon').value = '';
   document.getElementById('ilanAlert').style.display = 'none';
@@ -1060,18 +1173,24 @@ async function submitIlan() {
   alertEl.style.display='none';
   const btn = document.getElementById('submitBtn');
   btn.textContent='Yayınlanıyor...'; btn.disabled=true;
+
+  // Aracım Var modu ise farklı alanları kullan
+  const isArac = selectedType === 'arac';
+
   const { error } = await sb.from('ilanlar').insert([{
     type: selectedType, aciklama,
-    nereden_ilce: document.getElementById('fNeredenIlce').value.trim(),
-    nereden_sehir: document.getElementById('fNeredenSehir').value.trim(),
-    nereye_ilce: document.getElementById('fNereyeIlce').value.trim(),
-    nereye_sehir: document.getElementById('fNereyeSehir').value.trim(),
-    giris_saati: document.getElementById('fGiris').value.trim(),
-    cikis_saati: document.getElementById('fCikis').value.trim(),
-    servis_turu: document.getElementById('fServisTuru').value.trim(),
-    arac_marka: document.getElementById('fAracMarka').value.trim(),
-    arac_model: document.getElementById('fAracModel').value.trim(),
-    arac_kapasite: document.getElementById('fAracKapasite').value || null,
+    nereden_ilce: isArac ? document.getElementById('fCalismaIlce').value.trim() : document.getElementById('fNeredenIlce').value.trim(),
+    nereden_sehir: isArac ? document.getElementById('fCalismaSehir').value.trim() : document.getElementById('fNeredenSehir').value.trim(),
+    nereye_ilce: isArac ? document.getElementById('fIstikametIlce').value.trim() : document.getElementById('fNereyeIlce').value.trim(),
+    nereye_sehir: isArac ? document.getElementById('fIstikametSehir').value.trim() : document.getElementById('fNereyeSehir').value.trim(),
+    giris_saati: isArac ? document.getElementById('fGirisArac').value.trim() : document.getElementById('fGiris').value.trim(),
+    cikis_saati: isArac ? document.getElementById('fCikisArac').value.trim() : document.getElementById('fCikis').value.trim(),
+    servis_turu: isArac ? document.getElementById('fServisTuruArac').value.trim() : document.getElementById('fServisTuru').value.trim(),
+    arac_marka: isArac ? document.getElementById('fAracMarkaArac').value.trim() : document.getElementById('fAracMarka').value.trim(),
+    arac_model: isArac ? document.getElementById('fAracModelArac').value.trim() : document.getElementById('fAracModel').value.trim(),
+    arac_kapasite: isArac ? (document.getElementById('fAracKapasiteArac').value || null) : (document.getElementById('fAracKapasite').value || null),
+    arac_plaka: isArac ? document.getElementById('fAracPlaka').value.trim().toUpperCase() : null,
+    arac_ozellikler: isArac ? document.getElementById('fAracOzellikler').value.trim() : null,
     ilan_veren: document.getElementById('fIlanVeren').value.trim(),
     telefon: document.getElementById('fTelefon').value.trim(),
     user_id: currentUser?.id || null
