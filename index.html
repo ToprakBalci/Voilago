@@ -843,35 +843,68 @@ function openDetay(id) {
   const telefon = i.telefon || '';
   const ilanVeren = i.ilan_veren || 'Anonim';
   const sahibiId = i.user_id || '';
-  document.getElementById('detayBody').innerHTML = `
-    <div class="detail-desc ${isIs?'':'orange-border'}">ℹ️ İlan Açıklaması<br/><br/>${i.aciklama||'-'}</div>
-    <div class="detail-route">
-      <div class="detail-city">
-        <div class="time-label">Giriş Saati</div>
-        <div class="time">${i.giris_saati||'--:--'}</div>
-        <div class="name">${i.nereden_ilce||'-'}</div>
-        <div class="sub">${i.nereden_sehir||''}</div>
+  if (!isIs) {
+    // ARACIM VAR: Özel layout - Saat | Boş Olduğu Semt | Saat
+    document.getElementById('detayBody').innerHTML = `
+      <div class="detail-desc orange-border">ℹ️ İlan Açıklaması<br/><br/>${i.aciklama||'-'}</div>
+      <div style="display:grid;grid-template-columns:1fr 2fr 1fr;gap:0.8rem;align-items:center;margin-bottom:1.4rem;text-align:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;">
+        <div>
+          <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.4rem;">Saat</div>
+          <div style="font-size:1.5rem;font-weight:700;color:var(--gold);">${i.giris_saati||'--:--'}</div>
+        </div>
+        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.9rem;">
+          <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.3rem;">Boş Olduğu Semt</div>
+          <div style="font-size:0.95rem;font-weight:700;color:var(--text);">${i.nereden_ilce||'-'}</div>
+          <div style="font-size:0.75rem;color:var(--muted);">${i.nereden_sehir||''}</div>
+          ${i.nereye_ilce ? `<div style="margin-top:0.5rem;font-size:0.78rem;color:var(--orange2);"><strong>İstenen İstikamet:</strong> ${i.nereye_ilce}${i.nereye_sehir?' '+i.nereye_sehir:''}</div>` : ''}
+        </div>
+        <div>
+          <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.4rem;">Saat</div>
+          <div style="font-size:1.5rem;font-weight:700;color:var(--gold);">${i.cikis_saati||'--:--'}</div>
+        </div>
       </div>
-      <div style="font-size:1.4rem;color:var(--gold);">→</div>
-      <div class="detail-city">
-        <div class="time-label">Çıkış Saati</div>
-        <div class="time">${i.cikis_saati||'--:--'}</div>
-        <div class="name">${i.nereye_ilce||'-'}</div>
-        <div class="sub">${i.nereye_sehir||''}</div>
+      <div class="detail-meta">
+        <span>İlan Tarihi: <strong>${new Date(i.created_at).toLocaleDateString('tr-TR')}</strong></span>
+        <span>İlan Veren: <strong>${ilanVeren}</strong></span>
+        ${i.servis_turu?`<span>Servis Türü: <strong>${i.servis_turu}</strong></span>`:''}
+        ${(i.arac_marka||i.arac_model||i.arac_kapasite)?`<span>Araç: <strong>${[i.arac_model,i.arac_marka,i.arac_kapasite?i.arac_kapasite+' kişilik':''].filter(Boolean).join('  ')}</strong></span>`:''}
+        ${i.arac_plaka?`<span>Plaka: <strong>${i.arac_plaka}</strong></span>`:''}
+        ${i.arac_ozellikler?`<span>Özellikler: <strong>${i.arac_ozellikler}</strong></span>`:''}
       </div>
-    </div>
-    <div class="detail-meta">
-      <span>İlan Veren: <strong>${ilanVeren}</strong></span>
-      ${i.arac_marka||i.arac_model?`<span>Araç: <strong>${[i.arac_marka,i.arac_model].filter(Boolean).join(' ')}</strong></span>`:''}
-      ${i.arac_kapasite?`<span>Kapasite: <strong>${i.arac_kapasite} kişilik</strong></span>`:''}
-      ${i.servis_turu?`<span>Servis: <strong>${i.servis_turu}</strong></span>`:''}
-      ${i.arac_plaka?`<span>Plaka: <strong>${i.arac_plaka}</strong></span>`:''}
-      ${i.arac_ozellikler?`<span>Özellikler: <strong>${i.arac_ozellikler}</strong></span>`:''}
-    </div>
-    <div class="detail-actions">
-      <button class="btn-ara" onclick="araClick('${telefon}')">📞 Ara</button>
-      <button class="btn-mesaj" id="btnMesajGonder">💬 Mesaj Gönder</button>
-    </div>`;
+      <div class="detail-actions">
+        <button class="btn-ara" onclick="araClick('${telefon}')">📞 Ara</button>
+        <button class="btn-mesaj" id="btnMesajGonder">💬 Mesaj Gönder</button>
+      </div>`;
+  } else {
+    // İŞİM VAR: Orijinal layout
+    document.getElementById('detayBody').innerHTML = `
+      <div class="detail-desc">ℹ️ İlan Açıklaması<br/><br/>${i.aciklama||'-'}</div>
+      <div class="detail-route">
+        <div class="detail-city">
+          <div class="time-label">Giriş Saati</div>
+          <div class="time">${i.giris_saati||'--:--'}</div>
+          <div class="name">${i.nereden_ilce||'-'}</div>
+          <div class="sub">${i.nereden_sehir||''}</div>
+        </div>
+        <div style="font-size:1.4rem;color:var(--gold);">→</div>
+        <div class="detail-city">
+          <div class="time-label">Çıkış Saati</div>
+          <div class="time">${i.cikis_saati||'--:--'}</div>
+          <div class="name">${i.nereye_ilce||'-'}</div>
+          <div class="sub">${i.nereye_sehir||''}</div>
+        </div>
+      </div>
+      <div class="detail-meta">
+        <span>İlan Veren: <strong>${ilanVeren}</strong></span>
+        ${i.arac_marka||i.arac_model?`<span>Araç: <strong>${[i.arac_marka,i.arac_model].filter(Boolean).join(' ')}</strong></span>`:''}
+        ${i.arac_kapasite?`<span>Kapasite: <strong>${i.arac_kapasite} kişilik</strong></span>`:''}
+        ${i.servis_turu?`<span>Servis: <strong>${i.servis_turu}</strong></span>`:''}
+      </div>
+      <div class="detail-actions">
+        <button class="btn-ara" onclick="araClick('${telefon}')">📞 Ara</button>
+        <button class="btn-mesaj" id="btnMesajGonder">💬 Mesaj Gönder</button>
+      </div>`;
+  }
   document.getElementById('detayOverlay').classList.add('open');
   // Mesaj butonu - kapatma ile güvenli ilan verilerini aktar
   document.getElementById('btnMesajGonder').addEventListener('click', () => {
