@@ -516,12 +516,16 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
         </div>
       </div>
 
-      <!-- İŞİM VAR MODU: Araç Bilgileri (tek kolon) -->
+      <!-- İŞİM VAR MODU: Araç Bilgileri (2li grid) -->
       <div class="form-section-title is-only">🚗 Araç Bilgileri</div>
-      <div class="form-group is-only"><label>Araç Markası</label><input type="text" id="fAracMarka" placeholder="Mercedes"/></div>
-      <div class="form-group is-only"><label>Araç Modeli</label><input type="text" id="fAracModel" placeholder="2020"/></div>
-      <div class="form-group is-only"><label>Kaç Kişilik</label><input type="number" id="fAracKapasite" placeholder="14" min="1" max="100"/></div>
-      <div class="form-group is-only"><label>Servis Türü</label><input type="text" id="fServisTuru" placeholder="Turizm, Şehirler Arası..."/></div>
+      <div class="form-row is-only">
+        <div class="form-group"><label>Araç Markası</label><input type="text" id="fAracMarka" placeholder="Mercedes"/></div>
+        <div class="form-group"><label>Araç Modeli</label><input type="text" id="fAracModel" placeholder="2020"/></div>
+      </div>
+      <div class="form-row is-only">
+        <div class="form-group"><label>Kaç Kişilik</label><input type="number" id="fAracKapasite" placeholder="14" min="1" max="100"/></div>
+        <div class="form-group"><label>Servis Türü</label><input type="text" id="fServisTuru" placeholder="Turizm, Şehirler Arası..."/></div>
+      </div>
 
       <!-- ARACIM VAR MODU: Araç Bilgileri (Markası+Modeli | Plaka+Özellikler) -->
       <div class="form-section-title arac-only">🚗 Araç Bilgileri</div>
