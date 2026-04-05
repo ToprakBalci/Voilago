@@ -261,18 +261,16 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
 .contact-info-box .ci-val { font-size:0.88rem; color:var(--text); }
 .alert-success { background:rgba(197,160,80,0.1); border:1px solid rgba(197,160,80,0.3); color:var(--gold); padding:0.8rem 1rem; border-radius:8px; font-size:0.85rem; display:none; margin-bottom:0.8rem; }
 
-/* FIX: Mobil alt bar - "Bize Ulaş" eklendi ve görünür */
+/* FIX: Mobil alt bar */
 .mobile-bottom-bar { position:fixed; bottom:0; left:0; right:0; background:var(--dark3); border-top:1px solid rgba(197,160,80,0.15); display:none; z-index:150; height:60px; }
 .mobile-bottom-bar a { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--muted); font-size:0.52rem; font-weight:600; text-transform:uppercase; letter-spacing:0.03em; gap:2px; cursor:pointer; transition:color 0.15s; text-decoration:none; }
 .mobile-bottom-bar a .icon { font-size:1.15rem; line-height:1; }
 .mobile-bottom-bar a.active { color:var(--gold); }
 .mobile-bottom-bar a:hover { color:var(--text); }
 
-/* Mobil Bize Ulaş floating butonu */
 .mobile-contact-fab { display:none; position:fixed; bottom:68px; right:12px; z-index:140; background:linear-gradient(135deg,#b8902a,#c5a050); color:#0f1117; border:none; border-radius:50px; padding:0.6rem 1rem; font-size:0.75rem; font-weight:800; cursor:pointer; font-family:inherit; box-shadow:0 4px 20px rgba(197,160,80,0.3); align-items:center; gap:0.4rem; }
 
-/* === ARACIM VAR MODU - Özel Form Alanları === */
-/* Çalışma Bölgesi ve İstenen İstikamet - gizli/görünür toggle */
+/* === ARACIM VAR MODU === */
 .arac-only { display: none; }
 .is-only { display: block; }
 .form-group.arac-only { display: none; }
@@ -285,7 +283,6 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
 .form-row.arac-only { display: none; }
 .form-row.is-only { display: grid; }
 
-/* "Aracım Var" aktifken */
 body.mod-arac .arac-only { display: block !important; }
 body.mod-arac .is-only { display: none !important; }
 body.mod-arac .rota-group.arac-only { display: block !important; }
@@ -311,14 +308,12 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
   .mobile-bottom-bar { display:flex !important; }
   .mobile-contact-fab { display:flex !important; }
   body { padding-bottom:65px; }
-  /* Modal mobilde alttan açılır */
   .overlay { padding:0; align-items:flex-end; }
   .modal { border-radius:16px 16px 0 0; max-height:92vh; }
   .modal-body { padding:1rem; }
   .type-opt { font-size:0.78rem; padding:0.6rem 0.3rem; }
   .btn-ara,.btn-mesaj { font-size:0.8rem; padding:0.7rem 0.4rem; gap:0.3rem; }
   .form-row { grid-template-columns:1fr 1fr; }
-  /* Mesaj overlay mobilde tam ekran */
   .mesaj-overlay-inner { border-radius:16px 16px 0 0; height:92vh; max-height:none; }
 }
 @media(min-width:601px) { .mobile-bottom-bar { display:none !important; } .mobile-contact-fab { display:none !important; } }
@@ -386,7 +381,7 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
   </div>
 </div>
 
-<!-- MESAJ - yeniden yapılandırıldı, tam ekran sohbet deneyimi -->
+<!-- MESAJ -->
 <div class="overlay" id="mesajOverlay">
   <div class="mesaj-overlay-inner">
     <div class="mesaj-head">
@@ -409,7 +404,6 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
 <!-- İLAN VER -->
 <div class="overlay" id="ilanOverlay">
   <div class="modal">
-    <!-- FIX: Header rengi site temasına uygun altın/koyu yapıldı -->
     <div class="modal-head ilan-ver">
       <span>✦ İlan Ver</span>
       <button class="modal-close" onclick="closeOverlay('ilanOverlay')">×</button>
@@ -425,7 +419,6 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
         <textarea id="fAciklama" placeholder="Detaylı açıklama yazın..."></textarea>
       </div>
 
-      <!-- İŞİM VAR MODU: Nereden - yan yana birleşik blok -->
       <div class="rota-group is-only">
         <label>📍 Nereden</label>
         <div class="rota-row">
@@ -441,7 +434,6 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
         </div>
       </div>
 
-      <!-- İŞİM VAR MODU: Nereye - yan yana birleşik blok -->
       <div class="rota-group is-only">
         <label>🏁 Nereye</label>
         <div class="rota-row">
@@ -457,7 +449,6 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
         </div>
       </div>
 
-      <!-- ARACIM VAR MODU: Çalışma Bölgesi - yan yana birleşik blok -->
       <div class="rota-group arac-only">
         <label>📍 Çalışma Bölgesi</label>
         <div class="rota-row">
@@ -473,7 +464,6 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
         </div>
       </div>
 
-      <!-- ARACIM VAR MODU: İstenen İstikamet - yan yana birleşik blok -->
       <div class="rota-group arac-only">
         <label>🏁 İstenen İstikamet</label>
         <div class="rota-row">
@@ -489,7 +479,6 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
         </div>
       </div>
 
-      <!-- FIX: Saat alanları - text input, elle yazılsın -->
       <div class="saat-row is-only">
         <div class="saat-group">
           <label>🕐 Giriş Saati</label>
@@ -503,7 +492,6 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
         </div>
       </div>
 
-      <!-- ARACIM VAR MODU: Saat alanları -->
       <div class="saat-row arac-only">
         <div class="saat-group">
           <label>🕐 Giriş Saati</label>
@@ -517,7 +505,6 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
         </div>
       </div>
 
-      <!-- İŞİM VAR MODU: Araç Bilgileri (2li grid) -->
       <div class="form-section-title is-only">🚗 Araç Bilgileri</div>
       <div class="form-row is-only">
         <div class="form-group"><label>Araç Markası</label><input type="text" id="fAracMarka" placeholder="Mercedes"/></div>
@@ -528,7 +515,6 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
         <div class="form-group"><label>Servis Türü</label><input type="text" id="fServisTuru" placeholder="Turizm, Şehirler Arası..."/></div>
       </div>
 
-      <!-- ARACIM VAR MODU: Araç Bilgileri (Markası+Modeli | Plaka+Özellikler) -->
       <div class="form-section-title arac-only">🚗 Araç Bilgileri</div>
       <div class="form-row arac-only">
         <div class="form-group"><label>Araç Markası</label><input type="text" id="fAracMarkaArac" placeholder="Mercedes"/></div>
@@ -659,7 +645,7 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
   </div>
 </div>
 
-<!-- MOBİL ALT BAR - Bize Ulaş eklendi -->
+<!-- MOBİL ALT BAR -->
 <div class="mobile-bottom-bar" id="mobileBar">
   <a id="mBarAna" onclick="goPage('home')" class="active"><span class="icon">🏠</span>Ana</a>
   <a onclick="scrollToSearch()"><span class="icon">🔍</span>Ara</a>
@@ -688,7 +674,6 @@ let currentChatIlan = null;
 let chatSubscription = null;
 let activeProfileTab = 'ilanlar';
 
-// FIX: Saat formatı otomatik ":" ekle
 function saatFormat(input) {
   let v = input.value.replace(/\D/g, '');
   if (v.length >= 3) v = v.substring(0,2) + ':' + v.substring(2,4);
@@ -790,7 +775,7 @@ function renderIlanlar() {
     const carInfo = [i.arac_marka||'', i.arac_model||'', i.arac_kapasite ? i.arac_kapasite+' kişilik' : ''].filter(Boolean).join(' · ');
     const benim = currentUser && i.user_id === currentUser.id;
 
-    // ARACIM VAR kartı - yeni tasarım
+    // ARACIM VAR kartı - değiştirilmedi
     if (i.type === 'arac') {
       const aciklamaKisa = (i.aciklama||'-').length > 80 ? (i.aciklama||'-').substring(0,80)+'...' : (i.aciklama||'-');
       return `<div class="card" onclick="cardClick(${i.id})" style="min-height:220px;">
@@ -826,35 +811,35 @@ function renderIlanlar() {
       </div>`;
     }
 
-    // İŞİM VAR kartı 
-  return `<div class="card" onclick="cardClick(${i.id})" style="height:240px;display:flex;flex-direction:column;">
+    // İŞİM VAR kartı - SADECE BU KISIM DEĞİŞTİRİLDİ
+    return `<div class="card" onclick="cardClick(${i.id})" style="min-height:220px;">
       <div class="card-header green">
         <span>İŞİM VAR ARAÇ ARIYORUM</span>
         <span>${benim ? '⭐ Benim İlanım' : 'Detay →'}</span>
       </div>
-      <div class="card-body" style="padding:0.75rem 1rem;flex:1;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;">
-        <div style="font-size:0.75rem;color:var(--text2);line-height:1.5;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">ℹ️ ${i.aciklama||'-'}</div>
-        <div style="display:grid;grid-template-columns:auto 1fr 1fr auto;align-items:center;background:var(--dark3);border:1px solid var(--border);border-radius:6px;padding:0.6rem 0.5rem;gap:0.2rem;flex:1;margin:0.5rem 0;overflow:hidden;">
-          <div style="text-align:center;padding-right:0.5rem;border-right:1px solid var(--border);flex-shrink:0;">
-            <div style="font-size:0.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.25rem;">Giriş Saati</div>
-            <div style="font-size:1rem;font-weight:700;color:var(--green-text);">${i.giris_saati||'--:--'}</div>
+      <div class="card-body" style="padding:0.75rem 1rem;">
+        <div style="font-size:0.75rem;color:var(--text2);line-height:1.5;margin-bottom:0.7rem;min-height:36px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">ℹ️ ${i.aciklama||'-'}</div>
+        <div style="display:grid;grid-template-columns:auto 1fr 1fr auto;align-items:stretch;background:var(--dark3);border:1px solid var(--border);border-radius:6px;padding:0.5rem 0.6rem;margin-bottom:0.6rem;gap:0.2rem;">
+          <div style="text-align:center;padding-right:0.5rem;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;">
+            <div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.25rem;">Giriş Saati</div>
+            <div style="font-size:0.92rem;font-weight:700;color:var(--green-text);">${i.giris_saati||'--:--'}</div>
           </div>
-          <div style="text-align:center;padding:0 0.3rem;overflow:hidden;">
-            <div style="font-size:0.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.25rem;">Nereden</div>
-            <div style="font-size:0.72rem;font-weight:700;color:var(--text);text-transform:uppercase;line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${i.nereden_ilce||'-'}</div>
-            ${i.nereden_sehir?`<div style="font-size:0.6rem;color:var(--muted);margin-top:0.1rem;">${i.nereden_sehir}</div>`:''}
+          <div style="text-align:center;padding:0 0.3rem;display:flex;flex-direction:column;justify-content:flex-start;">
+            <div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.25rem;">Nereden</div>
+            <div style="font-size:0.75rem;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:0.02em;line-height:1.3;">${i.nereden_ilce||'-'}</div>
+            ${i.nereden_sehir?`<div style="font-size:0.62rem;color:var(--muted);margin-top:0.1rem;">${i.nereden_sehir}</div>`:''}
           </div>
-          <div style="text-align:center;padding:0 0.3rem;border-left:1px solid var(--border);overflow:hidden;">
-            <div style="font-size:0.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.25rem;">Nereye</div>
-            <div style="font-size:0.72rem;font-weight:700;color:var(--text);text-transform:uppercase;line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${i.nereye_ilce||'-'}</div>
-            ${i.nereye_sehir?`<div style="font-size:0.6rem;color:var(--muted);margin-top:0.1rem;">${i.nereye_sehir}</div>`:''}
+          <div style="text-align:center;padding:0 0.3rem;border-left:1px solid var(--border);display:flex;flex-direction:column;justify-content:flex-start;">
+            <div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.25rem;">Nereye</div>
+            <div style="font-size:0.75rem;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:0.02em;line-height:1.3;">${i.nereye_ilce||'-'}</div>
+            ${i.nereye_sehir?`<div style="font-size:0.62rem;color:var(--muted);margin-top:0.1rem;">${i.nereye_sehir}</div>`:''}
           </div>
-          <div style="text-align:center;padding-left:0.5rem;border-left:1px solid var(--border);flex-shrink:0;">
-            <div style="font-size:0.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.25rem;">Çıkış Saati</div>
-            <div style="font-size:1rem;font-weight:700;color:var(--green-text);">${i.cikis_saati||'--:--'}</div>
+          <div style="text-align:center;padding-left:0.5rem;border-left:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;">
+            <div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.25rem;">Çıkış Saati</div>
+            <div style="font-size:0.92rem;font-weight:700;color:var(--green-text);">${i.cikis_saati||'--:--'}</div>
           </div>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;font-size:0.68rem;color:var(--muted);gap:0.15rem;flex-shrink:0;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;font-size:0.68rem;color:var(--muted);gap:0.2rem;">
           <span>📅 ${new Date(i.created_at).toLocaleDateString('tr-TR')}</span>
           <span style="text-align:right;">👤 ${i.ilan_veren||'Anonim'}</span>
           ${i.servis_turu?`<span>🚌 ${i.servis_turu}</span>`:'<span></span>'}
@@ -865,7 +850,6 @@ function renderIlanlar() {
   }).join('');
 }
 
-// FIX: Karta tıklayınca giriş zorunlu
 function cardClick(id) {
   if (!requireLogin('İlan detaylarını görmek için giriş yapmanız gerekiyor.')) return;
   openDetay(id);
@@ -901,8 +885,6 @@ function openDetay(id) {
  if (!isIs) {
     document.getElementById('detayBody').innerHTML = `
       <div class="detail-desc orange-border">ℹ️ İlan Açıklaması<br/><br/>${i.aciklama||'-'}</div>
-      
-      <!-- Saat kutuları: Giriş ve Çıkış yan yana -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:1rem;">
         <div class="detail-city">
           <div class="time-label">Giriş Saati</div>
@@ -913,23 +895,17 @@ function openDetay(id) {
           <div class="time">${i.cikis_saati||'--:--'}</div>
         </div>
       </div>
-
-      <!-- Çalışma Bölgesi -->
       <div class="detail-city" style="margin-bottom:0.7rem;text-align:left;padding:0.9rem 1rem;">
         <div class="time-label" style="margin-bottom:0.3rem;">📍 Çalışma Bölgesi</div>
         <div class="name" style="font-size:1rem;">${i.nereden_ilce||'-'}</div>
         ${i.nereden_sehir?`<div class="sub">${i.nereden_sehir}</div>`:''}
       </div>
-
-      <!-- İstenen İstikamet -->
       ${i.nereye_ilce ? `
       <div class="detail-city" style="margin-bottom:1.2rem;text-align:left;padding:0.9rem 1rem;border-color:rgba(224,123,57,0.4);">
         <div class="time-label" style="margin-bottom:0.3rem;color:var(--orange2);">🏁 İstenen İstikamet</div>
         <div class="name" style="font-size:1rem;">${i.nereye_ilce}</div>
         ${i.nereye_sehir?`<div class="sub">${i.nereye_sehir}</div>`:''}
       </div>` : ''}
-
-      <!-- Diğer Bilgiler -->
       <div class="detail-meta">
         <span>İlan Tarihi: <strong>${new Date(i.created_at).toLocaleDateString('tr-TR')}</strong></span>
         <span>İlan Veren: <strong>${ilanVeren}</strong></span>
@@ -938,13 +914,11 @@ function openDetay(id) {
         ${i.arac_plaka?`<span>Plaka: <strong>${i.arac_plaka}</strong></span>`:''}
         ${i.arac_ozellikler?`<span>Özellikler: <strong>${i.arac_ozellikler}</strong></span>`:''}
       </div>
-
       <div class="detail-actions">
         <button class="btn-ara" onclick="araClick('${telefon}')">📞 Ara</button>
         <button class="btn-mesaj" id="btnMesajGonder">💬 Mesaj Gönder</button>
       </div>`;
   } else {
-    // İŞİM VAR: Orijinal layout
     document.getElementById('detayBody').innerHTML = `
       <div class="detail-desc">ℹ️ İlan Açıklaması<br/><br/>${i.aciklama||'-'}</div>
       <div class="detail-route">
@@ -974,7 +948,6 @@ function openDetay(id) {
       </div>`;
   }
   document.getElementById('detayOverlay').classList.add('open');
-  // Mesaj butonu - kapatma ile güvenli ilan verilerini aktar
   document.getElementById('btnMesajGonder').addEventListener('click', () => {
     mesajClick(i.id, i.ilan_veren || 'Anonim', i.user_id || '', i.type, i.nereden_ilce || '', i.nereye_ilce || '');
   });
@@ -985,24 +958,17 @@ function araClick(telefon) {
   window.location.href = 'tel:' + telefon.replace(/\D/g,'');
 }
 
-// Mesaj - karşı tarafın adını çek
 async function mesajClick(ilanId, ilanVeren, aliciId, ilanType, neredenIlce, nereyeIlce) {
   if (!requireLogin('Mesaj gönderebilmek için giriş yapmanız gerekiyor.')) return;
   if (!aliciId || aliciId === currentUser.id) { alert('Kendi ilanınıza mesaj gönderemezsiniz.'); return; }
   currentChatIlanId = ilanId;
   currentChatAliciId = aliciId;
-
-  // Karşı tarafın adını bul: önce ilanlar tablosundan ilan_veren'i al
-  // ilanVeren zaten ilan sahibinin girdiği ad
   const karsitarafAd = ilanVeren || 'Kullanıcı';
-
   const badge = ilanType === 'is' ? 'green' : 'orange';
   const badgeText = ilanType === 'is' ? 'İŞİM VAR' : 'ARACIM VAR';
   document.getElementById('mesajIlanInfo').innerHTML = `
     <span class="mesaj-ilan-badge ${badge}">${badgeText}</span>
     <span class="mesaj-ilan-route">📍 ${neredenIlce||'?'} → ${nereyeIlce||'?'}</span>`;
-
-  // Başlıkta ilan sahibinin adı gösterilsin
   document.getElementById('mesajModalBaslik').textContent = '💬 ' + karsitarafAd + ' ile Mesajlaş';
   closeOverlay('detayOverlay');
   document.getElementById('mesajOverlay').classList.add('open');
@@ -1167,7 +1133,6 @@ async function switchProfileTab(tab, ilanlarData) {
     tabContent.innerHTML = `<div class="mesaj-list">${items.map(k => {
       const ilan = k.ilan;
       const ilanBaslik = ilan ? `${ilan.nereden_ilce||'?'} → ${ilan.nereye_ilce||'?'}` : 'İlan';
-      // Konuştuğun kişi: eğer sen gönderici isen ilan sahibinin adı, değilsen sen mesaj atmışsın demek
       const ilanSahibiAd = ilan?.ilan_veren || 'Kullanıcı';
       const ilanType = ilan?.type || 'is';
       const ini = ilanSahibiAd.substring(0,2).toUpperCase();
@@ -1191,14 +1156,11 @@ async function switchProfileTab(tab, ilanlarData) {
 async function openKonusmaFromProfile(ilanId, aliciId, ilanVeren, ilanType, neredenIlce, nereyeIlce) {
   currentChatIlanId = ilanId;
   currentChatAliciId = aliciId;
-
-  // İlan bilgisi şeridini profilden açılırken de doldur
   const badge = ilanType === 'is' ? 'green' : 'orange';
   const badgeText = ilanType === 'is' ? 'İŞİM VAR' : 'ARACIM VAR';
   document.getElementById('mesajIlanInfo').innerHTML = `
     <span class="mesaj-ilan-badge ${badge}">${badgeText}</span>
     <span class="mesaj-ilan-route">📍 ${neredenIlce||'?'} → ${nereyeIlce||'?'} · ${ilanVeren}</span>`;
-
   document.getElementById('mesajModalBaslik').textContent = '💬 ' + ilanVeren + ' ile Mesajlaş';
   document.getElementById('mesajOverlay').classList.add('open');
   await loadChat();
@@ -1224,8 +1186,6 @@ function selectType(type) {
   document.getElementById('optIs').className = 'type-opt' + (type==='is'?' sel-green':'');
   document.getElementById('optArac').className = 'type-opt' + (type==='arac'?' sel-orange':'');
   document.getElementById('submitBtn').className = 'btn-submit ' + (type==='arac'?'orange':'green');
-
-  // Aracım Var moduna göre form alanlarını göster/gizle
   if (type === 'arac') {
     document.body.classList.add('mod-arac');
   } else {
@@ -1250,7 +1210,6 @@ function resetIlanForm() {
   document.getElementById('fAracModel').value = '';
   document.getElementById('fAracKapasite').value = '';
   document.getElementById('fServisTuru').value = '';
-  // Aracım Var alanlarını da sıfırla
   document.getElementById('fCalismaIlce').value = '';
   document.getElementById('fCalismaSehir').value = '';
   document.getElementById('fIstikametIlce').value = '';
@@ -1275,10 +1234,7 @@ async function submitIlan() {
   alertEl.style.display='none';
   const btn = document.getElementById('submitBtn');
   btn.textContent='Yayınlanıyor...'; btn.disabled=true;
-
-  // Aracım Var modu ise farklı alanları kullan
   const isArac = selectedType === 'arac';
-
   const { error } = await sb.from('ilanlar').insert([{
     type: selectedType, aciklama,
     nereden_ilce: isArac ? document.getElementById('fCalismaIlce').value.trim() : document.getElementById('fNeredenIlce').value.trim(),
@@ -1315,13 +1271,10 @@ async function submitContact() {
   btn.innerHTML = '⏳ Gönderiliyor...';
   btn.disabled = true;
   try {
-    // Supabase'e kaydet (tablo varsa)
     await sb.from('iletisim').insert([{ ad, konu, mesaj }]);
   } catch(e) {
-    // Tablo yoksa bile devam et
     console.warn('iletisim tablosu yok veya hata:', e);
   }
-  // Her durumda başarı göster
   document.getElementById('contactSuccess').style.display = 'block';
   document.getElementById('contactAd').value = '';
   document.getElementById('contactKonu').value = '';
