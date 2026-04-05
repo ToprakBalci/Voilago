@@ -806,9 +806,10 @@ function renderIlanlar() {
               <div style="font-size:0.92rem;font-weight:700;color:var(--orange2);">${i.giris_saati||'--:--'}</div>
             </div>
             <div style="text-align:center;padding:0 0.3rem;">
-              <div style="font-size:0.68rem;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:0.02em;">${i.nereden_ilce||'-'}</div>
+              <div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem;">Boş Olduğu Semt</div>
+              <div style="font-size:0.75rem;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:0.02em;line-height:1.3;">${i.nereden_ilce||'-'}</div>
               ${i.nereden_sehir?`<div style="font-size:0.62rem;color:var(--muted);">${i.nereden_sehir}</div>`:''}
-              ${i.nereye_ilce?`<div style="font-size:0.6rem;color:var(--orange2);margin-top:0.15rem;">→ ${i.nereye_ilce}${i.nereye_sehir?', '+i.nereye_sehir:''}</div>`:''}
+              ${i.nereye_ilce?`<div style="font-size:0.62rem;color:var(--orange2);margin-top:0.2rem;line-height:1.3;"><span style="color:var(--muted);">İstenen İstikamet:</span> ${i.nereye_ilce}${i.nereye_sehir?', '+i.nereye_sehir:''}</div>`:''}
             </div>
             <div style="text-align:center;">
               <div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;">Çıkış</div>
