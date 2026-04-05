@@ -944,7 +944,9 @@ function openDetay(id) {
       <div class="detail-meta">
         <span>İlan Veren: <strong>${ilanVeren}</strong></span>
         ${i.arac_marka||i.arac_model?`<span>Araç: <strong>${[i.arac_marka,i.arac_model].filter(Boolean).join(' ')}</strong></span>`:''}
-        ${i.arac_kapasite?`<span>Kapasite: <strong>${i.arac_kapasite} kişilik</strong></span>`:''}
+        ${i.nereden_ilce||i.nereye_ilce?`<span>Nereden: <strong>${[i.nereden_ilce,i.nereden_sehir].filter(Boolean).join(', ')}</strong></span>`:''}
+        ${i.nereye_ilce?`<span>Nereye: <strong>${[i.nereye_ilce,i.nereye_sehir].filter(Boolean).join(', ')}</strong></span>`:''}
+        ${i.arac_kapasite?`<span>Kaç Kişilik: <strong>${i.arac_kapasite} kişilik</strong></span>`:''}
         ${i.servis_turu?`<span>Servis: <strong>${i.servis_turu}</strong></span>`:''}
       </div>
       <div class="detail-actions">
