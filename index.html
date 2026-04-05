@@ -789,6 +789,43 @@ function renderIlanlar() {
   grid.innerHTML = filtered.map(i => {
     const carInfo = [i.arac_marka||'', i.arac_model||'', i.arac_kapasite ? i.arac_kapasite+' kişilik' : ''].filter(Boolean).join(' · ');
     const benim = currentUser && i.user_id === currentUser.id;
+
+    // ARACIM VAR kartı - yeni tasarım
+    if (i.type === 'arac') {
+      const aciklamaKisa = (i.aciklama||'-').length > 80 ? (i.aciklama||'-').substring(0,80)+'...' : (i.aciklama||'-');
+      return `<div class="card" onclick="cardClick(${i.id})" style="min-height:220px;">
+        <div class="card-header orange">
+          <span>ARACIM VAR İŞ ARIYORUM</span>
+          <span>${benim ? '⭐ Benim İlanım' : 'Detay →'}</span>
+        </div>
+        <div class="card-body" style="padding:0.75rem 1rem;">
+          <div style="font-size:0.75rem;color:var(--text2);line-height:1.5;margin-bottom:0.7rem;min-height:36px;">ℹ️ ${aciklamaKisa}</div>
+          <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:0.3rem;background:var(--dark3);border:1px solid var(--border);border-radius:6px;padding:0.5rem 0.6rem;margin-bottom:0.6rem;">
+            <div style="text-align:center;">
+              <div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;">Giriş</div>
+              <div style="font-size:0.92rem;font-weight:700;color:var(--orange2);">${i.giris_saati||'--:--'}</div>
+            </div>
+            <div style="text-align:center;padding:0 0.3rem;">
+              <div style="font-size:0.68rem;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:0.02em;">${i.nereden_ilce||'-'}</div>
+              ${i.nereden_sehir?`<div style="font-size:0.62rem;color:var(--muted);">${i.nereden_sehir}</div>`:''}
+              ${i.nereye_ilce?`<div style="font-size:0.6rem;color:var(--orange2);margin-top:0.15rem;">→ ${i.nereye_ilce}${i.nereye_sehir?', '+i.nereye_sehir:''}</div>`:''}
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;">Çıkış</div>
+              <div style="font-size:0.92rem;font-weight:700;color:var(--orange2);">${i.cikis_saati||'--:--'}</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;font-size:0.68rem;color:var(--muted);gap:0.2rem;">
+            <span>📅 ${new Date(i.created_at).toLocaleDateString('tr-TR')}</span>
+            <span style="text-align:right;">👤 ${i.ilan_veren||'Anonim'}</span>
+            ${i.servis_turu?`<span>🚌 ${i.servis_turu}</span>`:'<span></span>'}
+            ${carInfo?`<span style="text-align:right;">🚗 ${[i.arac_marka,i.arac_model].filter(Boolean).join(' ')}</span>`:''}
+          </div>
+        </div>
+      </div>`;
+    }
+
+    // İŞİM VAR kartı - orijinal tasarım
     return `<div class="card" onclick="cardClick(${i.id})">
       <div class="card-header ${i.type==='is'?'green':'orange'}">
         <span>${i.type==='is'?'İŞİM VAR ARAÇ ARIYORUM':'ARACIM VAR İŞ ARIYORUM'}</span>
