@@ -834,16 +834,20 @@ function renderIlanlar() {
       </div>
       <div class="card-body" style="padding:0.75rem 1rem;flex:1;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;">
         <div style="font-size:0.75rem;color:var(--text2);line-height:1.5;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">ℹ️ ${i.aciklama||'-'}</div>
-        <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;background:var(--dark3);border:1px solid var(--border);border-radius:6px;padding:0.6rem 0.5rem;gap:0.2rem;flex:1;margin:0.5rem 0;overflow:hidden;">
+        <div style="display:grid;grid-template-columns:auto 1fr 1fr auto;align-items:center;background:var(--dark3);border:1px solid var(--border);border-radius:6px;padding:0.6rem 0.5rem;gap:0.2rem;flex:1;margin:0.5rem 0;overflow:hidden;">
           <div style="text-align:center;padding-right:0.5rem;border-right:1px solid var(--border);flex-shrink:0;">
             <div style="font-size:0.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.25rem;">Giriş Saati</div>
             <div style="font-size:1rem;font-weight:700;color:var(--green-text);">${i.giris_saati||'--:--'}</div>
           </div>
           <div style="text-align:center;padding:0 0.3rem;overflow:hidden;">
-            <div style="font-size:0.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.25rem;">Nereden → Nereye</div>
-            <div style="font-size:0.72rem;font-weight:700;color:var(--text);text-transform:uppercase;line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;">${i.nereden_ilce||'-'}</div>
+            <div style="font-size:0.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.25rem;">Nereden</div>
+            <div style="font-size:0.72rem;font-weight:700;color:var(--text);text-transform:uppercase;line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${i.nereden_ilce||'-'}</div>
             ${i.nereden_sehir?`<div style="font-size:0.6rem;color:var(--muted);margin-top:0.1rem;">${i.nereden_sehir}</div>`:''}
-            ${i.nereye_ilce?`<div style="font-size:0.6rem;margin-top:0.15rem;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;"><span style="color:var(--muted);">→</span> <span style="color:var(--green-text);">${i.nereye_ilce}${i.nereye_sehir?', '+i.nereye_sehir:''}</span></div>`:''}
+          </div>
+          <div style="text-align:center;padding:0 0.3rem;border-left:1px solid var(--border);overflow:hidden;">
+            <div style="font-size:0.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.25rem;">Nereye</div>
+            <div style="font-size:0.72rem;font-weight:700;color:var(--text);text-transform:uppercase;line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${i.nereye_ilce||'-'}</div>
+            ${i.nereye_sehir?`<div style="font-size:0.6rem;color:var(--muted);margin-top:0.1rem;">${i.nereye_sehir}</div>`:''}
           </div>
           <div style="text-align:center;padding-left:0.5rem;border-left:1px solid var(--border);flex-shrink:0;">
             <div style="font-size:0.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.25rem;">Çıkış Saati</div>
