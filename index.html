@@ -803,34 +803,34 @@ function renderIlanlar() {
     }
 
     // İŞİM VAR kartı
-    return `<div class="card" onclick="cardClick(${i.id})">
+   return `<div class="card" onclick="cardClick(${i.id})">
       <div class="card-header green">
         <span>İŞİM VAR ARAÇ ARIYORUM</span>
         <span>${benim ? '⭐ Benim İlanım' : 'Detay →'}</span>
       </div>
       <div class="card-body" style="padding:0.75rem 1rem;">
         <div style="font-size:0.75rem;color:var(--text2);line-height:1.5;margin-bottom:0.7rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">ℹ️ ${i.aciklama||'-'}</div>
-      <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:0.6rem;padding-top:1rem;border-top:1px solid var(--border);">📋 İlan Bilgileri</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;border-top:1px solid var(--border);padding-top:1rem;margin-bottom:0.5rem;">
-        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;">
-          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">📅 İlan Tarihi</div>
-          <div style="font-size:0.85rem;font-weight:600;color:var(--text);">${i.ilan_veren||'Anonim'}</div>
-        ${i.servis_turu?`
-        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;">
-          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">🚌 Servis Türü</div>
-          <div style="font-size:0.85rem;font-weight:600;color:var(--text);">${i.servis_turu}</div>
-        </div>`:'<div></div>'}
-        ${(i.arac_marka||i.arac_model)?`
-        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;">
-          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">🚗 Araç</div>
-          <div style="font-size:0.85rem;font-weight:600;color:var(--text);">${[i.arac_marka,i.arac_model].filter(Boolean).join(' – ')}</div>
-        </div>`:'<div></div>'}
-        ${i.arac_kapasite?`
-        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;">
-          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">👥 Kapasite</div>
-          <div style="font-size:0.85rem;font-weight:600;color:var(--text);">${i.arac_kapasite} kişilik</div>
-        </div>`:''}
-      </div>
+        <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:0.6rem;padding-top:1rem;border-top:1px solid var(--border);">📋 İlan Bilgileri</div>
+        <div style="display:grid;grid-template-columns:auto 1fr 1fr auto;align-items:stretch;background:var(--dark3);border:1px solid var(--border);border-radius:6px;padding:0.5rem 0.6rem;margin-bottom:0.6rem;gap:0.2rem;">
+          <div style="text-align:center;padding-right:0.5rem;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;">
+            <div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.25rem;">Giriş</div>
+            <div style="font-size:0.92rem;font-weight:700;color:var(--green-text);">${i.giris_saati||'--:--'}</div>
+          </div>
+          <div style="text-align:center;padding:0 0.3rem;display:flex;flex-direction:column;justify-content:center;">
+            <div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.25rem;">Nereden</div>
+            <div style="font-size:0.75rem;font-weight:700;color:var(--text);text-transform:uppercase;line-height:1.3;">${i.nereden_ilce||'-'}</div>
+            ${i.nereden_sehir?`<div style="font-size:0.62rem;color:var(--muted);">${i.nereden_sehir}</div>`:''}
+          </div>
+          <div style="text-align:center;padding:0 0.3rem;border-left:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;">
+            <div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.25rem;">Nereye</div>
+            <div style="font-size:0.75rem;font-weight:700;color:var(--text);text-transform:uppercase;line-height:1.3;">${i.nereye_ilce||'-'}</div>
+            ${i.nereye_sehir?`<div style="font-size:0.62rem;color:var(--muted);">${i.nereye_sehir}</div>`:''}
+          </div>
+          <div style="text-align:center;padding-left:0.5rem;border-left:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;">
+            <div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.25rem;">Çıkış</div>
+            <div style="font-size:0.92rem;font-weight:700;color:var(--green-text);">${i.cikis_saati||'--:--'}</div>
+          </div>
+        </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;font-size:0.68rem;color:var(--muted);gap:0.3rem;">
           <span>📅 ${new Date(i.created_at).toLocaleDateString('tr-TR')}</span>
           <span>👤 ${i.ilan_veren||'Anonim'}</span>
