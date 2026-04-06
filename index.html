@@ -1265,8 +1265,6 @@ async function submitIlan() {
     arac_marka: isArac ? document.getElementById('fAracMarkaArac').value.trim() : document.getElementById('fAracMarka').value.trim(),
     arac_model: isArac ? document.getElementById('fAracModelArac').value.trim() : document.getElementById('fAracModel').value.trim(),
     arac_kapasite: isArac ? (document.getElementById('fAracKapasiteArac').value || null) : (document.getElementById('fAracKapasite').value || null),
-    arac_plaka: isArac ? document.getElementById('fAracPlaka').value.trim().toUpperCase() : null,
-    arac_ozellikler: isArac ? document.getElementById('fAracOzellikler').value.trim() : null,
     ilan_veren: document.getElementById('fIlanVeren').value.trim(),
     telefon: document.getElementById('fTelefon').value.trim(),
     user_id: currentUser?.id || null
