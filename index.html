@@ -910,8 +910,7 @@ function openDetay(id) {
         <span>İlan Tarihi: <strong>${new Date(i.created_at).toLocaleDateString('tr-TR')}</strong></span>
         <span>İlan Veren: <strong>${ilanVeren}</strong></span>
         ${i.servis_turu?`<span>Servis Türü: <strong>${i.servis_turu}</strong></span>`:''}
-        ${(i.arac_marka||i.arac_model)?`<span>Araç: <strong>${[i.arac_model,i.arac_marka].filter(Boolean).join(' – ')}</strong></span>`:''}
-        ${i.arac_plaka?`<span>Plaka: <strong>${i.arac_plaka}</strong></span>`:''}
+       ${i.arac_kapasite?`<span>Kapasite: <strong>${i.arac_kapasite} kişilik</strong></span>`:''}
         ${i.arac_ozellikler?`<span>Özellikler: <strong>${i.arac_ozellikler}</strong></span>`:''}
       </div>
       <div class="detail-actions">
