@@ -957,11 +957,26 @@ function openDetay(id) {
         <div class="name" style="font-size:1rem;">${i.nereye_ilce}</div>
         ${i.nereye_sehir?`<div class="sub">${i.nereye_sehir}</div>`:''}
       </div>` : ''}
-      <div class="detail-meta">
-        <span>İlan Veren: <strong>${ilanVeren}</strong></span>
-        ${i.arac_marka||i.arac_model?`<span>Araç: <strong>${[i.arac_marka,i.arac_model].filter(Boolean).join(' ')}</strong></span>`:''}
-        ${i.arac_kapasite?`<span>Kaç Kişilik: <strong>${i.arac_kapasite} kişilik</strong></span>`:''}
-        ${i.servis_turu?`<span>Servis: <strong>${i.servis_turu}</strong></span>`:''}
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;border-top:1px solid var(--border);padding-top:1rem;margin-bottom:0.5rem;">
+        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;">
+          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">👤 İlan Veren</div>
+          <div style="font-size:0.85rem;font-weight:600;color:var(--text);">${ilanVeren}</div>
+        </div>
+        ${i.servis_turu?`
+        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;">
+          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">🚌 Servis Türü</div>
+          <div style="font-size:0.85rem;font-weight:600;color:var(--text);">${i.servis_turu}</div>
+        </div>`:''}
+        ${(i.arac_marka||i.arac_model)?`
+        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;">
+          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">🚗 Araç</div>
+          <div style="font-size:0.85rem;font-weight:600;color:var(--text);">${[i.arac_marka,i.arac_model].filter(Boolean).join(' – ')}</div>
+        </div>`:''}
+        ${i.arac_kapasite?`
+        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;">
+          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">👥 Kapasite</div>
+          <div style="font-size:0.85rem;font-weight:600;color:var(--text);">${i.arac_kapasite} kişilik</div>
+        </div>`:''}
       </div>
       <div class="detail-actions">
         <button class="btn-ara" onclick="araClick('${telefon}')">📞 Ara</button>
