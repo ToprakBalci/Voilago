@@ -1,14 +1,113 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+<!-- ============================================================
+     1. ADIM: Mevcut <head>...</head> bölümünü tamamen sil,
+     aşağıdaki ile değiştir.
+     ============================================================ -->
+
+<head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-<meta http-equiv="Content-Security-Policy" content="default-src *; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'; img-src * data:; connect-src *;"/>
-<title>Servisçiler Kulübü</title>
-<link rel="icon" type="image/png" href="Logo.png">
-<meta name="description" content="Servis şoförleri ve araç sahipleri için Türkiye'nin iş ve araç ilan platformu. İşim var araç arıyorum veya aracım var iş arıyorum diyenler için ücretsiz ilan verin."/>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&fFamily=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<title>Servisçiler Kulübü | Servis Şoförü İş İlanları ve Araç İlanları</title>
+<meta name="description" content="Türkiye'nin profesyonel servis ilan platformu. Servis şoförü iş ilanları, minibüs ve araç ilanları. İşim var araç arıyorum veya aracım var iş arıyorum diyenler için ücretsiz ilan verin."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://serviscilerkulubu.com/"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://serviscilerkulubu.com/"/>
+<meta property="og:title" content="Servisçiler Kulübü | Servis Şoförü İş ve Araç İlanları"/>
+<meta property="og:description" content="Türkiye'nin profesyonel servis ilan platformu. Servis şoförleri ve araç sahiplerinin buluşma noktası."/>
+<meta property="og:image" content="https://serviscilerkulubu.com/Logo.png"/>
+<meta property="og:locale" content="tr_TR"/>
+<meta property="og:site_name" content="Servisçiler Kulübü"/>
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Servisçiler Kulübü | Servis İş ve Araç İlanları"/>
+<meta name="twitter:description" content="Servis şoförleri ve araç sahipleri için Türkiye'nin ücretsiz ilan platformu."/>
+<meta name="twitter:image" content="https://serviscilerkulubu.com/Logo.png"/>
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "Servisçiler Kulübü",
+      "url": "https://serviscilerkulubu.com",
+      "logo": "https://serviscilerkulubu.com/Logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "serviscilerkulubu@gmail.com",
+        "contactType": "customer support",
+        "availableLanguage": "Turkish"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "name": "Servisçiler Kulübü",
+      "url": "https://serviscilerkulubu.com",
+      "description": "Servis şoförleri ve araç sahipleri için profesyonel iş ve araç ilan platformu",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://serviscilerkulubu.com/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Performans: Preconnect -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="preconnect" href="https://mvecoktdgcalobeeesjz.supabase.co"/>
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="Logo.png"/>
+<link rel="apple-touch-icon" href="Logo.png"/>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- MEVCUT <style> BLOĞUNU BURAYA KORU — hiç dokunma -->
+</head>
+
+
+<!-- ============================================================
+     2. ADIM: Aşağıdaki SEO bölümünü </main> kapanış etiketinden
+     hemen ÖNCE ekle. (Ana sayfanın altına gelecek.)
+     ============================================================ -->
+
+<!-- SEO Açıklama Bölümü — ilanGrid div'inden sonra, </main>'den önce -->
+<section style="max-width:1200px;margin:2rem auto 0;padding:0 1.5rem 2rem;border-top:1px solid rgba(197,160,80,0.1);">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-bottom:1.5rem;">
+    <div>
+      <h2 style="font-family:'Cinzel',serif;font-size:0.85rem;color:#c5a050;letter-spacing:0.08em;margin-bottom:0.5rem;">Servis Şoförü İş İlanları</h2>
+      <p style="font-size:0.78rem;color:#7a7a90;line-height:1.7;">İşim var araç arıyorum diyenler için Türkiye genelinde ücretsiz ilan platformu. İstanbul, Ankara, İzmir ve tüm şehirlerde servis şoförü iş ilanı verin.</p>
+    </div>
+    <div>
+      <h2 style="font-family:'Cinzel',serif;font-size:0.85rem;color:#c5a050;letter-spacing:0.08em;margin-bottom:0.5rem;">Servis Aracı İlanları</h2>
+      <p style="font-size:0.78rem;color:#7a7a90;line-height:1.7;">Aracım var iş arıyorum diyenler için minibüs, midibüs ve servis aracı ilanları. Personel servisi, okul servisi ve turizm aracı ilanları ücretsiz yayınlanır.</p>
+    </div>
+    <div>
+      <h2 style="font-family:'Cinzel',serif;font-size:0.85rem;color:#c5a050;letter-spacing:0.08em;margin-bottom:0.5rem;">Nasıl Çalışır?</h2>
+      <p style="font-size:0.78rem;color:#7a7a90;line-height:1.7;">Ücretsiz kayıt olun, ilanınızı verin. Servis şoförleri ve araç sahipleri direkt mesajlaşarak anlaşır. Hızlı, güvenilir ve tamamen ücretsiz.</p>
+    </div>
+  </div>
+  <p style="font-size:0.72rem;color:#4a4a60;text-align:center;line-height:1.6;">
+    Servisçiler Kulübü · Türkiye'nin Profesyonel Servis İlan Platformu · Servis şoförü iş ilanları · Minibüs ve araç ilanları · Personel servisi · Okul servisi · Turizm aracı
+  </p>
+</section>
 <style>
 :root {
   --gold: #c5a050;
