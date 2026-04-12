@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kullanım Koşulları | Servisçiler Kulübü</title>
+<meta name="description" content="Servisçiler Kulübü kullanım koşulları. Platformumuzu kullanmadan önce lütfen bu koşulları okuyun."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://serviscilerkulubu.com/kullanim-kosullari.html"/>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --gold: #c5a050; --dark: #0f1117; --dark2: #1a1c24; --dark3: #141620;
+  --border: #2e3045; --muted: #7a7a90; --text: #e0d8c8; --text2: #b0b0cc;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--dark); color: var(--text); min-height: 100vh; }
+nav { background: var(--dark3); border-bottom: 1px solid rgba(197,160,80,0.15); padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 56px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 20px rgba(0,0,0,0.5); }
+.nav-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+.nav-logo img { width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid var(--gold); object-fit: contain; }
+.nav-logo-text { font-family: 'Cinzel', serif; font-size: 0.82rem; color: var(--gold); letter-spacing: 0.08em; font-weight: 700; }
+.nav-back { color: var(--muted); text-decoration: none; font-size: 0.78rem; transition: color 0.15s; }
+.nav-back:hover { color: var(--gold); }
+
+.page-hero { background: var(--dark3); border-bottom: 1px solid rgba(197,160,80,0.1); padding: 3.5rem 1.5rem 2.5rem; text-align: center; }
+.page-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(197,160,80,0.3); padding: 0.3rem 1rem; border-radius: 20px; margin-bottom: 1rem; }
+.page-hero h1 { font-family: 'Cinzel', serif; font-size: clamp(1.4rem, 3vw, 2rem); color: var(--text); letter-spacing: 0.05em; margin-bottom: 0.8rem; }
+.page-hero p { color: var(--muted); font-size: 0.85rem; }
+
+.layout { display: grid; grid-template-columns: 220px 1fr; gap: 3rem; max-width: 1000px; margin: 0 auto; padding: 3rem 1.5rem; }
+.sidebar { position: sticky; top: 72px; height: fit-content; }
+.sidebar-title { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem; }
+.sidebar nav { display: flex; flex-direction: column; gap: 0.2rem; background: none; border: none; padding: 0; height: auto; position: static; box-shadow: none; }
+.sidebar nav a { color: var(--text2); text-decoration: none; font-size: 0.8rem; padding: 0.45rem 0.8rem; border-radius: 6px; border-left: 2px solid transparent; transition: all 0.15s; }
+.sidebar nav a:hover { color: var(--gold); border-left-color: var(--gold); background: rgba(197,160,80,0.05); }
+
+.content section { margin-bottom: 3rem; scroll-margin-top: 80px; }
+.content h2 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold); letter-spacing: 0.06em; margin-bottom: 1rem; padding-bottom: 0.6rem; border-bottom: 1px solid rgba(197,160,80,0.15); }
+.content p { color: var(--text2); font-size: 0.88rem; line-height: 1.9; margin-bottom: 0.8rem; }
+.content ul { list-style: none; margin: 0.8rem 0; }
+.content ul li { color: var(--text2); font-size: 0.88rem; line-height: 1.8; padding-left: 1.2rem; position: relative; margin-bottom: 0.3rem; }
+.content ul li::before { content: '✦'; position: absolute; left: 0; color: var(--gold); font-size: 0.6rem; top: 0.35rem; }
+
+.info-box { background: var(--dark2); border: 1px solid rgba(197,160,80,0.15); border-radius: 10px; padding: 1.2rem 1.4rem; margin: 1rem 0; }
+.info-box p { margin: 0; }
+
+.update-note { background: var(--dark3); border-left: 3px solid var(--gold); padding: 1rem 1.2rem; border-radius: 0 8px 8px 0; font-size: 0.8rem; color: var(--muted); margin-bottom: 2rem; }
+
+footer { background: #0a0c12; border-top: 1px solid rgba(197,160,80,0.1); padding: 1.5rem; text-align: center; }
+footer p { font-size: 0.72rem; color: #3a3a55; }
+footer a { color: var(--gold); text-decoration: none; }
+
+@media(max-width:768px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="Logo.png" alt="Servisçiler Kulübü"/>
+    <span class="nav-logo-text">Servisçiler Kulübü</span>
+  </a>
+  <a class="nav-back" href="/">← Ana Sayfa</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-tag">Yasal</div>
+  <h1>Kullanım Koşulları</h1>
+  <p>Son güncelleme: Ocak 2025</p>
+</div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-title">İçindekiler</div>
+    <nav>
+      <a href="#kabul">1. Koşulların Kabulü</a>
+      <a href="#hizmet">2. Hizmet Tanımı</a>
+      <a href="#kullanici">3. Kullanıcı Yükümlülükleri</a>
+      <a href="#ilan">4. İlan Kuralları</a>
+      <a href="#yasaklar">5. Yasaklanan İçerik</a>
+      <a href="#sorumluluk">6. Sorumluluk Sınırı</a>
+      <a href="#fikri">7. Fikri Mülkiyet</a>
+      <a href="#hesap">8. Hesap Askıya Alma</a>
+      <a href="#degisiklik">9. Değişiklikler</a>
+      <a href="#iletisim">10. İletişim</a>
+    </nav>
+  </aside>
+
+  <div class="content">
+    <div class="update-note">
+      Bu kullanım koşulları en son Ocak 2025 tarihinde güncellenmiştir. Platformu kullanmaya devam etmeniz bu koşulları kabul ettiğiniz anlamına gelir.
+    </div>
+
+    <section id="kabul">
+      <h2>1. Koşulların Kabulü</h2>
+      <p>Servisçiler Kulübü'nü (<strong>serviscilerkulubu.com</strong>) ziyaret etmeniz veya kullanmanız, bu Kullanım Koşullarını okuduğunuzu, anladığınızı ve kabul ettiğinizi göstermektedir. Bu koşulları kabul etmiyorsanız lütfen platformu kullanmayınız.</p>
+      <p>18 yaşın altındaysanız platformumuzu kullanmak için ebeveyn veya yasal vasi onayına ihtiyacınız bulunmaktadır.</p>
+    </section>
+
+    <section id="hizmet">
+      <h2>2. Hizmet Tanımı</h2>
+      <p>Servisçiler Kulübü, servis şoförleri ve araç sahiplerinin birbirini bulabilmesi amacıyla iş ve araç ilanı yayınlanmasına imkân tanıyan ücretsiz bir dijital platformdur.</p>
+      <div class="info-box">
+        <p>Platform, ilan verenler ile ilan görenler arasında yalnızca bir köprü görevi üstlenmekte olup taraflar arasında yapılan anlaşmalardan sorumlu değildir.</p>
+      </div>
+      <p>Hizmetlerimiz şunları kapsar:</p>
+      <ul>
+        <li>Ücretsiz iş ve araç ilanı yayınlama</li>
+        <li>İlanlar arasında arama ve filtreleme</li>
+        <li>Kullanıcılar arası doğrudan mesajlaşma</li>
+        <li>İlan yönetimi (ekleme, silme)</li>
+      </ul>
+    </section>
+
+    <section id="kullanici">
+      <h2>3. Kullanıcı Yükümlülükleri</h2>
+      <p>Platformumuzu kullanan her kullanıcı aşağıdaki yükümlülükleri kabul eder:</p>
+      <ul>
+        <li>Gerçek ve doğru bilgiler ile kayıt olmak</li>
+        <li>Hesap bilgilerinin gizliliğini korumak</li>
+        <li>Başkalarının hesabını izinsiz kullanmamak</li>
+        <li>Yürürlükteki Türk hukukuna uymak</li>
+        <li>Diğer kullanıcılara saygılı davranmak</li>
+        <li>Platform güvenliğini tehlikeye atacak eylemlerden kaçınmak</li>
+      </ul>
+    </section>
+
+    <section id="ilan">
+      <h2>4. İlan Kuralları</h2>
+      <p>Platformumuzda ilan yayınlarken aşağıdaki kurallara uymak zorundasınız:</p>
+      <ul>
+        <li>İlan içerikleri gerçek ve güncel olmalıdır</li>
+        <li>İletişim bilgileri doğru ve aktif olmalıdır</li>
+        <li>Her kullanıcı yalnızca gerçek ihtiyaçları için ilan verebilir</li>
+        <li>Yanıltıcı veya abartılı bilgi içeren ilanlar yayınlanamaz</li>
+        <li>Aynı ilan birden fazla kez yayınlanamaz</li>
+        <li>İlanlar yalnızca servis sektörüne yönelik olmalıdır</li>
+      </ul>
+    </section>
+
+    <section id="yasaklar">
+      <h2>5. Yasaklanan İçerik</h2>
+      <p>Aşağıdaki içerikler platformumuzda kesinlikle yasaktır:</p>
+      <ul>
+        <li>Yasa dışı faaliyet içeren ilanlar</li>
+        <li>Hakaret, ayrımcılık veya nefret söylemi barındıran içerikler</li>
+        <li>Sahte veya yanıltıcı kimlik bilgileri</li>
+        <li>Spam, reklam amaçlı veya tekrarlı içerikler</li>
+        <li>Kişisel verilerin izinsiz paylaşılması</li>
+        <li>Zararlı yazılım veya kötü amaçlı bağlantılar</li>
+        <li>Servis sektörü dışı ilan ve reklamlar</li>
+      </ul>
+      <div class="info-box">
+        <p>Bu kurallara aykırı içerikler tespit edildiğinde bildirim yapılmaksızın kaldırılabilir ve ilgili hesap askıya alınabilir.</p>
+      </div>
+    </section>
+
+    <section id="sorumluluk">
+      <h2>6. Sorumluluk Sınırı</h2>
+      <p>Servisçiler Kulübü bir aracı platform olarak hareket etmekte olup kullanıcılar arasında gerçekleşen anlaşmalar, iş ilişkileri veya yaşanabilecek olumsuz durumlardan sorumlu tutulamaz.</p>
+      <p>Platform; ilanların doğruluğunu, kullanıcı niyetini, yapılan anlaşmaların yerine getirilmesini garanti etmez. Kullanıcılar birbirleriyle anlaşmadan önce gerekli özeni göstermekle yükümlüdür.</p>
+      <p>Teknik arızalar, veri kayıpları veya hizmet kesintileri nedeniyle oluşabilecek zararlardan platformumuz sorumlu değildir.</p>
+    </section>
+
+    <section id="fikri">
+      <h2>7. Fikri Mülkiyet</h2>
+      <p>Servisçiler Kulübü'ne ait logo, tasarım, yazılım ve içerikler telif hakkı kapsamında korunmaktadır. İzinsiz kopyalanması, dağıtılması veya ticari amaçla kullanılması yasaktır.</p>
+      <p>Kullanıcıların platforma yüklediği içerikler (ilan metinleri vb.) kullanıcıya aittir. Ancak kullanıcı, söz konusu içeriklerin platform üzerinde gösterilmesi için gerekli lisansı Servisçiler Kulübü'ne tanımış sayılır.</p>
+    </section>
+
+    <section id="hesap">
+      <h2>8. Hesap Askıya Alma</h2>
+      <p>Aşağıdaki durumlarda hesabınız uyarı yapılmaksızın askıya alınabilir veya silinebilir:</p>
+      <ul>
+        <li>Bu kullanım koşullarının ihlali</li>
+        <li>Diğer kullanıcılara zarar verilmesi</li>
+        <li>Platform güvenliğinin tehlikeye atılması</li>
+        <li>Sahte kimlik veya yanıltıcı bilgi kullanımı</li>
+        <li>Uzun süreli pasif hesap kullanımı</li>
+      </ul>
+    </section>
+
+    <section id="degisiklik">
+      <h2>9. Değişiklikler</h2>
+      <p>Servisçiler Kulübü, bu kullanım koşullarını önceden bildirim yapmaksızın güncelleme hakkını saklı tutar. Güncel koşullar her zaman <strong>serviscilerkulubu.com/kullanim-kosullari.html</strong> adresinde yayımlanır.</p>
+      <p>Değişiklik tarihinden sonra platformu kullanmaya devam etmeniz yeni koşulları kabul ettiğiniz anlamına gelir.</p>
+    </section>
+
+    <section id="iletisim">
+      <h2>10. İletişim</h2>
+      <p>Kullanım koşullarına ilişkin sorularınız için:</p>
+      <div class="info-box">
+        <p>📧 <a href="mailto:serviscilerkulubu@gmail.com" style="color:var(--gold);text-decoration:none;">serviscilerkulubu@gmail.com</a></p>
+      </div>
+    </section>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 Servisçiler Kulübü · <a href="/">Ana Sayfa</a> · <a href="/gizlilik.html">Gizlilik Politikası</a> · <a href="/kvkk.html">KVKK</a></p>
+</footer>
+
+</body>
+</html>
