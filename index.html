@@ -441,21 +441,77 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
     <div class="active-filters" id="activeFilters"></div>
     <div class="grid" id="ilanGrid"><div class="loading">İlanlar yükleniyor...</div></div>
        <section style="max-width:1200px;margin:2rem auto 0;padding:0 1.5rem 2rem;border-top:1px solid rgba(197,160,80,0.1);">
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-bottom:1.5rem;">
-    <div>
-      <h2 style="font-family:'Cinzel',serif;font-size:0.85rem;color:#c5a050;letter-spacing:0.08em;margin-bottom:0.5rem;">Servis Şoförü İş İlanları</h2>
-      <p style="font-size:0.78rem;color:#7a7a90;line-height:1.7;">İşim var araç arıyorum diyenler için Türkiye genelinde ücretsiz ilan platformu. İstanbul, Ankara, İzmir ve tüm şehirlerde servis şoförü iş ilanı verin.</p>
+
+  <!-- Şehir Bazlı Anahtar Kelimeler -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;margin-bottom:2rem;">
+    <div style="background:#1a1c24;border:1px solid #2e3045;border-radius:8px;padding:1rem;">
+      <h2 style="font-family:'Cinzel',serif;font-size:0.82rem;color:#c5a050;letter-spacing:0.08em;margin-bottom:0.4rem;">İstanbul Servis İş İlanları</h2>
+      <p style="font-size:0.75rem;color:#7a7a90;line-height:1.6;">İstanbul'da servis şoförü iş ilanları ve araç ilanları. Avrupa yakası ve Anadolu yakası servis hattı ilanları ücretsiz yayınlanır.</p>
     </div>
-    <div>
-      <h2 style="font-family:'Cinzel',serif;font-size:0.85rem;color:#c5a050;letter-spacing:0.08em;margin-bottom:0.5rem;">Servis Aracı İlanları</h2>
-      <p style="font-size:0.78rem;color:#7a7a90;line-height:1.7;">Aracım var iş arıyorum diyenler için minibüs, midibüs ve servis aracı ilanları. Personel servisi, okul servisi ve turizm aracı ilanları ücretsiz yayınlanır.</p>
+    <div style="background:#1a1c24;border:1px solid #2e3045;border-radius:8px;padding:1rem;">
+      <h2 style="font-family:'Cinzel',serif;font-size:0.82rem;color:#c5a050;letter-spacing:0.08em;margin-bottom:0.4rem;">Ankara Servis İş İlanları</h2>
+      <p style="font-size:0.75rem;color:#7a7a90;line-height:1.6;">Ankara'da servis şoförü arayanlar ve minibüs ilanları. Personel servisi ve okul servisi ilanları için ücretsiz platform.</p>
     </div>
-    <div>
-      <h2 style="font-family:'Cinzel',serif;font-size:0.85rem;color:#c5a050;letter-spacing:0.08em;margin-bottom:0.5rem;">Nasıl Çalışır?</h2>
-      <p style="font-size:0.78rem;color:#7a7a90;line-height:1.7;">Ücretsiz kayıt olun, ilanınızı verin. Servis şoförleri ve araç sahipleri direkt mesajlaşarak anlaşır. Hızlı, güvenilir ve tamamen ücretsiz.</p>
+    <div style="background:#1a1c24;border:1px solid #2e3045;border-radius:8px;padding:1rem;">
+      <h2 style="font-family:'Cinzel',serif;font-size:0.82rem;color:#c5a050;letter-spacing:0.08em;margin-bottom:0.4rem;">İzmir Servis İş İlanları</h2>
+      <p style="font-size:0.75rem;color:#7a7a90;line-height:1.6;">İzmir'de servis aracı ve şoför ilanları. Organize sanayi, hastane ve okul servis hatları için ilan verin.</p>
+    </div>
+    <div style="background:#1a1c24;border:1px solid #2e3045;border-radius:8px;padding:1rem;">
+      <h2 style="font-family:'Cinzel',serif;font-size:0.82rem;color:#c5a050;letter-spacing:0.08em;margin-bottom:0.4rem;">Bursa Servis İş İlanları</h2>
+      <p style="font-size:0.75rem;color:#7a7a90;line-height:1.6;">Bursa'da servis şoförü iş ilanları. Otomotiv fabrikaları ve organize sanayi bölgeleri için servis hattı ilanları.</p>
+    </div>
+    <div style="background:#1a1c24;border:1px solid #2e3045;border-radius:8px;padding:1rem;">
+      <h2 style="font-family:'Cinzel',serif;font-size:0.82rem;color:#c5a050;letter-spacing:0.08em;margin-bottom:0.4rem;">Kocaeli Servis İş İlanları</h2>
+      <p style="font-size:0.75rem;color:#7a7a90;line-height:1.6;">Kocaeli ve İzmit'te servis şoförü ilanları. Sanayi bölgeleri için minibüs ve midibüs servis hattı ilanları.</p>
+    </div>
+    <div style="background:#1a1c24;border:1px solid #2e3045;border-radius:8px;padding:1rem;">
+      <h2 style="font-family:'Cinzel',serif;font-size:0.82rem;color:#c5a050;letter-spacing:0.08em;margin-bottom:0.4rem;">Tüm Türkiye İlanları</h2>
+      <p style="font-size:0.75rem;color:#7a7a90;line-height:1.6;">Türkiye genelinde servis şoförü iş ilanları ve araç ilanları. Antalya, Adana, Gaziantep, Konya ve tüm şehirlerde ücretsiz ilan.</p>
     </div>
   </div>
-  <p style="font-size:0.72rem;color:#4a4a60;text-align:center;line-height:1.6;">Servisçiler Kulübü · Türkiye'nin Profesyonel Servis İlan Platformu · Servis şoförü iş ilanları · Minibüs ve araç ilanları · Personel servisi · Okul servisi · Turizm aracı</p>
+
+  <!-- Platform Açıklaması -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-bottom:2rem;padding-top:1.5rem;border-top:1px solid rgba(197,160,80,0.08);">
+    <div>
+      <h3 style="font-family:'Cinzel',serif;font-size:0.82rem;color:#c5a050;letter-spacing:0.08em;margin-bottom:0.5rem;">🟢 Servis Şoförü İş İlanları</h3>
+      <p style="font-size:0.75rem;color:#7a7a90;line-height:1.7;">İşim var araç arıyorum diyenler için Türkiye genelinde ücretsiz ilan platformu. Personel servisi, okul servisi, turizm ve şehirler arası servis iş ilanı verin.</p>
+    </div>
+    <div>
+      <h3 style="font-family:'Cinzel',serif;font-size:0.82rem;color:#c5a050;letter-spacing:0.08em;margin-bottom:0.5rem;">🟠 Servis Aracı İlanları</h3>
+      <p style="font-size:0.75rem;color:#7a7a90;line-height:1.7;">Aracım var iş arıyorum diyenler için minibüs, midibüs ve servis aracı ilanları. Mercedes, Ford Transit, Peugeot Boxer araç ilanları ücretsiz yayınlanır.</p>
+    </div>
+    <div>
+      <h3 style="font-family:'Cinzel',serif;font-size:0.82rem;color:#c5a050;letter-spacing:0.08em;margin-bottom:0.5rem;">✦ Nasıl Çalışır?</h3>
+      <p style="font-size:0.75rem;color:#7a7a90;line-height:1.7;">Ücretsiz kayıt olun, ilanınızı verin. Servis şoförleri ve araç sahipleri direkt mesajlaşarak anlaşır. Aracınız için iş, işiniz için araç bulmak artık çok kolay.</p>
+    </div>
+  </div>
+
+  <!-- SSS Bölümü -->
+  <div style="padding-top:1.5rem;border-top:1px solid rgba(197,160,80,0.08);margin-bottom:1.5rem;">
+    <h3 style="font-family:'Cinzel',serif;font-size:0.88rem;color:#c5a050;letter-spacing:0.1em;margin-bottom:1rem;">Sık Sorulan Sorular</h3>
+    <div style="display:flex;flex-direction:column;gap:0.7rem;">
+      <details style="background:#1a1c24;border:1px solid #2e3045;border-radius:8px;padding:0.8rem 1rem;cursor:pointer;">
+        <summary style="font-size:0.82rem;font-weight:600;color:#e0d8c8;list-style:none;">Servisçiler Kulübü nedir?</summary>
+        <p style="font-size:0.78rem;color:#7a7a90;line-height:1.7;margin-top:0.6rem;">Servisçiler Kulübü, servis şoförleri ve araç sahiplerini buluşturan Türkiye'nin ücretsiz ilan platformudur. İşim var araç arıyorum veya aracım var iş arıyorum diyenler buradan ücretsiz ilan verebilir.</p>
+      </details>
+      <details style="background:#1a1c24;border:1px solid #2e3045;border-radius:8px;padding:0.8rem 1rem;cursor:pointer;">
+        <summary style="font-size:0.82rem;font-weight:600;color:#e0d8c8;list-style:none;">İlan vermek ücretli mi?</summary>
+        <p style="font-size:0.78rem;color:#7a7a90;line-height:1.7;margin-top:0.6rem;">Hayır, Servisçiler Kulübü'nde ilan vermek tamamen ücretsizdir. Kayıt olun ve hemen ilanınızı yayınlayın.</p>
+      </details>
+      <details style="background:#1a1c24;border:1px solid #2e3045;border-radius:8px;padding:0.8rem 1rem;cursor:pointer;">
+        <summary style="font-size:0.82rem;font-weight:600;color:#e0d8c8;list-style:none;">Hangi şehirlerde ilan verebilirim?</summary>
+        <p style="font-size:0.78rem;color:#7a7a90;line-height:1.7;margin-top:0.6rem;">Türkiye'nin tüm şehirlerinde ilan verebilirsiniz. İstanbul, Ankara, İzmir, Bursa, Kocaeli, Antalya, Adana, Gaziantep başta olmak üzere tüm illerden ilan kabul edilmektedir.</p>
+      </details>
+      <details style="background:#1a1c24;border:1px solid #2e3045;border-radius:8px;padding:0.8rem 1rem;cursor:pointer;">
+        <summary style="font-size:0.82rem;font-weight:600;color:#e0d8c8;list-style:none;">Hangi araç türleri için ilan verebilirim?</summary>
+        <p style="font-size:0.78rem;color:#7a7a90;line-height:1.7;margin-top:0.6rem;">Minibüs, midibüs, otobüs ve tüm servis araçları için ilan verebilirsiniz. Personel servisi, okul servisi, turizm aracı ve şehirler arası servis ilanları kabul edilmektedir.</p>
+      </details>
+    </div>
+  </div>
+
+  <p style="font-size:0.7rem;color:#3a3a55;text-align:center;line-height:1.8;">
+    Servisçiler Kulübü · Türkiye'nin Profesyonel Servis İlan Platformu · Servis şoförü iş ilanları · Minibüs ilanları · Midibüs ilanları · Personel servisi ilanları · Okul servisi ilanları · Turizm aracı ilanları · İstanbul · Ankara · İzmir · Bursa · Kocaeli
+  </p>
 </section>
   </main>
 </div>
