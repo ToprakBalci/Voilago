@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>İlan Detayı | Servisçiler Kulübü</title>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" id="canonicalTag" href="https://serviscilerkulubu.com/"/>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root {
+  --gold: #c5a050; --dark: #0f1117; --dark2: #1a1c24; --dark3: #141620;
+  --orange: #e07b39; --orange2: #f59c5a; --border: #2e3045;
+  --muted: #7a7a90; --text: #e0d8c8; --text2: #b0b0cc;
+  --green-dim: #1a3a20; --green-text: #4caf50; --orange-dim: #3a2010;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--dark); color: var(--text); min-height: 100vh; }
+nav { background: var(--dark3); border-bottom: 1px solid rgba(197,160,80,0.15); padding: 0 1.2rem; display: flex; align-items: center; height: 56px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 20px rgba(0,0,0,0.5); }
+.nav-logo { display: flex; align-items: center; gap: 0.6rem; cursor: pointer; text-decoration: none; }
+.nav-logo img { width: 42px; height: 42px; border-radius: 50%; object-fit: contain; border: 1.5px solid var(--gold); }
+.nav-logo-text { font-family: 'Cinzel', serif; font-size: 0.82rem; color: var(--gold); letter-spacing: 0.08em; font-weight: 700; }
+main { max-width: 640px; margin: 2rem auto; padding: 0 1.2rem 3rem; }
+.badge { display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.3rem 0.8rem; border-radius: 4px; margin-bottom: 1rem; }
+.badge.green { background: var(--green-dim); color: var(--green-text); border: 1px solid #2d5a33; }
+.badge.orange { background: var(--orange-dim); color: var(--orange2); border: 1px solid #5a3020; }
+h1 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold); letter-spacing: 0.06em; margin-bottom: 1.2rem; line-height: 1.5; }
+.desc-box { background: var(--dark3); border-left: 3px solid var(--gold); padding: 1rem; border-radius: 0 8px 8px 0; font-size: 0.88rem; line-height: 1.7; margin-bottom: 1.4rem; color: var(--text2); }
+.desc-box.orange { border-left-color: var(--orange); }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-bottom: 1.4rem; }
+.info-box { background: var(--dark3); border: 1px solid var(--border); border-radius: 8px; padding: 0.7rem 0.9rem; }
+.info-label { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-bottom: 0.25rem; }
+.info-val { font-size: 0.88rem; font-weight: 600; color: var(--text); }
+.actions { display: flex; gap: 0.7rem; margin-top: 1.2rem; }
+.btn-ara { flex: 1; padding: 0.85rem; background: #0d1f3a; color: #64b5f6; border: 1.5px solid #1565c0; border-radius: 8px; font-size: 0.95rem; font-weight: 700; cursor: pointer; font-family: inherit; text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center; }
+.btn-geri { flex: 1; padding: 0.85rem; background: var(--dark3); color: var(--text2); border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.95rem; font-weight: 700; cursor: pointer; font-family: inherit; text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center; }
+.loading { text-align: center; padding: 4rem; color: var(--muted); }
+.error { text-align: center; padding: 4rem; color: #ef9a9a; }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="/Logo.png" alt="Servisçiler Kulübü"/>
+    <span class="nav-logo-text">Servisçiler Kulübü</span>
+  </a>
+</nav>
+<main id="content">
+  <div class="loading">⏳ İlan yükleniyor...</div>
+</main>
+
+<script>
+const { createClient } = supabase;
+const sb = createClient(
+  'https://mvecoktdgcalobeeesjz.supabase.co',
+  'sb_publishable_DJ3IS9dzeavUfKm5xP_5hA_qBCDg1NF'
+);
+
+async function loadIlan() {
+  const id = window.location.pathname.split('/ilan/')[1];
+  if (!id) { showError(); return; }
+
+  const { data: ilan, error } = await sb.from('ilanlar').select('*').eq('id', id).single();
+  if (error || !ilan) { showError(); return; }
+
+  // SEO meta güncelle
+  const isIs = ilan.type === 'is';
+  const tip = isIs ? 'İşim Var Araç Arıyorum' : 'Aracım Var İş Arıyorum';
+  const nereden = [ilan.nereden_ilce, ilan.nereden_sehir].filter(Boolean).join(', ');
+  const nereye = [ilan.nereye_ilce, ilan.nereye_sehir].filter(Boolean).join(', ');
+  
+  document.title = `${tip} | ${nereden}${nereye ? ' → ' + nereye : ''} | Servisçiler Kulübü`;
+  document.querySelector('meta[name="robots"]').setAttribute('content', 'index, follow');
+  document.getElementById('canonicalTag').setAttribute('href', `https://serviscilerkulubu.com/ilan/${id}`);
+
+  // Schema.org JobPosting
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    "title": tip,
+    "description": ilan.aciklama || '',
+    "datePosted": ilan.created_at,
+    "jobLocation": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": ilan.nereden_sehir || '',
+        "addressCountry": "TR"
+      }
+    },
+    "hiringOrganization": {
+      "@type": "Organization",
+      "name": ilan.ilan_veren || 'Servisçiler Kulübü',
+      "sameAs": "https://serviscilerkulubu.com"
+    }
+  };
+  const s = document.createElement('script');
+  s.type = 'application/ld+json';
+  s.text = JSON.stringify(schema);
+  document.head.appendChild(s);
+
+  // Sayfayı render et
+  const badgeClass = isIs ? 'green' : 'orange';
+  const tarih = new Date(ilan.created_at).toLocaleDateString('tr-TR');
+
+  document.getElementById('content').innerHTML = `
+    <span class="badge ${badgeClass}">${tip}</span>
+    <h1>${nereden}${nereye ? ' → ' + nereye : ''}</h1>
+    <div class="desc-box ${isIs ? '' : 'orange'}">${ilan.aciklama || '-'}</div>
+    <div class="info-grid">
+      <div class="info-box"><div class="info-label">📍 Nereden</div><div class="info-val">${nereden || '-'}</div></div>
+      <div class="info-box"><div class="info-label">🏁 Nereye</div><div class="info-val">${nereye || '-'}</div></div>
+      <div class="info-box"><div class="info-label">🕐 Giriş Saati</div><div class="info-val">${ilan.giris_saati || '--:--'}</div></div>
+      <div class="info-box"><div class="info-label">🕔 Çıkış Saati</div><div class="info-val">${ilan.cikis_saati || '--:--'}</div></div>
+      ${ilan.arac_marka ? `<div class="info-box"><div class="info-label">🚗 Araç</div><div class="info-val">${[ilan.arac_marka, ilan.arac_model].filter(Boolean).join(' ')}</div></div>` : ''}
+      ${ilan.arac_kapasite ? `<div class="info-box"><div class="info-label">👥 Kapasite</div><div class="info-val">${ilan.arac_kapasite} kişilik</div></div>` : ''}
+      ${ilan.servis_turu ? `<div class="info-box"><div class="info-label">🚌 Servis Türü</div><div class="info-val">${ilan.servis_turu}</div></div>` : ''}
+      <div class="info-box"><div class="info-label">👤 İlan Veren</div><div class="info-val">${ilan.ilan_veren || 'Anonim'}</div></div>
+      <div class="info-box"><div class="info-label">📅 Tarih</div><div class="info-val">${tarih}</div></div>
+    </div>
+    <div class="actions">
+      <a class="btn-geri" href="/">← Tüm İlanlar</a>
+      ${ilan.telefon ? `<a class="btn-ara" href="tel:${ilan.telefon.replace(/\D/g,'')}">📞 Hemen Ara</a>` : ''}
+    </div>
+  `;
+}
+
+function showError() {
+  document.getElementById('content').innerHTML = '<div class="error">❌ İlan bulunamadı. <a href="/" style="color:var(--gold);">Ana sayfaya dön</a></div>';
+}
+
+loadIlan();
+</script>
+</body>
+</html>
