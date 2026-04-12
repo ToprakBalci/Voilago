@@ -39,4 +39,8 @@
       ]
     }
   ]
+  ,
+"rewrites": [
+  { "source": "/ilan/:id", "destination": "/ilan.html" }
+]
 }
