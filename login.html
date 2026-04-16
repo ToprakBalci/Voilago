@@ -270,9 +270,9 @@ input::placeholder { color: #3e4060; }
       <label>Telefon Numarası</label>
       <div class="input-wrap">
         <span class="phone-prefix">🇹🇷 +90</span>
-        <input type="tel" id="phone" class="with-prefix" placeholder="5XX XXX XX XX" maxlength="10"/>
+        <input type="tel" id="phone" class="with-prefix" placeholder="05XX XXX XX XX" maxlength="11"/>
       </div>
-      <div class="error-msg" id="phoneError">Geçerli bir telefon numarası girin.</div>
+      <div class="error-msg" id="phoneError">Geçerli bir telefon numarası girin (05XX XXX XX XX).</div>
     </div>
     <button class="btn-primary" id="sendOtpBtn" onclick="handleSendOtp()">
       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
@@ -364,9 +364,9 @@ input::placeholder { color: #3e4060; }
       <label>Telefon Numarası</label>
       <div class="input-wrap">
         <span class="phone-prefix">🇹🇷 +90</span>
-        <input type="tel" id="collectPhone" class="with-prefix" placeholder="5XX XXX XX XX" maxlength="10"/>
+        <input type="tel" id="collectPhone" class="with-prefix" placeholder="05XX XXX XX XX" maxlength="11"/>
       </div>
-      <div class="error-msg" id="collectPhoneError">Geçerli bir telefon numarası girin.</div>
+      <div class="error-msg" id="collectPhoneError">Geçerli bir telefon numarası girin (05XX XXX XX XX).</div>
     </div>
     <button class="btn-primary" id="savePhoneBtn" onclick="handleSavePhone()">
       💾 Kaydet ve Devam Et
@@ -385,10 +385,37 @@ const sb = createClient(
 
 let currentPhone = '';
 
+function enforcePhoneFormat(el) {
+  // Sadece rakam al
+  let val = el.value.replace(/\D/g, '');
+  // Her zaman 0 ile başlasın
+  if (val.length > 0 && val[0] !== '0') {
+    val = '0' + val;
+  } else if (val.length === 0) {
+    val = '';
+  }
+  // Maksimum 11 hane (0 + 10 rakam)
+  if (val.length > 11) val = val.slice(0, 11);
+  el.value = val;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  ['phone','otpCode','collectPhone'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('input', () => { el.value = el.value.replace(/\D/g, ''); });
+  const phoneEl = document.getElementById('phone');
+  const collectEl = document.getElementById('collectPhone');
+
+  phoneEl.addEventListener('input', () => enforcePhoneFormat(phoneEl));
+  phoneEl.addEventListener('focus', () => {
+    if (phoneEl.value === '') phoneEl.value = '0';
+  });
+
+  collectEl.addEventListener('input', () => enforcePhoneFormat(collectEl));
+  collectEl.addEventListener('focus', () => {
+    if (collectEl.value === '') collectEl.value = '0';
+  });
+
+  document.getElementById('otpCode').addEventListener('input', () => {
+    const el = document.getElementById('otpCode');
+    el.value = el.value.replace(/\D/g, '');
   });
 });
 
@@ -400,7 +427,6 @@ window.addEventListener('load', async () => {
   const user = session.user;
   const provider = user.app_metadata?.provider;
 
-  // .catch() OLMADAN - düzeltildi
   const { data: profile, error: profileError } = await sb.from('profiles')
     .select('full_name, phone')
     .eq('id', user.id)
@@ -429,13 +455,15 @@ async function handleSendOtp() {
   document.getElementById('phone').classList.remove('error');
   document.getElementById('phoneError').style.display = 'none';
 
-  if (!rawPhone || rawPhone.length < 10) {
+  // Tam 11 hane ve 0 ile başlamalı
+  if (!rawPhone || rawPhone.length !== 11 || !rawPhone.startsWith('0')) {
     document.getElementById('phone').classList.add('error');
     document.getElementById('phoneError').style.display = 'block';
     return;
   }
 
-  const digits = rawPhone.replace(/^0+/, '');
+  // Başındaki 0'ı çıkar, +90 ekle
+  const digits = rawPhone.slice(1);
   currentPhone = '+90' + digits;
   btn.innerHTML = '<span>Gönderiliyor...</span>';
   btn.disabled = true;
@@ -475,7 +503,6 @@ async function handleVerifyOtp() {
   const userId = data.session.user.id;
   await sb.from('profiles').upsert({ id: userId, phone: currentPhone });
 
-  // .catch() OLMADAN - düzeltildi
   const { data: profile } = await sb.from('profiles')
     .select('full_name')
     .eq('id', userId)
@@ -521,12 +548,14 @@ async function handleSavePhone() {
   document.getElementById('collectPhoneError').style.display = 'none';
   clearAlert('collectPhoneAlertError');
 
-  if (!rawPhone || rawPhone.length < 10) {
+  // Tam 11 hane ve 0 ile başlamalı
+  if (!rawPhone || rawPhone.length !== 11 || !rawPhone.startsWith('0')) {
     document.getElementById('collectPhoneError').style.display = 'block';
     return;
   }
 
-  const digits = rawPhone.replace(/^0+/, '');
+  // Başındaki 0'ı çıkar, +90 ekle
+  const digits = rawPhone.slice(1);
   const phoneFormatted = '+90' + digits;
   btn.textContent = 'Kaydediliyor...';
   btn.disabled = true;
