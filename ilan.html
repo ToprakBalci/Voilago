@@ -4,6 +4,12 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>İlan Detayı | Servisçiler Kulübü</title>
+<!-- =====================================================
+     DEĞİŞİKLİK 1: Default meta description eklendi.
+     JS yüklenince üzerine yazar, ama Google JS çalıştıramazsa
+     bu metni görür. Önceden hiç description yoktu.
+     ===================================================== -->
+<meta name="description" content="Servis şoförü iş ilanı ve araç ilanı detayı. Servisçiler Kulübü — Türkiye'nin ücretsiz servis ilan platformu."/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" id="canonicalTag" href="https://serviscilerkulubu.com/"/>
 <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
@@ -67,15 +73,41 @@ async function loadIlan() {
   const { data: ilan, error } = await sb.from('ilanlar').select('*').eq('id', id).single();
   if (error || !ilan) { showError(); return; }
 
-  // SEO meta güncelle
   const isIs = ilan.type === 'is';
   const tip = isIs ? 'İşim Var Araç Arıyorum' : 'Aracım Var İş Arıyorum';
   const nereden = [ilan.nereden_ilce, ilan.nereden_sehir].filter(Boolean).join(', ');
   const nereye = [ilan.nereye_ilce, ilan.nereye_sehir].filter(Boolean).join(', ');
-  
+
+  // SEO title güncelle
   document.title = `${tip} | ${nereden}${nereye ? ' → ' + nereye : ''} | Servisçiler Kulübü`;
-  document.querySelector('meta[name="robots"]').setAttribute('content', 'index, follow');
+
+  // =====================================================
+  // DEĞİŞİKLİK 2: Meta description JS ile güncelleniyor.
+  // Daha önce sadece title güncelleniyordu, description eksikti.
+  // =====================================================
+  const aciklamaKisa = (ilan.aciklama || '').substring(0, 120).replace(/\s+/g, ' ').trim();
+  const descText = `${tip} — ${nereden}${nereye ? ' → ' + nereye : ''}. ${aciklamaKisa}`;
+  let metaDesc = document.querySelector('meta[name="description"]');
+  if (!metaDesc) {
+    metaDesc = document.createElement('meta');
+    metaDesc.name = 'description';
+    document.head.appendChild(metaDesc);
+  }
+  metaDesc.setAttribute('content', descText);
+
+  // Canonical güncelle
   document.getElementById('canonicalTag').setAttribute('href', `https://serviscilerkulubu.com/ilan/${id}`);
+
+  // Open Graph güncelle
+  const setOG = (prop, val) => {
+    let el = document.querySelector(`meta[property="${prop}"]`);
+    if (!el) { el = document.createElement('meta'); el.setAttribute('property', prop); document.head.appendChild(el); }
+    el.setAttribute('content', val);
+  };
+  setOG('og:title', `${tip} | ${nereden}${nereye ? ' → ' + nereye : ''}`);
+  setOG('og:description', descText);
+  setOG('og:url', `https://serviscilerkulubu.com/ilan/${id}`);
+  setOG('og:type', 'article');
 
   // Schema.org JobPosting
   const schema = {
