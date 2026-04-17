@@ -4,6 +4,7 @@
   <!-- Ana Sayfa -->
   <url>
     <loc>https://serviscilerkulubu.com/</loc>
+    <lastmod>2026-04-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -11,20 +12,15 @@
   <!-- Hakkımızda -->
   <url>
     <loc>https://serviscilerkulubu.com/hakkimizda.html</loc>
+    <lastmod>2026-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-
-  <!-- İlan Sayfası -->
-  <url>
-    <loc>https://serviscilerkulubu.com/ilan.html</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
   </url>
 
   <!-- Giriş -->
   <url>
     <loc>https://serviscilerkulubu.com/login.html</loc>
+    <lastmod>2026-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -32,6 +28,7 @@
   <!-- Kullanım Koşulları -->
   <url>
     <loc>https://serviscilerkulubu.com/kullanim-kosullari.html</loc>
+    <lastmod>2026-04-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -39,6 +36,7 @@
   <!-- Gizlilik Politikası -->
   <url>
     <loc>https://serviscilerkulubu.com/gizlilik.html</loc>
+    <lastmod>2026-04-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -46,6 +44,7 @@
   <!-- KVKK -->
   <url>
     <loc>https://serviscilerkulubu.com/kvkk.html</loc>
+    <lastmod>2026-04-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
