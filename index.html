@@ -58,23 +58,7 @@
 }
 </script>
 
-<!-- Performans: Preconnect -->
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link rel="preconnect" href="https://mvecoktdgcalobeeesjz.supabase.co"/>
-
-<!-- Favicon -->
-<link rel="icon" type="image/png" href="Logo.png"/>
-<link rel="apple-touch-icon" href="Logo.png"/>
-
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-
-<!-- Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<!-- MEVCUT <style> BLOĞUNU BURAYA KORU — hiç dokunma -->
-  <script type="application/ld+json">
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -114,16 +98,26 @@
   ]
 }
 </script>
-</head>
 
+<!-- Performans: Preconnect -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="preconnect" href="https://mvecoktdgcalobeeesjz.supabase.co"/>
 
-<!-- ============================================================
-     2. ADIM: Aşağıdaki SEO bölümünü </main> kapanış etiketinden
-     hemen ÖNCE ekle. (Ana sayfanın altına gelecek.)
-     ============================================================ -->
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="Logo.png"/>
+<link rel="apple-touch-icon" href="Logo.png"/>
 
-<!-- SEO Açıklama Bölümü — ilanGrid div'inden sonra, </main>'den önce -->
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- =====================================================
+     DEĞİŞİKLİK 1: <style> bloğu HEAD içine taşındı.
+     Önceden </head> dışındaydı (geçersiz HTML).
+     ===================================================== -->
 <style>
 :root {
   --gold: #c5a050;
@@ -215,10 +209,7 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
 .modal-head { padding:1rem 1.2rem; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; display:flex; justify-content:space-between; align-items:center; border-radius:14px 14px 0 0; border-bottom:1px solid var(--border); }
 .modal-head.green { background:var(--green-dim); color:var(--green-text); }
 .modal-head.orange { background:var(--orange-dim); color:var(--orange2); }
-
-/* FIX: İlan ver header - site temasına uygun altın/koyu */
 .modal-head.ilan-ver { background: linear-gradient(135deg, #2a1f08, #3a2d10); color: var(--gold); border-bottom: 1px solid rgba(197,160,80,0.25); }
-
 .modal-head.gold { background:linear-gradient(135deg,#2a1f08,#3a2d10); color:var(--gold); }
 .modal-head.blue { background:#0d1f3a; color:#64b5f6; }
 .modal-head.red { background:#3a0d0d; color:#ef9a9a; }
@@ -244,7 +235,6 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
 .btn-mesaj { flex:1; padding:0.82rem; background:#0d2a28; color:#4db6ac; border:1.5px solid #00796b; border-radius:8px; font-size:0.95rem; font-weight:700; cursor:pointer; font-family:inherit; display:flex; align-items:center; justify-content:center; gap:0.5rem; transition:background 0.15s; }
 .btn-mesaj:hover { background:#00796b; color:#fff; }
 
-/* Mesaj overlay - tam ekran mobilde */
 .mesaj-overlay-inner { display:flex; flex-direction:column; background:var(--dark2); border:1px solid rgba(197,160,80,0.2); border-radius:14px; width:100%; max-width:520px; height:85vh; max-height:700px; box-shadow:0 20px 60px rgba(0,0,0,0.7); overflow:hidden; }
 .mesaj-head { padding:1rem 1.2rem; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); background:#0d2a28; color:#4db6ac; flex-shrink:0; }
 .mesaj-ilan-info { background:var(--dark3); border-bottom:1px solid var(--border); padding:0.65rem 1rem; display:flex; align-items:center; gap:0.6rem; flex-shrink:0; }
@@ -288,7 +278,6 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
 .type-opt.sel-orange { border-color:#c06020; background:var(--orange-dim); color:var(--orange2); }
 .ilan-alert { display:none; padding:0.7rem; border-radius:6px; font-size:0.83rem; margin-bottom:0.8rem; background:rgba(229,57,53,0.1); border:1px solid rgba(229,57,53,0.3); color:#ef9a9a; }
 
-/* FIX: Nereden/Nereye yan yana, ok ile birleştirilmiş blok */
 .rota-group { margin-bottom:0.9rem; }
 .rota-group label { display:block; font-size:0.72rem; font-weight:700; margin-bottom:0.5rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; }
 .rota-row { display:grid; grid-template-columns:1fr auto 1fr; gap:0; align-items:stretch; background:var(--dark3); border:1.5px solid var(--border); border-radius:8px; overflow:hidden; transition:border-color 0.2s; }
@@ -300,7 +289,6 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
 .rota-divider-line { width:1px; background:var(--border); align-self:stretch; flex-shrink:0; }
 .rota-arrow-center { display:flex; align-items:center; justify-content:center; padding:0 0.5rem; color:var(--gold); font-size:1rem; flex-shrink:0; background:rgba(197,160,80,0.05); }
 
-/* FIX: Saat alanları - text input, el yazısı */
 .saat-row { display:grid; grid-template-columns:1fr 1fr; gap:0.7rem; margin-bottom:0.9rem; }
 .saat-group label { display:block; font-size:0.72rem; font-weight:700; margin-bottom:0.3rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; }
 .saat-group input[type="text"] { width:100%; padding:0.65rem 0.9rem; border:1.5px solid var(--border); border-radius:6px; font-size:0.88rem; font-family:inherit; outline:none; transition:border-color 0.2s; background:#1e2030; color:var(--text); }
@@ -378,7 +366,6 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
 .contact-info-box .ci-val { font-size:0.88rem; color:var(--text); }
 .alert-success { background:rgba(197,160,80,0.1); border:1px solid rgba(197,160,80,0.3); color:var(--gold); padding:0.8rem 1rem; border-radius:8px; font-size:0.85rem; display:none; margin-bottom:0.8rem; }
 
-/* FIX: Mobil alt bar */
 .mobile-bottom-bar { position:fixed; bottom:0; left:0; right:0; background:var(--dark3); border-top:1px solid rgba(197,160,80,0.15); display:none; z-index:150; height:60px; }
 .mobile-bottom-bar a { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--muted); font-size:0.52rem; font-weight:600; text-transform:uppercase; letter-spacing:0.03em; gap:2px; cursor:pointer; transition:color 0.15s; text-decoration:none; }
 .mobile-bottom-bar a .icon { font-size:1.15rem; line-height:1; }
@@ -387,7 +374,6 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
 
 .mobile-contact-fab { display:none; position:fixed; bottom:68px; right:12px; z-index:140; background:linear-gradient(135deg,#b8902a,#c5a050); color:#0f1117; border:none; border-radius:50px; padding:0.6rem 1rem; font-size:0.75rem; font-weight:800; cursor:pointer; font-family:inherit; box-shadow:0 4px 20px rgba(197,160,80,0.3); align-items:center; gap:0.4rem; }
 
-/* === ARACIM VAR MODU === */
 .arac-only { display: none; }
 .is-only { display: block; }
 .form-group.arac-only { display: none; }
@@ -480,6 +466,31 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
     </div>
     <div class="active-filters" id="activeFilters"></div>
     <div class="grid" id="ilanGrid"><div class="loading">İlanlar yükleniyor...</div></div>
+
+    <!-- =====================================================
+         DEĞİŞİKLİK 4: SEO metin bölümü — Google bu metni okur.
+         Görsel tasarım sitenin dark temasıyla birebir uyumlu.
+         ===================================================== -->
+    <section style="margin-top:3rem;padding:2rem;background:#0d0f15;border:1px solid rgba(197,160,80,0.1);border-radius:12px;">
+      <h2 style="font-family:'Cinzel',serif;font-size:1rem;color:#c5a050;letter-spacing:0.08em;margin-bottom:1rem;">Türkiye'nin Servis Şoförü ve Araç İlan Platformu</h2>
+      <p style="font-size:0.82rem;color:#7a7a90;line-height:1.8;margin-bottom:1rem;">
+        Servisçiler Kulübü, servis şoförleri ile araç sahiplerini bir araya getiren Türkiye'nin ücretsiz ilan platformudur.
+        İşi olan araç arıyorsa "İşim Var Araç Arıyorum", aracı olan iş arıyorsa "Aracım Var İş Arıyorum" ilanı verebilir.
+        Personel servisi, okul servisi, turizm aracı ve minibüs ilanları ücretsiz yayınlanmaktadır.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;">
+        <a href="/?q=istanbul" onclick="document.getElementById('searchInput').value='istanbul';renderIlanlar();return false;" style="font-size:0.75rem;color:#7a7a90;background:#1a1c24;border:1px solid #2e3045;border-radius:20px;padding:0.25rem 0.8rem;text-decoration:none;">İstanbul Servis İlanları</a>
+        <a href="/?q=ankara" onclick="document.getElementById('searchInput').value='ankara';renderIlanlar();return false;" style="font-size:0.75rem;color:#7a7a90;background:#1a1c24;border:1px solid #2e3045;border-radius:20px;padding:0.25rem 0.8rem;text-decoration:none;">Ankara Servis İlanları</a>
+        <a href="/?q=izmir" onclick="document.getElementById('searchInput').value='izmir';renderIlanlar();return false;" style="font-size:0.75rem;color:#7a7a90;background:#1a1c24;border:1px solid #2e3045;border-radius:20px;padding:0.25rem 0.8rem;text-decoration:none;">İzmir Servis İlanları</a>
+        <a href="/?q=bursa" onclick="document.getElementById('searchInput').value='bursa';renderIlanlar();return false;" style="font-size:0.75rem;color:#7a7a90;background:#1a1c24;border:1px solid #2e3045;border-radius:20px;padding:0.25rem 0.8rem;text-decoration:none;">Bursa Servis İlanları</a>
+        <a href="/?q=kocaeli" onclick="document.getElementById('searchInput').value='kocaeli';renderIlanlar();return false;" style="font-size:0.75rem;color:#7a7a90;background:#1a1c24;border:1px solid #2e3045;border-radius:20px;padding:0.25rem 0.8rem;text-decoration:none;">Kocaeli Servis İlanları</a>
+        <a href="/?q=minibus" onclick="document.getElementById('searchInput').value='minibus';renderIlanlar();return false;" style="font-size:0.75rem;color:#7a7a90;background:#1a1c24;border:1px solid #2e3045;border-radius:20px;padding:0.25rem 0.8rem;text-decoration:none;">Minibüs İlanları</a>
+        <a href="/?q=okul" onclick="document.getElementById('searchInput').value='okul';renderIlanlar();return false;" style="font-size:0.75rem;color:#7a7a90;background:#1a1c24;border:1px solid #2e3045;border-radius:20px;padding:0.25rem 0.8rem;text-decoration:none;">Okul Servisi İlanları</a>
+        <a href="/?q=personel" onclick="document.getElementById('searchInput').value='personel';renderIlanlar();return false;" style="font-size:0.75rem;color:#7a7a90;background:#1a1c24;border:1px solid #2e3045;border-radius:20px;padding:0.25rem 0.8rem;text-decoration:none;">Personel Servisi İlanları</a>
+      </div>
+    </section>
+    <!-- SEO bölümü sonu -->
+
        <footer style="background:#0a0c12;border-top:1px solid rgba(197,160,80,0.15);margin-top:3rem;padding:3rem 1.5rem 1.5rem;">
   <div style="max-width:1200px;margin:0 auto;">
 
@@ -986,13 +997,22 @@ function renderIlanlar() {
     const carInfo = [i.arac_marka||'', i.arac_model||'', i.arac_kapasite ? i.arac_kapasite+' kişilik' : ''].filter(Boolean).join(' · ');
     const benim = currentUser && i.user_id === currentUser.id;
 
+    // =====================================================
+    // DEĞİŞİKLİK 3: "Detay →" yazısı gerçek <a> linke döndürüldü.
+    // Google bu linkleri takip ederek ilan sayfalarını indeksler.
+    // Görsel değişiklik yok, stil aynı.
+    // =====================================================
+    const detayLink = benim
+      ? '<span>⭐ Benim İlanım</span>'
+      : `<a href="/ilan/${i.id}" onclick="event.stopPropagation();" style="color:inherit;text-decoration:none;">Detay →</a>`;
+
     // ARACIM VAR kartı
     if (i.type === 'arac') {
       const aciklamaKisa = (i.aciklama||'-').length > 80 ? (i.aciklama||'-').substring(0,80)+'...' : (i.aciklama||'-');
       return `<div class="card" onclick="cardClick(${i.id})" style="min-height:220px;">
         <div class="card-header orange">
           <span>ARACIM VAR İŞ ARIYORUM</span>
-          <span>${benim ? '⭐ Benim İlanım' : 'Detay →'}</span>
+          ${detayLink}
         </div>
         <div class="card-body" style="padding:0.75rem 1rem;">
           <div style="font-size:0.75rem;color:var(--text2);line-height:1.5;margin-bottom:0.7rem;min-height:36px;">ℹ️ ${aciklamaKisa}</div>
@@ -1027,7 +1047,7 @@ function renderIlanlar() {
     return `<div class="card" onclick="cardClick(${i.id})">
       <div class="card-header green">
         <span>İŞİM VAR ARAÇ ARIYORUM</span>
-        <span>${benim ? '⭐ Benim İlanım' : 'Detay →'}</span>
+        ${detayLink}
       </div>
       <div class="card-body" style="padding:0.75rem 1rem;">
         <div style="font-size:0.75rem;color:var(--text2);line-height:1.5;margin-bottom:0.7rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">ℹ️ ${i.aciklama||'-'}</div>
