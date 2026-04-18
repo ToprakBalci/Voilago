@@ -103,25 +103,14 @@
 }
 </script>
 
-<!-- Performans: Preconnect -->
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link rel="preconnect" href="https://mvecoktdgcalobeeesjz.supabase.co"/>
-
-<!-- Favicon -->
 <link rel="icon" type="image/png" href="Logo.png"/>
 <link rel="apple-touch-icon" href="Logo.png"/>
-
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-
-<!-- Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<!-- =====================================================
-     DEĞİŞİKLİK 1: <style> bloğu HEAD içine taşındı.
-     Önceden </head> dışındaydı (geçersiz HTML).
-     ===================================================== -->
 <style>
 :root {
   --gold: #c5a050;
@@ -453,7 +442,7 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
       <div class="hero-logo-name">Güvenilir · Hızlı · Ücretsiz</div>
     </div>
     <h1>Servis Şoförü İş İlanları &amp; Araç İlanları</h1>
-<p>Türkiye genelinde servis şoförleri ve araç sahiplerinin buluşma noktası.</p>
+    <p>Türkiye genelinde servis şoförleri ve araç sahiplerinin buluşma noktası.</p>
     <div class="toggle-wrap">
       <button class="toggle-btn" id="toggleIs" onclick="setFilter('is')">🟢 İşim Var Araç Arıyorum</button>
       <button class="toggle-btn" id="toggleArac" onclick="setFilter('arac')">🟠 Aracım Var İş Arıyorum</button>
@@ -471,10 +460,6 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
     <div class="active-filters" id="activeFilters"></div>
     <div class="grid" id="ilanGrid"><div class="loading">İlanlar yükleniyor...</div></div>
 
-    <!-- =====================================================
-         DEĞİŞİKLİK 4: SEO metin bölümü — Google bu metni okur.
-         Görsel tasarım sitenin dark temasıyla birebir uyumlu.
-         ===================================================== -->
     <section style="margin-top:3rem;padding:2rem;background:#0d0f15;border:1px solid rgba(197,160,80,0.1);border-radius:12px;">
       <h2 style="font-family:'Cinzel',serif;font-size:1rem;color:#c5a050;letter-spacing:0.08em;margin-bottom:1rem;">Türkiye'nin Servis Şoförü ve Araç İlan Platformu</h2>
       <p style="font-size:0.82rem;color:#7a7a90;line-height:1.8;margin-bottom:1rem;">
@@ -493,50 +478,36 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
         <a href="/?q=personel" onclick="document.getElementById('searchInput').value='personel';renderIlanlar();return false;" style="font-size:0.75rem;color:#7a7a90;background:#1a1c24;border:1px solid #2e3045;border-radius:20px;padding:0.25rem 0.8rem;text-decoration:none;">Personel Servisi İlanları</a>
       </div>
     </section>
-    <!-- SEO bölümü sonu -->
 
-       <footer style="background:#0a0c12;border-top:1px solid rgba(197,160,80,0.15);margin-top:3rem;padding:3rem 1.5rem 1.5rem;">
+    <footer style="background:#0a0c12;border-top:1px solid rgba(197,160,80,0.15);margin-top:3rem;padding:3rem 1.5rem 1.5rem;">
   <div style="max-width:1200px;margin:0 auto;">
-
-    <!-- Üst kısım: Logo + Sütunlar -->
     <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2.5rem;">
-
-      <!-- Logo & Açıklama -->
       <div>
         <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.8rem;">
           <img src="Logo.png" style="width:38px;height:38px;border-radius:50%;border:1.5px solid #c5a050;object-fit:contain;" alt="Servisçiler Kulübü"/>
           <span style="font-family:'Cinzel',serif;font-size:0.82rem;color:#c5a050;font-weight:700;letter-spacing:0.08em;">Servisçiler Kulübü</span>
         </div>
         <p style="font-size:0.75rem;color:#7a7a90;line-height:1.7;margin-bottom:1rem;">Türkiye'nin profesyonel servis şoförü ve araç ilan platformu. Ücretsiz ilan ver, hızlıca anlaş.</p>
-        <!-- Sosyal Medya -->
         <div style="display:flex;gap:0.6rem;">
           <a href="https://instagram.com/servisciler.kulubu" target="_blank" rel="noopener"
             style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);display:flex;align-items:center;justify-content:center;text-decoration:none;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-            </svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
           </a>
           <a href="https://facebook.com/profile.php?id=61576693780338"
             style="width:36px;height:36px;border-radius:8px;background:#1877f2;display:flex;align-items:center;justify-content:center;text-decoration:none;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
-              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-            </svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
           </a>
         </div>
       </div>
-
-      <!-- Sütun 1: Araç Durumuna Göre -->
       <div>
         <h4 style="font-family:'Cinzel',serif;font-size:0.72rem;color:#c5a050;letter-spacing:0.1em;margin-bottom:0.9rem;text-transform:uppercase;">Araç Durumuna Göre</h4>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
-          <li><a href="/" onclick="setFilter('is');return false;" style="font-size:0.78rem;color:#7a7a90;text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='#c5a050'" onmouseout="this.style.color='#7a7a90'">İşime Araç Arıyorum</a></li>
+          <li><a href="/" onclick="setFilter('is');return false;" style="font-size:0.78rem;color:#7a7a90;text-decoration:none;" onmouseover="this.style.color='#c5a050'" onmouseout="this.style.color='#7a7a90'">İşime Araç Arıyorum</a></li>
           <li><a href="/" onclick="setFilter('arac');return false;" style="font-size:0.78rem;color:#7a7a90;text-decoration:none;" onmouseover="this.style.color='#c5a050'" onmouseout="this.style.color='#7a7a90'">Aracıma İş Arıyorum</a></li>
           <li><a href="/" onclick="setFilter('is');return false;" style="font-size:0.78rem;color:#7a7a90;text-decoration:none;" onmouseover="this.style.color='#c5a050'" onmouseout="this.style.color='#7a7a90'">Şoför Arıyorum</a></li>
           <li><a href="/" onclick="setFilter('arac');return false;" style="font-size:0.78rem;color:#7a7a90;text-decoration:none;" onmouseover="this.style.color='#c5a050'" onmouseout="this.style.color='#7a7a90'">Şoförüm İş Arıyorum</a></li>
         </ul>
       </div>
-
-      <!-- Sütun 2: Hizmetlerimiz -->
       <div>
         <h4 style="font-family:'Cinzel',serif;font-size:0.72rem;color:#c5a050;letter-spacing:0.1em;margin-bottom:0.9rem;text-transform:uppercase;">Hizmetlerimiz</h4>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
@@ -547,8 +518,6 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
           <li><a href="/" style="font-size:0.78rem;color:#7a7a90;text-decoration:none;" onmouseover="this.style.color='#c5a050'" onmouseout="this.style.color='#7a7a90'">Okul Servisi İlanları</a></li>
         </ul>
       </div>
-
-      <!-- Sütun 3: Gizlilik ve Kullanım -->
       <div>
         <h4 style="font-family:'Cinzel',serif;font-size:0.72rem;color:#c5a050;letter-spacing:0.1em;margin-bottom:0.9rem;text-transform:uppercase;">Gizlilik ve Kullanım</h4>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
@@ -558,40 +527,24 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
           <li><a onclick="openContact()" style="font-size:0.78rem;color:#7a7a90;text-decoration:none;cursor:pointer;" onmouseover="this.style.color='#c5a050'" onmouseout="this.style.color='#7a7a90'">Yardım</a></li>
         </ul>
       </div>
-
-      <!-- Sütun 4: Kurumsal -->
       <div>
         <h4 style="font-family:'Cinzel',serif;font-size:0.72rem;color:#c5a050;letter-spacing:0.1em;margin-bottom:0.9rem;text-transform:uppercase;">Kurumsal</h4>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
           <li><a href="/hakkimizda.html" style="font-size:0.78rem;color:#7a7a90;text-decoration:none;" onmouseover="this.style.color='#c5a050'" onmouseout="this.style.color='#7a7a90'">Hakkımızda</a></li>
           <li><a onclick="openContact()" style="font-size:0.78rem;color:#7a7a90;text-decoration:none;cursor:pointer;" onmouseover="this.style.color='#c5a050'" onmouseout="this.style.color='#7a7a90'">İletişim</a></li>
           <li><a href="/" onclick="setTimeout(()=>ilanVerClick(),300);return false;" style="font-size:0.78rem;color:#7a7a90;text-decoration:none;" onmouseover="this.style.color='#c5a050'" onmouseout="this.style.color='#7a7a90'">İlan Ver</a></li>
+        </ul>
       </div>
-
     </div>
-
-    <!-- Alt çizgi -->
     <div style="border-top:1px solid rgba(197,160,80,0.1);padding-top:1.2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">
       <p style="font-size:0.72rem;color:#3a3a55;">© 2026 Servisçiler Kulübü · Tüm hakları saklıdır.</p>
       <p style="font-size:0.72rem;color:#3a3a55;">Servis şoförü iş ilanları · Minibüs ilanları · Araç ilanları · Türkiye</p>
     </div>
-
   </div>
 </footer>
-
-<!-- Mobil Footer -->
 <style>
-@media(max-width:768px) {
-  footer > div > div:first-child {
-    grid-template-columns: 1fr 1fr !important;
-    gap: 1.5rem !important;
-  }
-}
-@media(max-width:480px) {
-  footer > div > div:first-child {
-    grid-template-columns: 1fr !important;
-  }
-}
+@media(max-width:768px) { footer > div > div:first-child { grid-template-columns: 1fr 1fr !important; gap: 1.5rem !important; } }
+@media(max-width:480px) { footer > div > div:first-child { grid-template-columns: 1fr !important; } }
 </style>
   </main>
 </div>
@@ -881,7 +834,8 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
   <a id="mBarProfil" onclick="goPage('benim')"><span class="icon">👤</span>Profil</a>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
 const { createClient } = supabase;
 const sb = createClient(
   'https://mvecoktdgcalobeeesjz.supabase.co',
@@ -1000,17 +954,10 @@ function renderIlanlar() {
   grid.innerHTML = filtered.map(i => {
     const carInfo = [i.arac_marka||'', i.arac_model||'', i.arac_kapasite ? i.arac_kapasite+' kişilik' : ''].filter(Boolean).join(' · ');
     const benim = currentUser && i.user_id === currentUser.id;
-
-    // =====================================================
-    // DEĞİŞİKLİK 3: "Detay →" yazısı gerçek <a> linke döndürüldü.
-    // Google bu linkleri takip ederek ilan sayfalarını indeksler.
-    // Görsel değişiklik yok, stil aynı.
-    // =====================================================
     const detayLink = benim
       ? '<span>⭐ Benim İlanım</span>'
       : `<a href="/ilan/${i.id}" onclick="event.stopPropagation();" style="color:inherit;text-decoration:none;">Detay →</a>`;
 
-    // ARACIM VAR kartı
     if (i.type === 'arac') {
       const aciklamaKisa = (i.aciklama||'-').length > 80 ? (i.aciklama||'-').substring(0,80)+'...' : (i.aciklama||'-');
       return `<div class="card" onclick="cardClick(${i.id})" style="min-height:220px;">
@@ -1047,7 +994,6 @@ function renderIlanlar() {
       </div>`;
     }
 
-    // İŞİM VAR kartı
     return `<div class="card" onclick="cardClick(${i.id})">
       <div class="card-header green">
         <span>İŞİM VAR ARAÇ ARIYORUM</span>
@@ -1118,108 +1064,55 @@ function openDetay(id) {
   document.getElementById('detayType').textContent = isIs ? 'İŞİM VAR ARAÇ ARIYORUM' : 'ARACIM VAR İŞ ARIYORUM';
   const telefon = i.telefon || '';
   const ilanVeren = i.ilan_veren || 'Anonim';
-  const sahibiId = i.user_id || '';
   if (!isIs) {
     document.getElementById('detayBody').innerHTML = `
       <div class="detail-desc orange-border">ℹ️ İlan Açıklaması<br/><br/>${i.aciklama||'-'}</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:1rem;">
-        <div class="detail-city">
-          <div class="time-label">Giriş Saati</div>
-          <div class="time">${i.giris_saati||'--:--'}</div>
-        </div>
-        <div class="detail-city">
-          <div class="time-label">Çıkış Saati</div>
-          <div class="time">${i.cikis_saati||'--:--'}</div>
-        </div>
+        <div class="detail-city"><div class="time-label">Giriş Saati</div><div class="time">${i.giris_saati||'--:--'}</div></div>
+        <div class="detail-city"><div class="time-label">Çıkış Saati</div><div class="time">${i.cikis_saati||'--:--'}</div></div>
       </div>
       <div class="detail-city" style="margin-bottom:0.7rem;text-align:left;padding:0.9rem 1rem;">
         <div class="time-label" style="margin-bottom:0.3rem;">📍 Çalışma Bölgesi</div>
         <div class="name" style="font-size:1rem;">${i.nereden_ilce||'-'}</div>
         ${i.nereden_sehir?`<div class="sub">${i.nereden_sehir}</div>`:''}
       </div>
-      ${i.nereye_ilce ? `
-      <div class="detail-city" style="margin-bottom:1.2rem;text-align:left;padding:0.9rem 1rem;border-color:rgba(224,123,57,0.4);">
+      ${i.nereye_ilce?`<div class="detail-city" style="margin-bottom:1.2rem;text-align:left;padding:0.9rem 1rem;border-color:rgba(224,123,57,0.4);">
         <div class="time-label" style="margin-bottom:0.3rem;color:var(--orange2);">🏁 İstenen İstikamet</div>
         <div class="name" style="font-size:1rem;">${i.nereye_ilce}</div>
-        ${i.nereye_sehir?`<div class="sub">${i.nereye_sehir}</div>`:''}
-      </div>` : ''}
-     <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;border-top:1px solid var(--border);padding-top:1rem;margin-bottom:0.5rem;">
-        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;">
-          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">📅 İlan Tarihi</div>
-          <div style="font-size:0.85rem;font-weight:600;color:var(--text);">${new Date(i.created_at).toLocaleDateString('tr-TR')}</div>
-        </div>
-        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;">
-          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">👤 İlan Veren</div>
-          <div style="font-size:0.85rem;font-weight:600;color:var(--text);">${ilanVeren}</div>
-        </div>
-        ${i.servis_turu?`
-        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;">
-          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">🚌 Servis Türü</div>
-          <div style="font-size:0.85rem;font-weight:600;color:var(--text);">${i.servis_turu}</div>
-        </div>`:''}
-        ${(i.arac_marka||i.arac_model)?`
-        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;">
-          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">🚗 Araç</div>
-          <div style="font-size:0.85rem;font-weight:600;color:var(--text);">${[i.arac_model,i.arac_marka].filter(Boolean).join(' – ')}</div>
-        </div>`:''}
-        ${i.arac_kapasite?`
-        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;">
-          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">👥 Kapasite</div>
-          <div style="font-size:0.85rem;font-weight:600;color:var(--text);">${i.arac_kapasite} kişilik</div>
-        </div>`:''}
+        ${i.nereye_sehir?`<div class="sub">${i.nereye_sehir}</div>`:''}</div>`:''}
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;border-top:1px solid var(--border);padding-top:1rem;margin-bottom:0.5rem;">
+        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;"><div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">📅 İlan Tarihi</div><div style="font-size:0.85rem;font-weight:600;color:var(--text);">${new Date(i.created_at).toLocaleDateString('tr-TR')}</div></div>
+        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;"><div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">👤 İlan Veren</div><div style="font-size:0.85rem;font-weight:600;color:var(--text);">${ilanVeren}</div></div>
+        ${i.servis_turu?`<div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;"><div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">🚌 Servis Türü</div><div style="font-size:0.85rem;font-weight:600;color:var(--text);">${i.servis_turu}</div></div>`:''}
+        ${(i.arac_marka||i.arac_model)?`<div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;"><div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">🚗 Araç</div><div style="font-size:0.85rem;font-weight:600;color:var(--text);">${[i.arac_model,i.arac_marka].filter(Boolean).join(' – ')}</div></div>`:''}
+        ${i.arac_kapasite?`<div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;"><div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">👥 Kapasite</div><div style="font-size:0.85rem;font-weight:600;color:var(--text);">${i.arac_kapasite} kişilik</div></div>`:''}
       </div>
       <div class="detail-actions">
         <button class="btn-ara" onclick="araClick('${telefon}')">📞 Ara</button>
         <button class="btn-mesaj" id="btnMesajGonder">💬 Mesaj Gönder</button>
       </div>`;
- } else {
+  } else {
     document.getElementById('detayBody').innerHTML = `
       <div class="detail-desc">ℹ️ İlan Açıklaması<br/><br/>${i.aciklama||'-'}</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:0.8rem;">
-        <div class="detail-city">
-          <div class="time-label">Giriş Saati</div>
-          <div class="time" style="color:var(--green-text);">${i.giris_saati||'--:--'}</div>
-        </div>
-        <div class="detail-city">
-          <div class="time-label">Çıkış Saati</div>
-          <div class="time" style="color:var(--green-text);">${i.cikis_saati||'--:--'}</div>
-        </div>
+        <div class="detail-city"><div class="time-label">Giriş Saati</div><div class="time" style="color:var(--green-text);">${i.giris_saati||'--:--'}</div></div>
+        <div class="detail-city"><div class="time-label">Çıkış Saati</div><div class="time" style="color:var(--green-text);">${i.cikis_saati||'--:--'}</div></div>
       </div>
       <div class="detail-city" style="margin-bottom:0.7rem;text-align:left;padding:0.9rem 1rem;">
         <div class="time-label" style="margin-bottom:0.3rem;">📍 Nereden</div>
         <div class="name" style="font-size:1rem;">${i.nereden_ilce||'-'}</div>
         ${i.nereden_sehir?`<div class="sub">${i.nereden_sehir}</div>`:''}
       </div>
-      ${i.nereye_ilce ? `
-      <div class="detail-city" style="margin-bottom:1.2rem;text-align:left;padding:0.9rem 1rem;border-color:rgba(77,182,172,0.3);">
+      ${i.nereye_ilce?`<div class="detail-city" style="margin-bottom:1.2rem;text-align:left;padding:0.9rem 1rem;border-color:rgba(77,182,172,0.3);">
         <div class="time-label" style="margin-bottom:0.3rem;color:var(--green-text);">🏁 Nereye</div>
         <div class="name" style="font-size:1rem;">${i.nereye_ilce}</div>
-        ${i.nereye_sehir?`<div class="sub">${i.nereye_sehir}</div>`:''}
-      </div>` : ''}
+        ${i.nereye_sehir?`<div class="sub">${i.nereye_sehir}</div>`:''}</div>`:''}
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;border-top:1px solid var(--border);padding-top:1rem;margin-bottom:0.5rem;">
-        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;">
-          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">📅 İlan Tarihi</div>
-          <div style="font-size:0.85rem;font-weight:600;color:var(--text);">${new Date(i.created_at).toLocaleDateString('tr-TR')}</div>
-        </div>
-        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;">
-          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">👤 İlan Veren</div>
-          <div style="font-size:0.85rem;font-weight:600;color:var(--text);">${ilanVeren}</div>
-        </div>
-        ${i.servis_turu?`
-        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;">
-          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">🚌 Servis Türü</div>
-          <div style="font-size:0.85rem;font-weight:600;color:var(--text);">${i.servis_turu}</div>
-        </div>`:''}
-        ${(i.arac_marka||i.arac_model)?`
-        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;">
-          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">🚗 Araç</div>
-          <div style="font-size:0.85rem;font-weight:600;color:var(--text);">${[i.arac_marka,i.arac_model].filter(Boolean).join(' – ')}</div>
-        </div>`:''}
-        ${i.arac_kapasite?`
-        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;">
-          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">👥 Kapasite</div>
-          <div style="font-size:0.85rem;font-weight:600;color:var(--text);">${i.arac_kapasite} kişilik</div>
-        </div>`:''}
+        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;"><div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">📅 İlan Tarihi</div><div style="font-size:0.85rem;font-weight:600;color:var(--text);">${new Date(i.created_at).toLocaleDateString('tr-TR')}</div></div>
+        <div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;"><div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">👤 İlan Veren</div><div style="font-size:0.85rem;font-weight:600;color:var(--text);">${ilanVeren}</div></div>
+        ${i.servis_turu?`<div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;"><div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">🚌 Servis Türü</div><div style="font-size:0.85rem;font-weight:600;color:var(--text);">${i.servis_turu}</div></div>`:''}
+        ${(i.arac_marka||i.arac_model)?`<div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;"><div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">🚗 Araç</div><div style="font-size:0.85rem;font-weight:600;color:var(--text);">${[i.arac_marka,i.arac_model].filter(Boolean).join(' – ')}</div></div>`:''}
+        ${i.arac_kapasite?`<div style="background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;"><div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.25rem;">👥 Kapasite</div><div style="font-size:0.85rem;font-weight:600;color:var(--text);">${i.arac_kapasite} kişilik</div></div>`:''}
       </div>
       <div class="detail-actions">
         <button class="btn-ara" onclick="araClick('${telefon}')">📞 Ara</button>
@@ -1385,8 +1278,6 @@ async function switchProfileTab(tab, ilanlarData) {
           <span>🕐 ${i.giris_saati||'--:--'} → ${i.cikis_saati||'--:--'}</span>
           ${i.servis_turu?`<span>🚌 ${i.servis_turu}</span>`:''}
           ${i.arac_marka?`<span>🚗 ${[i.arac_marka,i.arac_model,i.arac_kapasite?i.arac_kapasite+' kişilik':''].filter(Boolean).join(' ')}</span>`:''}
-          ${i.arac_plaka?`<span>🔢 ${i.arac_plaka}</span>`:''}
-          ${i.arac_ozellikler?`<span>✨ ${i.arac_ozellikler}</span>`:''}
         </div>
       </div>`).join('')}</div>`;
   } else {
@@ -1465,11 +1356,7 @@ function selectType(type) {
   document.getElementById('optIs').className = 'type-opt' + (type==='is'?' sel-green':'');
   document.getElementById('optArac').className = 'type-opt' + (type==='arac'?' sel-orange':'');
   document.getElementById('submitBtn').className = 'btn-submit ' + (type==='arac'?'orange':'green');
-  if (type === 'arac') {
-    document.body.classList.add('mod-arac');
-  } else {
-    document.body.classList.remove('mod-arac');
-  }
+  if (type === 'arac') { document.body.classList.add('mod-arac'); } else { document.body.classList.remove('mod-arac'); }
 }
 
 function resetIlanForm() {
@@ -1499,9 +1386,44 @@ function resetIlanForm() {
   document.getElementById('fAracModelArac').value = '';
   document.getElementById('fAracKapasiteArac').value = '';
   document.getElementById('fServisTuruArac').value = '';
-  document.getElementById('fIlanVeren').value = '';
-  document.getElementById('fTelefon').value = '';
+  // İlan veren ve telefon readonly sıfırla
+  const ilanVerenEl = document.getElementById('fIlanVeren');
+  ilanVerenEl.value = '';
+  ilanVerenEl.readOnly = false;
+  ilanVerenEl.style.opacity = '';
+  ilanVerenEl.style.cursor = '';
+  const telefonEl = document.getElementById('fTelefon');
+  telefonEl.value = '';
+  telefonEl.readOnly = false;
+  telefonEl.style.opacity = '';
+  telefonEl.style.cursor = '';
   document.getElementById('ilanAlert').style.display = 'none';
+}
+
+// ─── SADECE DEĞİŞTİRİLEN FONKSİYON: openIlanModal ───────────────────────────
+// Profil tablosundan full_name ve phone çekilir, alanlara yazılır ve kilitlenir
+async function openIlanModal() {
+  resetIlanForm();
+  document.getElementById('ilanOverlay').classList.add('open');
+  if (currentUser) {
+    const { data: profile } = await sb.from('profiles').select('full_name, phone').eq('id', currentUser.id).single();
+    if (profile) {
+      if (profile.full_name) {
+        const el = document.getElementById('fIlanVeren');
+        el.value = profile.full_name;
+        el.readOnly = true;
+        el.style.opacity = '0.65';
+        el.style.cursor = 'not-allowed';
+      }
+      if (profile.phone) {
+        const el = document.getElementById('fTelefon');
+        el.value = profile.phone;
+        el.readOnly = true;
+        el.style.opacity = '0.65';
+        el.style.cursor = 'not-allowed';
+      }
+    }
+  }
 }
 
 async function submitIlan() {
@@ -1545,11 +1467,7 @@ async function submitContact() {
   const orijinalText = btn.innerHTML;
   btn.innerHTML = '⏳ Gönderiliyor...';
   btn.disabled = true;
-  try {
-    await sb.from('iletisim').insert([{ ad, konu, mesaj }]);
-  } catch(e) {
-    console.warn('iletisim tablosu yok veya hata:', e);
-  }
+  try { await sb.from('iletisim').insert([{ ad, konu, mesaj }]); } catch(e) { console.warn('iletisim tablosu yok veya hata:', e); }
   document.getElementById('contactSuccess').style.display = 'block';
   document.getElementById('contactAd').value = '';
   document.getElementById('contactKonu').value = '';
@@ -1564,7 +1482,6 @@ function scrollToSearch() {
   setTimeout(() => { document.getElementById('heroSection').scrollIntoView({ behavior:'smooth' }); setTimeout(() => document.getElementById('searchInput').focus(), 400); }, 50);
 }
 function openDetayliArama() { document.getElementById('detayliAramaOverlay').classList.add('open'); }
-function openIlanModal() { resetIlanForm(); document.getElementById('ilanOverlay').classList.add('open'); }
 function closeOverlay(id) {
   document.getElementById(id).classList.remove('open');
   if (id === 'mesajOverlay' && chatSubscription) { sb.removeChannel(chatSubscription); chatSubscription = null; }
