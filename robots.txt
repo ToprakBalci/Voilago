@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+Disallow: /admin.html
+Disallow: /login.html
+
 Sitemap: https://serviscilerkulubu.com/sitemap.xml
