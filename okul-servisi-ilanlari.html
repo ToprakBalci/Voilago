@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Okul Servisi İlanları — Şoför ve Araç Eşleştirme | Servisçiler Kulübü</title>
+<meta name="description" content="Türkiye genelinde okul servisi ilanları. Okul servisi şoförü arayan ve araç sahibi olan firmalar için ücretsiz ilan platformu."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://serviscilerkulubu.com/okul-servisi-ilanlari.html"/>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Okul servisi şoförü olmak için hangi belgeler gerekir?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Okul servisi şoförlüğü için SRC2 belgesi, psikoteknik belgesi ve şoför kartı gereklidir. Minibüs veya midibüs kullanacaklar için D sınıfı ehliyet aranmaktadır."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Personel servisçisi maaşı ne kadar?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Personel servisçisi maaşları şehire, çalışma saatlerine ve araç tipine göre değişmektedir. 2026 yılında asgari ücret üzerinde ek primlerle çalışma imkânı sunulmaktadır."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Okul servisi ilanı nasıl verilir?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Servisçiler Kulübü'nde ücretsiz olarak kayıt olup okul servisi ilanı verebilirsiniz. İlanınız anında yayına girer ve servis şoförleri tarafından görüntülenebilir."
+      }
+    }
+  ]
+}
+</script>
+<style>
+:root{--gold:#c5a050;--dark:#0f1117;--dark2:#1a1c24;--dark3:#141620;--border:#2e3045;--muted:#7a7a90;--text:#e0d8c8;--text2:#b0b0cc;--green-dim:#1a3a20;--green-text:#4caf50;--orange-dim:#3a2010;--orange2:#f59c5a;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;}
+nav{background:var(--dark3);border-bottom:1px solid rgba(197,160,80,0.15);padding:0 1.2rem;display:flex;align-items:center;height:56px;position:sticky;top:0;z-index:100;}
+.nav-logo{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.nav-logo img{width:42px;height:42px;border-radius:50%;object-fit:contain;border:1.5px solid var(--gold);}
+.nav-logo-text{font-family:'Cinzel',serif;font-size:0.82rem;color:var(--gold);font-weight:700;}
+.btn-ilan{background:linear-gradient(135deg,#b8902a,#c5a050);color:#0f1117;border:none;padding:0.42rem 0.9rem;border-radius:4px;font-size:0.78rem;font-weight:800;cursor:pointer;text-decoration:none;margin-left:auto;}
+.hero{background:linear-gradient(160deg,var(--dark3),var(--dark2));padding:2.5rem 1.5rem 2rem;text-align:center;border-bottom:1px solid rgba(197,160,80,0.1);}
+.breadcrumb{font-size:0.75rem;color:var(--muted);margin-bottom:1rem;}
+.breadcrumb a{color:var(--gold);text-decoration:none;}
+h1{font-family:'Cinzel',serif;font-size:clamp(1rem,3vw,1.5rem);color:var(--gold);margin-bottom:0.6rem;}
+.hero-sub{color:var(--muted);font-size:0.88rem;margin-bottom:1.5rem;}
+.btn-primary{display:inline-block;background:linear-gradient(135deg,#b8902a,#c5a050);color:#0f1117;padding:0.75rem 2rem;border-radius:6px;font-weight:800;font-size:0.9rem;text-decoration:none;}
+main{max-width:1000px;margin:0 auto;padding:2rem 1.5rem;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin:1.5rem 0;}
+.card{background:var(--dark2);border-radius:10px;border:1px solid var(--border);overflow:hidden;text-decoration:none;display:block;transition:transform 0.15s,border-color 0.15s;}
+.card:hover{transform:translateY(-2px);border-color:rgba(197,160,80,0.3);}
+.card-head{padding:0.55rem 1rem;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;}
+.card-head.green{background:var(--green-dim);color:var(--green-text);border-bottom:1px solid #2d5a33;}
+.card-head.orange{background:var(--orange-dim);color:var(--orange2);border-bottom:1px solid #5a3020;}
+.card-body{padding:0.9rem 1rem;font-size:0.83rem;color:var(--text2);line-height:1.5;}
+.loading{text-align:center;padding:3rem;color:var(--muted);grid-column:1/-1;}
+.content-block{background:#0d0f15;border:1px solid rgba(197,160,80,0.1);border-radius:12px;padding:2rem;margin:2rem 0;}
+.content-block h2{font-family:'Cinzel',serif;font-size:1rem;color:var(--gold);margin-bottom:1rem;}
+.content-block p{font-size:0.85rem;color:var(--muted);line-height:1.9;margin-bottom:0.8rem;}
+.content-block h3{font-size:0.9rem;color:var(--text2);margin:1.2rem 0 0.5rem;font-weight:600;}
+.faq-item{border-bottom:1px solid var(--border);padding:1rem 0;}
+.faq-q{font-weight:600;font-size:0.9rem;color:var(--text);margin-bottom:0.4rem;}
+.faq-a{font-size:0.83rem;color:var(--muted);line-height:1.7;}
+.sehir-links{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;}
+.sehir-link{font-size:0.78rem;color:var(--muted);background:var(--dark2);border:1px solid var(--border);border-radius:20px;padding:0.3rem 1rem;text-decoration:none;}
+.sehir-link:hover{color:var(--gold);}
+footer{background:#0a0c12;border-top:1px solid rgba(197,160,80,0.15);margin-top:3rem;padding:2rem 1.5rem;text-align:center;font-size:0.75rem;color:#3a3a55;}
+footer a{color:var(--muted);text-decoration:none;margin:0 0.5rem;}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/"><img src="/Logo.png" alt="Servisçiler Kulübü"/><span class="nav-logo-text">Servisçiler Kulübü</span></a>
+  <a class="btn-ilan" href="/">+ İlan Ver</a>
+</nav>
+
+<div class="hero">
+  <div class="breadcrumb"><a href="/">Ana Sayfa</a> › Okul Servisi İlanları</div>
+  <h1>Okul Servisi İlanları</h1>
+  <p class="hero-sub">Türkiye genelinde okul servisi şoförü ve araç ilanları — ücretsiz ilan ver, doğrudan anlaş.</p>
+  <a class="btn-primary" href="/">Tüm İlanları Gör</a>
+</div>
+
+<main>
+  <div id="ilanGrid" class="grid">
+    <div class="loading">⏳ Okul servisi ilanları yükleniyor...</div>
+  </div>
+
+  <div class="content-block">
+    <h2>Personel Servisi Hakkında</h2>
+    <p>Okul servisi, fabrikalar, hastaneler, AVM'ler ve büyük iş merkezlerinde çalışanları işyerine taşıyan özel taşımacılık hizmetidir. Türkiye'de büyük ölçekli firmaların büyük çoğunluğu personel servis hizmeti kullanmaktadır.</p>
+    <h3>Personel Servisi Şoförü Olmak İçin Gerekenler</h3>
+    <p>SRC2 veya SRC4 belgesi, psikoteknik belgesi ve şoför kartı zorunludur. D sınıfı ehliyet minibüs ve midibüs kullananlar için aranmaktadır. 26-66 yaş aralığında olma şartı da pek çok firmada aranmaktadır.</p>
+    <h3>İstanbul'da Personel Servisi</h3>
+    <p>İstanbul'daki organize sanayi bölgeleri (İkitelli OSB, Dudullu OSB, Tuzla OSB) başta olmak üzere tüm ilçelerde okul servisi ilanları yayınlanmaktadır.</p>
+  </div>
+
+  <div class="content-block">
+    <h2>Sık Sorulan Sorular</h2>
+    <div class="faq-item">
+      <div class="faq-q">Okul servisi şoförü olmak için hangi belgeler gerekir?</div>
+      <div class="faq-a">SRC2 belgesi, psikoteknik belgesi ve şoför kartı gereklidir. Minibüs veya midibüs kullanacaklar için D sınıfı ehliyet aranmaktadır.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Personel servisçisi maaşı ne kadar?</div>
+      <div class="faq-a">Şehire, çalışma saatlerine ve araç tipine göre değişmektedir. Genellikle asgari ücret üzerinde ek primlerle çalışma imkânı sunulmaktadır.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Okul servisi ilanı nasıl verilir?</div>
+      <div class="faq-a">Servisçiler Kulübü'nde kayıt olup ücretsiz ilan verebilirsiniz. İlanınız anında yayına girer.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h2>Şehre Göre Servis İlanları</h2>
+    <div class="sehir-links">
+      <a class="sehir-link" href="/istanbul-servis-ilanlari.html">İstanbul</a>
+      <a class="sehir-link" href="/ankara-servis-ilanlari.html">Ankara</a>
+      <a class="sehir-link" href="/izmir-servis-ilanlari.html">İzmir</a>
+      <a class="sehir-link" href="/kocaeli-servis-ilanlari.html">Kocaeli</a>
+      <a class="sehir-link" href="/bursa-servis-ilanlari.html">Bursa</a>
+      <a class="sehir-link" href="/okul-servisi-ilanlari.html">Okul Servisi İlanları</a>
+      <a class="sehir-link" href="/minibus-ilanlari.html">Minibüs İlanları</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p style="margin-bottom:0.8rem;">
+    <a href="/">Ana Sayfa</a><a href="/hakkimizda.html">Hakkımızda</a><a href="/kullanim-kosullari.html">Kullanım Koşulları</a><a href="/gizlilik.html">Gizlilik</a>
+  </p>
+  <p>© 2026 Servisçiler Kulübü · Okul servisi ilanları · Türkiye</p>
+</footer>
+
+<script>
+const {createClient}=supabase;
+const sb=createClient('https://mvecoktdgcalobeeesjz.supabase.co','sb_publishable_DJ3IS9dzeavUfKm5xP_5hA_qBCDg1NF');
+async function load(){
+  const grid=document.getElementById('ilanGrid');
+  const {data,error}=await sb.from('ilanlar').select('*')
+    .ilike('servis_turu','%okul%')
+    .order('created_at',{ascending:false}).limit(12);
+  const {data:data2}=await sb.from('ilanlar').select('*')
+    .ilike('aciklama','%okul%')
+    .order('created_at',{ascending:false}).limit(6);
+  const combined=[...( data||[]),...(data2||[])].filter((v,i,a)=>a.findIndex(x=>x.id===v.id)===i).slice(0,12);
+  if(!combined.length){
+    grid.innerHTML=`<div class="loading"><p style="margin-bottom:1rem;">Henüz okul servisi ilanı yok.</p><a href="/" style="background:var(--gold);color:#0f1117;padding:0.6rem 1.4rem;border-radius:6px;font-weight:700;text-decoration:none;">Tüm İlanları Gör →</a></div>`;
+    return;
+  }
+  grid.innerHTML=combined.map(i=>{
+    const cls=i.type==='is'?'green':'orange';
+    const tip=i.type==='is'?'İŞİM VAR':'ARACIM VAR';
+    const nereden=[i.nereden_ilce,i.nereden_sehir].filter(Boolean).join(', ');
+    const nereye=[i.nereye_ilce,i.nereye_sehir].filter(Boolean).join(', ');
+    return `<a href="/ilan/${i.id}" class="card"><div class="card-head ${cls}">${tip}</div><div class="card-body"><p style="margin-bottom:0.5rem;">${nereden}${nereye?' → '+nereye:''}</p><p style="color:var(--muted);font-size:0.75rem;">${(i.aciklama||'').substring(0,80)}...</p><p style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">📅 ${new Date(i.created_at).toLocaleDateString('tr-TR')}</p></div></a>`;
+  }).join('');
+}
+load();
+</script>
+</body>
+</html>
