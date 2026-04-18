@@ -557,10 +557,28 @@ async function handleSavePhone() {
   // Başındaki 0'ı çıkar, +90 ekle
   const digits = rawPhone.slice(1);
   const phoneFormatted = '+90' + digits;
-  btn.textContent = 'Kaydediliyor...';
+  btn.textContent = 'Kontrol ediliyor...';
   btn.disabled = true;
 
   const { data: { user } } = await sb.auth.getUser();
+
+  // Aynı telefon numarası başka bir hesapta kullanılıyor mu kontrol et
+  const { data: existing } = await sb.from('profiles')
+    .select('id')
+    .eq('phone', phoneFormatted)
+    .neq('id', user.id)
+    .maybeSingle();
+
+  if (existing) {
+    document.getElementById('collectPhoneError').textContent = 'Bu telefon numarası başka bir hesapta kayıtlı.';
+    document.getElementById('collectPhoneError').style.display = 'block';
+    btn.textContent = '💾 Kaydet ve Devam Et';
+    btn.disabled = false;
+    return;
+  }
+
+  btn.textContent = 'Kaydediliyor...';
+
   const { error } = await sb.from('profiles').upsert({
     id: user.id,
     phone: phoneFormatted,
