@@ -125,7 +125,7 @@ footer a:hover{color:var(--gold);}
   </div>
   <h1>Ankara Servis Şoförü İş ve Araç İlanları</h1>
   <p class="hero-sub">Ankara'da personel servisi, okul servisi ve minibüs ilanları — ücretsiz ilan ver, hızlıca anlaş.</p>
-  <a class="btn-primary" href="/">Tüm İstanbul İlanlarını Gör</a>
+  <a class="btn-primary" href="/">Tüm Ankara İlanlarını Gör</a>
 </div>
 
 <main>
@@ -222,7 +222,7 @@ async function loadIstanbulIlanlar() {
 
   if (error || !data || !data.length) {
     grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--muted);">
-      <p style="margin-bottom:1rem;">Henüz İstanbul ilanı yok.</p>
+      <p style="margin-bottom:1rem;">Henüz Ankara ilanı yok.</p>
       <a href="/" style="background:var(--gold);color:#0f1117;padding:0.6rem 1.4rem;border-radius:6px;font-weight:700;text-decoration:none;">Tüm İlanları Gör →</a>
     </div>`;
     return;
