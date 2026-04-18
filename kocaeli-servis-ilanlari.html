@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kocaeli Servis Şoförü İş ve Araç İlanları | Servisçiler Kulübü</title>
+<meta name="description" content="Kocaeli'da servis şoförü iş ilanları ve araç ilanları. Personel servisi, okul servisi, minibüs ilanları İstanbul genelinde — ücretsiz ilan ver, hızlıca anlaş."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://serviscilerkulubu.com/kocaeli-servis-ilanlari.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://serviscilerkulubu.com/kocaeli-servis-ilanlari.html"/>
+<meta property="og:title" content="Kocaeli Servis Şoförü İş ve Araç İlanları | Servisçiler Kulübü"/>
+<meta property="og:description" content="Kocaeli'da servis şoförü iş ilanları ve araç ilanları. Personel servisi, okul servisi, minibüs ilanları — ücretsiz."/>
+<meta property="og:image" content="https://serviscilerkulubu.com/Logo.png"/>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Kocaeli Servis Şoförü İş ve Araç İlanları",
+  "description": "Kocaeli'da servis şoförü iş ilanları ve araç ilanları platformu",
+  "url": "https://serviscilerkulubu.com/kocaeli-servis-ilanlari.html",
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "https://serviscilerkulubu.com"},
+      {"@type": "ListItem", "position": 2, "name": "Kocaeli Servis İlanları", "item": "https://serviscilerkulubu.com/kocaeli-servis-ilanlari.html"}
+    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Kocaeli'da servis şoförü nasıl bulunur?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Servisçiler Kulübü üzerinden ücretsiz ilan vererek Kocaeli'da servis şoförü bulabilirsiniz. İstanbul Avrupa ve Anadolu yakası ilanlarını ayrı ayrı filtreleyebilirsiniz."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kocaeli'da personel servisi ne kadar tutar?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Kocaeli'da personel servisi fiyatları güzergaha, araç kapasitesine ve mesafeye göre değişmektedir. Servisçiler Kulübü'nde araç sahipleri ile doğrudan iletişime geçerek fiyat öğrenebilirsiniz."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kocaeli'da okul servisi ilanları nerede yayınlanır?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "İstanbul okul servisi ilanları Servisçiler Kulübü'nde ücretsiz olarak yayınlanmaktadır. Avrupa ve Anadolu yakası için ayrı ilanlar verilebilir."
+      }
+    }
+  ]
+}
+</script>
+<style>
+:root { --gold:#c5a050; --dark:#0f1117; --dark2:#1a1c24; --dark3:#141620; --border:#2e3045; --muted:#7a7a90; --text:#e0d8c8; --text2:#b0b0cc; --green-dim:#1a3a20; --green-text:#4caf50; --orange-dim:#3a2010; --orange2:#f59c5a; }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;}
+nav{background:var(--dark3);border-bottom:1px solid rgba(197,160,80,0.15);padding:0 1.2rem;display:flex;align-items:center;height:56px;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,0.5);gap:0.5rem;}
+.nav-logo{display:flex;align-items:center;gap:0.6rem;cursor:pointer;text-decoration:none;}
+.nav-logo img{width:42px;height:42px;border-radius:50%;object-fit:contain;border:1.5px solid var(--gold);}
+.nav-logo-text{font-family:'Cinzel',serif;font-size:0.82rem;color:var(--gold);letter-spacing:0.08em;font-weight:700;}
+.btn-ilan{background:linear-gradient(135deg,#b8902a,#c5a050);color:#0f1117;border:none;padding:0.42rem 0.9rem;border-radius:4px;font-size:0.78rem;font-weight:800;cursor:pointer;white-space:nowrap;font-family:inherit;text-decoration:none;margin-left:auto;}
+.hero{background:linear-gradient(160deg,var(--dark3) 0%,#141620 60%,var(--dark2) 100%);padding:2.5rem 1.5rem 2rem;text-align:center;border-bottom:1px solid rgba(197,160,80,0.1);}
+.breadcrumb{font-size:0.75rem;color:var(--muted);margin-bottom:1rem;}
+.breadcrumb a{color:var(--gold);text-decoration:none;}
+h1{font-family:'Cinzel',serif;font-size:clamp(1rem,3vw,1.6rem);color:var(--gold);letter-spacing:0.05em;margin-bottom:0.6rem;}
+.hero-sub{color:var(--muted);font-size:0.88rem;margin-bottom:1.5rem;}
+.btn-primary{display:inline-block;background:linear-gradient(135deg,#b8902a,#c5a050);color:#0f1117;border:none;padding:0.75rem 2rem;border-radius:6px;font-weight:800;font-size:0.9rem;cursor:pointer;text-decoration:none;font-family:inherit;}
+main{max-width:1000px;margin:0 auto;padding:2rem 1.5rem;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin:1.5rem 0;}
+.card{background:var(--dark2);border-radius:10px;border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:transform 0.15s,border-color 0.15s;}
+.card:hover{transform:translateY(-2px);border-color:rgba(197,160,80,0.3);}
+.card-head{padding:0.55rem 1rem;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;}
+.card-head.green{background:var(--green-dim);color:var(--green-text);border-bottom:1px solid #2d5a33;}
+.card-head.orange{background:var(--orange-dim);color:var(--orange2);border-bottom:1px solid #5a3020;}
+.card-body{padding:0.9rem 1rem;font-size:0.83rem;color:var(--text2);line-height:1.5;}
+.loading{text-align:center;padding:3rem;color:var(--muted);}
+.section-title{font-family:'Cinzel',serif;font-size:1rem;color:var(--gold);letter-spacing:0.08em;margin-bottom:1rem;}
+.content-block{background:#0d0f15;border:1px solid rgba(197,160,80,0.1);border-radius:12px;padding:2rem;margin:2rem 0;}
+.content-block h2{font-family:'Cinzel',serif;font-size:1rem;color:var(--gold);margin-bottom:1rem;}
+.content-block p{font-size:0.85rem;color:var(--muted);line-height:1.9;margin-bottom:0.8rem;}
+.content-block h3{font-size:0.9rem;color:var(--text2);margin:1.2rem 0 0.5rem;font-weight:600;}
+.ilce-grid{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1rem;}
+.ilce-tag{font-size:0.75rem;color:var(--muted);background:var(--dark2);border:1px solid var(--border);border-radius:20px;padding:0.25rem 0.8rem;text-decoration:none;}
+.ilce-tag:hover{color:var(--gold);border-color:var(--gold);}
+.faq{margin:2rem 0;}
+.faq-item{border-bottom:1px solid var(--border);padding:1rem 0;}
+.faq-q{font-weight:600;font-size:0.9rem;color:var(--text);margin-bottom:0.4rem;}
+.faq-a{font-size:0.83rem;color:var(--muted);line-height:1.7;}
+.sehir-links{display:flex;flex-wrap:wrap;gap:0.5rem;margin:1rem 0;}
+.sehir-link{font-size:0.78rem;color:var(--muted);background:var(--dark2);border:1px solid var(--border);border-radius:20px;padding:0.3rem 1rem;text-decoration:none;}
+.sehir-link:hover{color:var(--gold);}
+footer{background:#0a0c12;border-top:1px solid rgba(197,160,80,0.15);margin-top:3rem;padding:2rem 1.5rem;text-align:center;font-size:0.75rem;color:#3a3a55;}
+footer a{color:var(--muted);text-decoration:none;margin:0 0.5rem;}
+footer a:hover{color:var(--gold);}
+@media(max-width:600px){main{padding:1rem;}.hero{padding:1.5rem 1rem;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="/Logo.png" alt="Servisçiler Kulübü Logosu"/>
+    <span class="nav-logo-text">Servisçiler Kulübü</span>
+  </a>
+  <a class="btn-ilan" href="/">+ İlan Ver</a>
+</nav>
+
+<div class="hero">
+  <div class="breadcrumb">
+    <a href="/">Ana Sayfa</a> › Kocaeli Servis İlanları
+  </div>
+  <h1>Kocaeli Servis Şoförü İş ve Araç İlanları</h1>
+  <p class="hero-sub">Kocaeli'da personel servisi, okul servisi ve minibüs ilanları — ücretsiz ilan ver, hızlıca anlaş.</p>
+  <a class="btn-primary" href="/">Tüm İstanbul İlanlarını Gör</a>
+</div>
+
+<main>
+  <div id="ilanGrid" class="grid">
+    <div class="loading">⏳ İstanbul ilanları yükleniyor...</div>
+  </div>
+
+  <div class="content-block">
+    <h2>Kocaeli'da Servis Şoförü ve Araç İlanları</h2>
+    <p>İstanbul, Türkiye'nin en yoğun servis taşımacılığının yapıldığı şehridir. Anadolu ve Avrupa yakasındaki fabrikalar, okullar, hastaneler ve iş merkezleri için binlerce servis şoförü ve araç sahibi her gün yeni güzergah arayışındadır.</p>
+    <p>Servisçiler Kulübü üzerinden Kocaeli'daki servis şoförü iş ilanlarını ve araç ilanlarını ücretsiz olarak yayınlayabilirsiniz. İşi olan araç arıyorsa, aracı olan iş arıyorsa doğrudan iletişime geçebilirsiniz.</p>
+
+    <h3>Kocaeli'da Hangi Semtlerde İlan Var?</h3>
+    <div class="ilce-grid">
+      <a class="ilce-tag" href="/">Kadıköy</a>
+      <a class="ilce-tag" href="/">Üsküdar</a>
+      <a class="ilce-tag" href="/">Beşiktaş</a>
+      <a class="ilce-tag" href="/">Şişli</a>
+      <a class="ilce-tag" href="/">Bağcılar</a>
+      <a class="ilce-tag" href="/">Pendik</a>
+      <a class="ilce-tag" href="/">Maltepe</a>
+      <a class="ilce-tag" href="/">Ataşehir</a>
+      <a class="ilce-tag" href="/">Kartal</a>
+      <a class="ilce-tag" href="/">Tuzla</a>
+      <a class="ilce-tag" href="/">Esenyurt</a>
+      <a class="ilce-tag" href="/">Beylikdüzü</a>
+      <a class="ilce-tag" href="/">Avcılar</a>
+      <a class="ilce-tag" href="/">Bahçelievler</a>
+      <a class="ilce-tag" href="/">İkitelli OSB</a>
+      <a class="ilce-tag" href="/">Sultanbeyli</a>
+      <a class="ilce-tag" href="/">Sancaktepe</a>
+      <a class="ilce-tag" href="/">Ümraniye</a>
+    </div>
+
+    <h3>Kocaeli'da Servis Türleri</h3>
+    <p>Personel servisi, okul servisi, turizm servisi ve özel güzergah servisçiliği için Kocaeli'da hem Anadolu yakası hem Avrupa yakası ilanları bulunmaktadır. SRC2, SRC4 belgeli şoförler ve minibüs, midibüs sahipleri ilanlarını ücretsiz verebilir.</p>
+  </div>
+
+  <div class="faq">
+    <div class="section-title">Sık Sorulan Sorular</div>
+    <div class="faq-item">
+      <div class="faq-q">Kocaeli'da servis şoförü nasıl bulunur?</div>
+      <div class="faq-a">Servisçiler Kulübü üzerinden ücretsiz ilan vererek veya mevcut ilanları inceleyerek Kocaeli'da servis şoförü bulabilirsiniz. Anadolu ve Avrupa yakası ilanlarını ayrı ayrı filtreleyebilirsiniz.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">İstanbul personel servisi fiyatları ne kadar?</div>
+      <div class="faq-a">Fiyatlar güzergah uzunluğuna, araç kapasitesine ve yakıt maliyetlerine göre değişir. Servisçiler Kulübü'nde araç sahipleriyle doğrudan iletişime geçerek güncel fiyat öğrenebilirsiniz.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">SRC2 belgesi olmadan Kocaeli'da servis şoförü olunabilir mi?</div>
+      <div class="faq-a">Ücretli yolcu taşımacılığı için SRC2 veya SRC4 belgesi zorunludur. Bazı ilanlar belgesiz şoförlere de açık olabilir, ilan detaylarını incelemeniz önerilir.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Kocaeli'da okul servisi ilanları nerede bulunur?</div>
+      <div class="faq-a">İstanbul okul servisi ilanları Servisçiler Kulübü'nde ücretsiz yayınlanmaktadır. "Okul servisi" anahtar kelimesiyle arama yaparak ilgili ilanları görebilirsiniz.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h2>Diğer Şehirlerde Servis İlanları</h2>
+    <div class="sehir-links">
+      <a class="sehir-link" href="/ankara-servis-ilanlari.html">Ankara Servis İlanları</a>
+      <a class="sehir-link" href="/izmir-servis-ilanlari.html">İzmir Servis İlanları</a>
+      <a class="sehir-link" href="/kocaeli-servis-ilanlari.html">Kocaeli Servis İlanları</a>
+      <a class="sehir-link" href="/bursa-servis-ilanlari.html">Bursa Servis İlanları</a>
+      <a class="sehir-link" href="/personel-servisi-ilanlari.html">Personel Servisi İlanları</a>
+      <a class="sehir-link" href="/okul-servisi-ilanlari.html">Okul Servisi İlanları</a>
+      <a class="sehir-link" href="/minibus-ilanlari.html">Minibüs İlanları</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p style="margin-bottom:0.8rem;">
+    <a href="/">Ana Sayfa</a>
+    <a href="/hakkimizda.html">Hakkımızda</a>
+    <a href="/kullanim-kosullari.html">Kullanım Koşulları</a>
+    <a href="/gizlilik.html">Gizlilik</a>
+    <a href="/kvkk.html">KVKK</a>
+  </p>
+  <p>© 2026 Servisçiler Kulübü · Kocaeli servis şoförü iş ilanları · Araç ilanları · Türkiye</p>
+</footer>
+
+<script>
+const { createClient } = supabase;
+const sb = createClient('https://mvecoktdgcalobeeesjz.supabase.co','sb_publishable_DJ3IS9dzeavUfKm5xP_5hA_qBCDg1NF');
+
+async function loadIstanbulIlanlar() {
+  const grid = document.getElementById('ilanGrid');
+  const { data, error } = await sb.from('ilanlar').select('*')
+    .or('nereden_sehir.ilike.%kocaeli%,nereye_sehir.ilike.%kocaeli%')
+    .order('created_at', { ascending: false })
+    .limit(12);
+
+  if (error || !data || !data.length) {
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--muted);">
+      <p style="margin-bottom:1rem;">Henüz İstanbul ilanı yok.</p>
+      <a href="/" style="background:var(--gold);color:#0f1117;padding:0.6rem 1.4rem;border-radius:6px;font-weight:700;text-decoration:none;">Tüm İlanları Gör →</a>
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = data.map(i => {
+    const isIs = i.type === 'is';
+    const tip = isIs ? 'İŞİM VAR ARAÇ ARIYORUM' : 'ARACIM VAR İŞ ARIYORUM';
+    const cls = isIs ? 'green' : 'orange';
+    const nereden = [i.nereden_ilce, i.nereden_sehir].filter(Boolean).join(', ');
+    const nereye = [i.nereye_ilce, i.nereye_sehir].filter(Boolean).join(', ');
+    return `<a href="/ilan/${i.id}" style="text-decoration:none;">
+      <div class="card">
+        <div class="card-head ${cls}">${tip}</div>
+        <div class="card-body">
+          <p style="margin-bottom:0.5rem;font-size:0.78rem;">${nereden} → ${nereye}</p>
+          <p style="color:var(--muted);font-size:0.75rem;">${(i.aciklama||'').substring(0,80)}...</p>
+          <p style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">📅 ${new Date(i.created_at).toLocaleDateString('tr-TR')} · 👤 ${i.ilan_veren||'Anonim'}</p>
+        </div>
+      </div>
+    </a>`;
+  }).join('');
+}
+
+loadIstanbulIlanlar();
+</script>
+</body>
+</html>
