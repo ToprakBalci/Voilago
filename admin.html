@@ -613,30 +613,7 @@ body.admin-mod-arac .saat-row-admin.arac-field { display: grid !important; }
       <div class="info-banner" id="triggerBanner" style="display:none;">
         <div class="ib-icon">ℹ️</div>
         <div class="ib-text">
-          <strong>Google ile giriş yapan kullanıcılar neden görünmüyor?</strong><br/>
-          Supabase, Google hesabını <code style="display:inline;padding:0.1rem 0.3rem;">auth.users</code>'a ekliyor ama <code style="display:inline;padding:0.1rem 0.3rem;">profiles</code> tablosuna otomatik eklemiyor.
-          Bunu düzeltmek için Supabase Dashboard → SQL Editor'a aşağıdaki kodu yapıştırın ve çalıştırın:
-          <code>-- Yeni her kullanıcıyı profiles'a otomatik ekle
-CREATE OR REPLACE FUNCTION public.handle_new_user()
-RETURNS TRIGGER AS $$
-BEGIN
-  INSERT INTO public.profiles (id, full_name, email, created_at)
-  VALUES (
-    NEW.id,
-    NEW.raw_user_meta_data->>'full_name',
-    NEW.email,
-    NOW()
-  )
-  ON CONFLICT (id) DO NOTHING;
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
-
-CREATE OR REPLACE TRIGGER on_auth_user_created
-  AFTER INSERT ON auth.users
-  FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();</code>
-          <button class="copy-sql-btn" onclick="copyTriggerSQL()">📋 SQL'i Kopyala</button>
-        </div>
+        
       </div>
 
       <div class="table-card">
