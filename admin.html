@@ -659,7 +659,7 @@ body.admin-mod-arac .saat-row-admin.arac-field { display: grid !important; }
 const { createClient } = supabase;
 const sb = createClient(
   'https://mvecoktdgcalobeeesjz.supabase.co',
-  'sb_publishable_DJ3IS9dzeavUfKm5xP_5hA_qBCDg1NF'
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im12ZWNva3RkZ2NhbG9iZWVlc2p6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzNjg2ODMsImV4cCI6MjA4Nzk0NDY4M30.vV-YtuB-QLnwSjGRq4snObSmpCQ4ArqCh0WEfl1QipI'
 );
 
 const ADMIN_ID = 'c8d1d46d-0afe-41ab-9da6-bcc52570d052';
@@ -704,10 +704,7 @@ async function loadAll() {
 
   document.getElementById('topbarSub').textContent = 'Son güncelleme: ' + new Date().toLocaleTimeString('tr-TR');
 
-  // Kullanıcı yoksa trigger banner'ı göster
-  if (allProfiles.length === 0) {
-    document.getElementById('triggerBanner').style.display = 'flex';
-  }
+  
 
   renderDashboard();
   renderIlanlarTable(allIlanlar);
