@@ -422,12 +422,21 @@ document.addEventListener('DOMContentLoaded', () => {
 // ─── OTURUM KONTROLÜ ───────────────────────────
 window.addEventListener('load', async () => {
   const { data: { session } } = await sb.auth.getSession();
-  if (!session) return;
+  if (session) {
+    await handleSession(session);
+    return;
+  }
+  sb.auth.onAuthStateChange(async (event, session) => {
+    if (event === 'SIGNED_IN' && session) {
+      await handleSession(session);
+    }
+  });
+});
 
+async function handleSession(session) {
   const user = session.user;
   const provider = user.app_metadata?.provider;
-
-  const { data: profile, error: profileError } = await sb.from('profiles')
+  const { data: profile } = await sb.from('profiles')
     .select('full_name, phone')
     .eq('id', user.id)
     .single();
@@ -443,9 +452,8 @@ window.addEventListener('load', async () => {
       return;
     }
   }
-
   window.location.href = 'index.html';
-});
+}
 
 // ─── SMS GÖNDER ────────────────────────────────
 async function handleSendOtp() {
