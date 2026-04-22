@@ -242,7 +242,7 @@ function cardClick(id) {
 async function loadIstanbulIlanlar() {
   const grid = document.getElementById('ilanGrid');
   const { data, error } = await sb.from('ilanlar').select('*')
-    .or('nereden_sehir.ilike.%İSTANBUL%,nereye_sehir.ilike.%İSTANBUL%,nereden_sehir.ilike.%istanbul%,nereye_sehir.ilike.%istanbul%,nereden_sehir.ilike.%İstanbul%,nereye_sehir.ilike.%İstanbul%')
+    .or('nereden_sehir.ilike.%İSTANBUL%,nereye_sehir.ilike.%istanbul%,nereden_sehir.ilike.%istanbul%,nereye_sehir.ilike.%istanbul%,nereden_sehir.ilike.%İstanbul%,nereye_sehir.ilike.%İstanbul%')
     .order('created_at', { ascending: false })
     .limit(12);
 
