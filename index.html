@@ -720,38 +720,85 @@ body.mod-arac .form-row.arac-only { display: grid !important; }
 
 <!-- DETAYLI ARAMA -->
 <div class="overlay" id="detayliAramaOverlay">
-  <div class="modal" style="max-width:480px;">
+  <div class="modal" style="max-width:500px;">
     <div class="modal-head blue">
       <span>🔍 Detaylı Arama</span>
       <button class="modal-close" onclick="closeOverlay('detayliAramaOverlay')">×</button>
     </div>
-    <div class="modal-body">
-      <div class="filter-grid">
-        <div class="form-group"><label>Nereden (Şehir)</label><input type="text" id="fNeredenSehirFilter" placeholder="İstanbul"/></div>
-        <div class="form-group"><label>Nereye (Şehir)</label><input type="text" id="fNereyeSehirFilter" placeholder="Ankara"/></div>
-        <div class="form-group"><label>Nereden (İlçe)</label><input type="text" id="fNeredenIlceFilter" placeholder="Kadıköy"/></div>
-        <div class="form-group"><label>Nereye (İlçe)</label><input type="text" id="fNereyeIlceFilter" placeholder="Beşiktaş"/></div>
-        <div class="form-group"><label>Giriş Saatinden</label><input type="text" id="fGirisSaatiMin" placeholder="07:00" maxlength="5" oninput="saatFormat(this)"/></div>
-        <div class="form-group"><label>Giriş Saatine Kadar</label><input type="text" id="fGirisSaatiMax" placeholder="09:00" maxlength="5" oninput="saatFormat(this)"/></div>
+    <div class="modal-body" style="padding:1.2rem;">
+
+      <!-- İlan Türü -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:1.2rem;">
+        <div id="ftIs" onclick="setFtType('is')" style="padding:0.7rem;border:1.5px solid #2d5a33;border-radius:8px;background:var(--green-dim);color:var(--green-text);font-size:0.82rem;font-weight:700;cursor:pointer;text-align:center;transition:all 0.15s;">🟢 İşim Var<br/><span style="font-size:0.72rem;opacity:0.8;">Araç Aranıyor</span></div>
+        <div id="ftArac" onclick="setFtType('arac')" style="padding:0.7rem;border:1.5px solid var(--border);border-radius:8px;background:var(--dark3);color:var(--muted);font-size:0.82rem;font-weight:700;cursor:pointer;text-align:center;transition:all 0.15s;">🟠 Aracım Var<br/><span style="font-size:0.72rem;opacity:0.8;">İş Aranıyor</span></div>
+        <input type="hidden" id="fTypeFilter" value=""/>
       </div>
-      <div class="form-group"><label>Servis Türü</label><input type="text" id="fServisTuruFilter" placeholder="Turizm, Şehirler Arası..."/></div>
-      <div class="filter-grid">
-        <div class="form-group"><label>Araç Markası</label><input type="text" id="fAracMarkaFilter" placeholder="Mercedes"/></div>
-        <div class="form-group"><label>Araç Modeli</label><input type="text" id="fAracModelFilter" placeholder="2019"/></div>
-        <div class="form-group"><label>Min. Koltuk</label><input type="number" id="fAracKapasiteMin" placeholder="10" min="1"/></div>
-        <div class="form-group"><label>Max. Koltuk</label><input type="number" id="fAracKapasiteMax" placeholder="50" min="1"/></div>
+
+      <!-- Güzergah -->
+      <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:0.5rem;padding-bottom:0.3rem;border-bottom:1px solid var(--border);">📍 Güzergah</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:1rem;">
+        <div>
+          <div style="font-size:0.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.3rem;">Nereden – Şehir</div>
+          <input class="da-input" type="text" id="fNeredenSehirFilter" placeholder="İstanbul"/>
+        </div>
+        <div>
+          <div style="font-size:0.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.3rem;">Nereye – Şehir</div>
+          <input class="da-input" type="text" id="fNereyeSehirFilter" placeholder="Ankara"/>
+        </div>
+        <div>
+          <div style="font-size:0.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.3rem;">Nereden – İlçe</div>
+          <input class="da-input" type="text" id="fNeredenIlceFilter" placeholder="Kadıköy"/>
+        </div>
+        <div>
+          <div style="font-size:0.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.3rem;">Nereye – İlçe</div>
+          <input class="da-input" type="text" id="fNereyeIlceFilter" placeholder="Beşiktaş"/>
+        </div>
       </div>
-      <div class="form-group"><label>İlan Türü</label>
-        <select id="fTypeFilter">
-          <option value="">Tümü</option>
-          <option value="is">İşim Var – Araç Aranıyor</option>
-          <option value="arac">Aracım Var – İş Aranıyor</option>
-        </select>
+
+      <!-- Saat -->
+      <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:0.5rem;padding-bottom:0.3rem;border-bottom:1px solid var(--border);">🕐 Giriş Saati</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:1rem;">
+        <div>
+          <div style="font-size:0.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.3rem;">En Erken</div>
+          <input class="da-input" type="text" id="fGirisSaatiMin" placeholder="07:00" maxlength="5" oninput="saatFormat(this)"/>
+        </div>
+        <div>
+          <div style="font-size:0.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.3rem;">En Geç</div>
+          <input class="da-input" type="text" id="fGirisSaatiMax" placeholder="09:00" maxlength="5" oninput="saatFormat(this)"/>
+        </div>
       </div>
-      <div class="filter-actions">
-        <button class="btn-clear" onclick="clearFilters()">🗑️ Temizle</button>
-        <button class="btn-apply" onclick="applyFilters()">✅ Uygula</button>
+
+      <!-- Araç -->
+      <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:0.5rem;padding-bottom:0.3rem;border-bottom:1px solid var(--border);">🚗 Araç Bilgileri</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:1rem;">
+        <div>
+          <div style="font-size:0.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.3rem;">Araç Markası</div>
+          <input class="da-input" type="text" id="fAracMarkaFilter" placeholder="Mercedes"/>
+        </div>
+        <div>
+          <div style="font-size:0.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.3rem;">Araç Modeli</div>
+          <input class="da-input" type="text" id="fAracModelFilter" placeholder="2019"/>
+        </div>
+        <div>
+          <div style="font-size:0.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.3rem;">Min. Koltuk</div>
+          <input class="da-input" type="number" id="fAracKapasiteMin" placeholder="10" min="1"/>
+        </div>
+        <div>
+          <div style="font-size:0.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.3rem;">Max. Koltuk</div>
+          <input class="da-input" type="number" id="fAracKapasiteMax" placeholder="50" min="1"/>
+        </div>
       </div>
+
+      <!-- Servis Türü -->
+      <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:0.5rem;padding-bottom:0.3rem;border-bottom:1px solid var(--border);">🚌 Servis Türü</div>
+      <input class="da-input" type="text" id="fServisTuruFilter" placeholder="Personel, Okul, Turizm..." style="width:100%;margin-bottom:1.2rem;"/>
+
+      <!-- Butonlar -->
+      <div style="display:grid;grid-template-columns:1fr 2fr;gap:0.6rem;">
+        <button onclick="clearFilters()" style="padding:0.75rem;background:var(--dark3);color:var(--muted);border:1.5px solid var(--border);border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">🗑️ Temizle</button>
+        <button onclick="applyFilters()" style="padding:0.75rem;background:linear-gradient(135deg,#1a3a5c,#1565c0);color:#64b5f6;border:1.5px solid #1565c0;border-radius:8px;font-size:0.88rem;font-weight:800;cursor:pointer;font-family:inherit;">🔍 Arama Yap</button>
+      </div>
+
     </div>
   </div>
 </div>
