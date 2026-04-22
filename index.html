@@ -112,6 +112,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+  
 :root {
   --gold: #c5a050;
   --gold2: #d4b060;
@@ -364,7 +365,15 @@ main { max-width:1200px; margin:0 auto; padding:1.5rem; }
 .mobile-bottom-bar a .icon { font-size:1.15rem; line-height:1; }
 .mobile-bottom-bar a.active { color:var(--gold); }
 .mobile-bottom-bar a:hover { color:var(--text); }
-
+.da-input {
+  width:100%; padding:0.6rem 0.85rem;
+  border:1.5px solid var(--border); border-radius:6px;
+  font-size:0.86rem; font-family:inherit; outline:none;
+  background:#1e2030; color:var(--text);
+  transition:border-color 0.2s;
+}
+.da-input::placeholder { color:#3e4060; }
+.da-input:focus { border-color:var(--gold); }
 .mobile-contact-fab { display:none; position:fixed; bottom:68px; right:12px; z-index:140; background:linear-gradient(135deg,#b8902a,#c5a050); color:#0f1117; border:none; border-radius:50px; padding:0.6rem 1rem; font-size:0.75rem; font-weight:800; cursor:pointer; font-family:inherit; box-shadow:0 4px 20px rgba(197,160,80,0.3); align-items:center; gap:0.4rem; }
 
 .arac-only { display: none; }
@@ -904,6 +913,16 @@ function normalizePhone(p) {
   if (p.startsWith('+90')) return '0' + p.slice(3);
   if (p.startsWith('90') && p.length === 12) return '0' + p.slice(2);
   return p;
+}
+  function setFtType(type) {
+  document.getElementById('fTypeFilter').value = type === document.getElementById('fTypeFilter').value ? '' : type;
+  const val = document.getElementById('fTypeFilter').value;
+  document.getElementById('ftIs').style.cssText = val==='is'
+    ? 'padding:0.7rem;border:1.5px solid #2d7a35;border-radius:8px;background:var(--green-dim);color:var(--green-text);font-size:0.82rem;font-weight:700;cursor:pointer;text-align:center;transition:all 0.15s;'
+    : 'padding:0.7rem;border:1.5px solid var(--border);border-radius:8px;background:var(--dark3);color:var(--muted);font-size:0.82rem;font-weight:700;cursor:pointer;text-align:center;transition:all 0.15s;';
+  document.getElementById('ftArac').style.cssText = val==='arac'
+    ? 'padding:0.7rem;border:1.5px solid #c06020;border-radius:8px;background:var(--orange-dim);color:var(--orange2);font-size:0.82rem;font-weight:700;cursor:pointer;text-align:center;transition:all 0.15s;'
+    : 'padding:0.7rem;border:1.5px solid var(--border);border-radius:8px;background:var(--dark3);color:var(--muted);font-size:0.82rem;font-weight:700;cursor:pointer;text-align:center;transition:all 0.15s;';
 }
 function saatFormat(input) {
   let v = input.value.replace(/\D/g, '');
