@@ -143,69 +143,128 @@ footer a{color:var(--muted);text-decoration:none;margin:0 0.5rem;}
     <a href="/">Ana Sayfa</a><a href="/hakkimizda.html">Hakkımızda</a><a href="/kullanim-kosullari.html">Kullanım Koşulları</a><a href="/gizlilik.html">Gizlilik</a>
   </p>
   <p>© 2026 Servisçiler Kulübü · Minibüs ilanları · Türkiye</p>
+  <div id="girisModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:200;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px);">
+  <div style="background:#1a1c24;border:1px solid rgba(197,160,80,0.2);border-radius:14px;width:100%;max-width:360px;padding:2rem;text-align:center;">
+    <div style="font-size:2.5rem;margin-bottom:0.8rem;">🔒</div>
+    <h3 style="font-family:'Cinzel',serif;font-size:1.2rem;color:#c5a050;margin-bottom:0.5rem;">Giriş Yapmanız Gerekiyor</h3>
+    <p style="color:#7a7a90;font-size:0.88rem;margin-bottom:1.2rem;">İlan detaylarını görmek için giriş yapmanız gerekiyor.</p>
+    <div style="display:flex;gap:0.7rem;">
+      <button onclick="document.getElementById('girisModal').style.display='none'" style="flex:1;padding:0.75rem;background:#141620;color:#b0b0cc;border:1.5px solid #2e3045;border-radius:6px;font-size:0.88rem;font-weight:600;cursor:pointer;">Vazgeç</button>
+      <button onclick="window.location.href='/login.html'" style="flex:1;padding:0.75rem;background:linear-gradient(135deg,#b8902a,#c5a050);color:#0f1117;border:none;border-radius:6px;font-size:0.88rem;font-weight:800;cursor:pointer;">Giriş Yap</button>
+    </div>
+  </div>
+</div>
 </footer>
 
 <script>
-const {createClient}=supabase;
-const sb=createClient('https://mvecoktdgcalobeeesjz.supabase.co','sb_publishable_DJ3IS9dzeavUfKm5xP_5hA_qBCDg1NF');
-async function load(){
-  const grid=document.getElementById('ilanGrid');
-  async function load(){
+const {createClient} = supabase;
+const sb = createClient('https://mvecoktdgcalobeeesjz.supabase.co','sb_publishable_DJ3IS9dzeavUfKm5xP_5hA_qBCDg1NF');
+
+let currentUser = null;
+
+window.addEventListener('load', async () => {
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) currentUser = session.user;
+  loadMinibüsIlanlar();
+});
+
+function cardClick(id) {
+  if (!currentUser) {
+    document.getElementById('girisModal').style.display = 'flex';
+    return;
+  }
+  window.location.href = '/ilan/' + id;
+}
+
+async function loadIstanbulIlanlar() {
   const grid = document.getElementById('ilanGrid');
-  
-  // Araç kapasitesi 8-20 arası VEYA açıklamada/servis türünde minibüs geçenler
-  const {data: d1} = await sb.from('ilanlar').select('*')
-    .ilike('aciklama','%minibüs%')
-    .order('created_at',{ascending:false}).limit(8);
-    
-  const {data: d2} = await sb.from('ilanlar').select('*')
-    .ilike('aciklama','%minibus%')
-    .order('created_at',{ascending:false}).limit(8);
+  const { data, error } = await sb.from('ilanlar').select('*')
+    .or('nereden_sehir.ilike.%MİNİBÜS%,nereye_sehir.ilike.%minibüs%,nereden_sehir.ilike.%Minibüs%,nereye_sehir.ilike.%istanbul%,nereden_sehir.ilike.%İstanbul%,nereye_sehir.ilike.%İstanbul%')
+    .order('created_at', { ascending: false })
+    .limit(12);
 
-  const {data: d3} = await sb.from('ilanlar').select('*')
-    .ilike('aciklama','%sprinter%')
-    .order('created_at',{ascending:false}).limit(8);
-
-  const {data: d4} = await sb.from('ilanlar').select('*')
-    .ilike('aciklama','%crafter%')
-    .order('created_at',{ascending:false}).limit(8);
-
-  const combined = [...(d1||[]),...(d2||[]),...(d3||[]),...(d4||[])]
-    .filter((v,i,a) => a.findIndex(x => x.id === v.id) === i)
-    .slice(0,12);
-
-  if(!combined.length){
-    grid.innerHTML = `<div class="loading"><p style="margin-bottom:1rem;">Henüz minibüs ilanı yok.</p><a href="/" style="background:var(--gold);color:#0f1117;padding:0.6rem 1.4rem;border-radius:6px;font-weight:700;text-decoration:none;">Tüm İlanları Gör →</a></div>`;
+  if (error || !data || !data.length) {
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--muted);">
+      <p style="margin-bottom:1rem;">Henüz Minibüs ilanı yok.</p>
+      <a href="/" style="background:var(--gold);color:#0f1117;padding:0.6rem 1.4rem;border-radius:6px;font-weight:700;text-decoration:none;">Tüm İlanları Gör →</a>
+    </div>`;
     return;
   }
 
-  grid.innerHTML = combined.map(i => {
-    const cls = i.type==='is' ? 'green' : 'orange';
-    const tip = i.type==='is' ? 'İŞİM VAR' : 'ARACIM VAR';
-    const nereden = [i.nereden_ilce, i.nereden_sehir].filter(Boolean).join(', ');
-    const nereye = [i.nereye_ilce, i.nereye_sehir].filter(Boolean).join(', ');
-    return `<a href="/ilan/${i.id}" class="card"><div class="card-head ${cls}">${tip}</div><div class="card-body"><p style="margin-bottom:0.5rem;">${nereden}${nereye?' → '+nereye:''}</p><p style="color:var(--muted);font-size:0.75rem;">${(i.aciklama||'').substring(0,80)}...</p><p style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">📅 ${new Date(i.created_at).toLocaleDateString('tr-TR')}</p></div></a>`;
+  grid.innerHTML = data.map(i => {
+    const isIs = i.type === 'is';
+    const cls = isIs ? 'green' : 'orange';
+    const tip = isIs ? 'İŞİM VAR ARAÇ ARIYORUM' : 'ARACIM VAR İŞ ARIYORUM';
+    const tarih = new Date(i.created_at).toLocaleDateString('tr-TR');
+    const aciklamaKisa = (i.aciklama||'-').length > 80 ? (i.aciklama||'-').substring(0,80)+'...' : (i.aciklama||'-');
+
+    if (!isIs) {
+      return `<div class="card" onclick="cardClick(${i.id})" style="cursor:pointer;">
+        <div class="card-head orange">${tip}</div>
+        <div class="card-body" style="padding:0.75rem 1rem;">
+          <div style="font-size:0.75rem;color:var(--text2);line-height:1.5;margin-bottom:0.7rem;">ℹ️ ${aciklamaKisa}</div>
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:0.6rem;padding-top:0.8rem;border-top:1px solid var(--border);">📋 İlan Bilgileri</div>
+          <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:0.3rem;background:#0f1117;border:1px solid var(--border);border-radius:6px;padding:0.5rem 0.6rem;margin-bottom:0.6rem;">
+            <div style="text-align:center;">
+              <div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;">Giriş</div>
+              <div style="font-size:0.92rem;font-weight:700;color:var(--orange2);">${i.giris_saati||'--:--'}</div>
+            </div>
+            <div style="text-align:center;padding:0 0.3rem;">
+              <div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;margin-bottom:0.2rem;">Boş Olduğu Semt</div>
+              <div style="font-size:0.75rem;font-weight:700;color:var(--text);text-transform:uppercase;">${i.nereden_ilce||'-'}</div>
+              ${i.nereden_sehir?`<div style="font-size:0.62rem;color:var(--muted);">${i.nereden_sehir}</div>`:''}
+              ${i.nereye_ilce?`<div style="font-size:0.62rem;color:var(--orange2);margin-top:0.2rem;"><span style="color:var(--muted);">İstikamet:</span> ${i.nereye_ilce}</div>`:''}
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;">Çıkış</div>
+              <div style="font-size:0.92rem;font-weight:700;color:var(--orange2);">${i.cikis_saati||'--:--'}</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;font-size:0.68rem;color:var(--muted);gap:0.2rem;">
+            <span>📅 ${tarih}</span>
+            <span style="text-align:right;">👤 ${i.ilan_veren||'Anonim'}</span>
+            ${i.servis_turu?`<span>🚌 ${i.servis_turu}</span>`:''}
+            ${i.arac_marka?`<span style="text-align:right;">🚗 ${[i.arac_marka,i.arac_model].filter(Boolean).join(' ')}</span>`:''}
+          </div>
+        </div>
+      </div>`;
+    }
+
+    return `<div class="card" onclick="cardClick(${i.id})" style="cursor:pointer;">
+      <div class="card-head green">${tip}</div>
+      <div class="card-body" style="padding:0.75rem 1rem;">
+        <div style="font-size:0.75rem;color:var(--text2);line-height:1.5;margin-bottom:0.7rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">ℹ️ ${i.aciklama||'-'}</div>
+        <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:0.6rem;padding-top:0.8rem;border-top:1px solid var(--border);">📋 İlan Bilgileri</div>
+        <div style="display:grid;grid-template-columns:auto 1fr 1fr auto;align-items:stretch;background:#0f1117;border:1px solid var(--border);border-radius:6px;padding:0.5rem 0.6rem;margin-bottom:0.6rem;gap:0.2rem;">
+          <div style="text-align:center;padding-right:0.5rem;border-right:1px solid var(--border);">
+            <div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;margin-bottom:0.2rem;">Giriş</div>
+            <div style="font-size:0.92rem;font-weight:700;color:#4caf50;">${i.giris_saati||'--:--'}</div>
+          </div>
+          <div style="text-align:center;padding:0 0.3rem;">
+            <div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;margin-bottom:0.2rem;">Nereden</div>
+            <div style="font-size:0.75rem;font-weight:700;color:var(--text);text-transform:uppercase;">${i.nereden_ilce||'-'}</div>
+            ${i.nereden_sehir?`<div style="font-size:0.62rem;color:var(--muted);">${i.nereden_sehir}</div>`:''}
+          </div>
+          <div style="text-align:center;padding:0 0.3rem;border-left:1px solid var(--border);">
+            <div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;margin-bottom:0.2rem;">Nereye</div>
+            <div style="font-size:0.75rem;font-weight:700;color:var(--text);text-transform:uppercase;">${i.nereye_ilce||'-'}</div>
+            ${i.nereye_sehir?`<div style="font-size:0.62rem;color:var(--muted);">${i.nereye_sehir}</div>`:''}
+          </div>
+          <div style="text-align:center;padding-left:0.5rem;border-left:1px solid var(--border);">
+            <div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;margin-bottom:0.2rem;">Çıkış</div>
+            <div style="font-size:0.92rem;font-weight:700;color:#4caf50;">${i.cikis_saati||'--:--'}</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;font-size:0.68rem;color:var(--muted);gap:0.3rem;">
+          <span>📅 ${tarih}</span>
+          <span>👤 ${i.ilan_veren||'Anonim'}</span>
+          ${i.servis_turu?`<span>🚌 ${i.servis_turu}</span>`:'<span></span>'}
+          <span>🚗 ${[i.arac_marka,i.arac_model].filter(Boolean).join(' ')||'-'}</span>
+        </div>
+      </div>
+    </div>`;
   }).join('');
 }
-load();
-    .order('created_at',{ascending:false}).limit(12);
-  const {data:data2}=await sb.from('ilanlar').select('*')
-    .ilike('aciklama','%minibüs%')
-    .order('created_at',{ascending:false}).limit(6);
-  const combined=[...( data||[]),...(data2||[])].filter((v,i,a)=>a.findIndex(x=>x.id===v.id)===i).slice(0,12);
-  if(!combined.length){
-    grid.innerHTML=`<div class="loading"><p style="margin-bottom:1rem;">Henüz minibüs ilanı yok.</p><a href="/" style="background:var(--gold);color:#0f1117;padding:0.6rem 1.4rem;border-radius:6px;font-weight:700;text-decoration:none;">Tüm İlanları Gör →</a></div>`;
-    return;
-  }
-  grid.innerHTML=combined.map(i=>{
-    const cls=i.type==='is'?'green':'orange';
-    const tip=i.type==='is'?'İŞİM VAR':'ARACIM VAR';
-    const nereden=[i.nereden_ilce,i.nereden_sehir].filter(Boolean).join(', ');
-    const nereye=[i.nereye_ilce,i.nereye_sehir].filter(Boolean).join(', ');
-    return `<a href="/ilan/${i.id}" class="card"><div class="card-head ${cls}">${tip}</div><div class="card-body"><p style="margin-bottom:0.5rem;">${nereden}${nereye?' → '+nereye:''}</p><p style="color:var(--muted);font-size:0.75rem;">${(i.aciklama||'').substring(0,80)}...</p><p style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">📅 ${new Date(i.created_at).toLocaleDateString('tr-TR')}</p></div></a>`;
-  }).join('');
-}
-load();
 </script>
 </body>
 </html>
