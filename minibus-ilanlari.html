@@ -150,8 +150,44 @@ const {createClient}=supabase;
 const sb=createClient('https://mvecoktdgcalobeeesjz.supabase.co','sb_publishable_DJ3IS9dzeavUfKm5xP_5hA_qBCDg1NF');
 async function load(){
   const grid=document.getElementById('ilanGrid');
-  const {data,error}=await sb.from('ilanlar').select('*')
-    .ilike('arac_marka','%mercedes%')
+  async function load(){
+  const grid = document.getElementById('ilanGrid');
+  
+  // Araç kapasitesi 8-20 arası VEYA açıklamada/servis türünde minibüs geçenler
+  const {data: d1} = await sb.from('ilanlar').select('*')
+    .ilike('aciklama','%minibüs%')
+    .order('created_at',{ascending:false}).limit(8);
+    
+  const {data: d2} = await sb.from('ilanlar').select('*')
+    .ilike('aciklama','%minibus%')
+    .order('created_at',{ascending:false}).limit(8);
+
+  const {data: d3} = await sb.from('ilanlar').select('*')
+    .ilike('aciklama','%sprinter%')
+    .order('created_at',{ascending:false}).limit(8);
+
+  const {data: d4} = await sb.from('ilanlar').select('*')
+    .ilike('aciklama','%crafter%')
+    .order('created_at',{ascending:false}).limit(8);
+
+  const combined = [...(d1||[]),...(d2||[]),...(d3||[]),...(d4||[])]
+    .filter((v,i,a) => a.findIndex(x => x.id === v.id) === i)
+    .slice(0,12);
+
+  if(!combined.length){
+    grid.innerHTML = `<div class="loading"><p style="margin-bottom:1rem;">Henüz minibüs ilanı yok.</p><a href="/" style="background:var(--gold);color:#0f1117;padding:0.6rem 1.4rem;border-radius:6px;font-weight:700;text-decoration:none;">Tüm İlanları Gör →</a></div>`;
+    return;
+  }
+
+  grid.innerHTML = combined.map(i => {
+    const cls = i.type==='is' ? 'green' : 'orange';
+    const tip = i.type==='is' ? 'İŞİM VAR' : 'ARACIM VAR';
+    const nereden = [i.nereden_ilce, i.nereden_sehir].filter(Boolean).join(', ');
+    const nereye = [i.nereye_ilce, i.nereye_sehir].filter(Boolean).join(', ');
+    return `<a href="/ilan/${i.id}" class="card"><div class="card-head ${cls}">${tip}</div><div class="card-body"><p style="margin-bottom:0.5rem;">${nereden}${nereye?' → '+nereye:''}</p><p style="color:var(--muted);font-size:0.75rem;">${(i.aciklama||'').substring(0,80)}...</p><p style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">📅 ${new Date(i.created_at).toLocaleDateString('tr-TR')}</p></div></a>`;
+  }).join('');
+}
+load();
     .order('created_at',{ascending:false}).limit(12);
   const {data:data2}=await sb.from('ilanlar').select('*')
     .ilike('aciklama','%minibüs%')
