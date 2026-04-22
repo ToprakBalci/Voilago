@@ -542,6 +542,16 @@ body.admin-mod-arac .saat-row-admin.arac-field { display: grid !important; }
               <div class="saat-hint">Örnek: 17:45</div>
             </div>
           </div>
+          <!-- Araç bilgileri (is) -->
+<div class="af-section-title is-field">🚗 Araç Bilgileri</div>
+<div class="af-row is-field">
+  <div class="af-group"><label>Araç Markası</label><input type="text" id="afAracMarka" placeholder="Mercedes"/></div>
+  <div class="af-group"><label>Araç Modeli</label><input type="text" id="afAracModel" placeholder="2020"/></div>
+</div>
+<div class="af-row is-field">
+  <div class="af-group"><label>Kaç Kişilik</label><input type="number" id="afAracKapasite" placeholder="14" min="1" max="100"/></div>
+  <div class="af-group"><label>Servis Türü</label><input type="text" id="afServisTuru" placeholder="Personel, Okul, Turizm..."/></div>
+</div>
           <!-- Araç bilgileri (arac) -->
           <div class="af-section-title arac-field">🚗 Araç Bilgileri</div>
           <div class="af-row arac-field">
@@ -912,7 +922,13 @@ function renderAktivite() {
       <div class="log-time">${e.time}</div>
     </div>`).join('') : '<div style="padding:2rem;text-align:center;color:var(--muted);">Henüz aktivite yok</div>';
 }
-
+function normalizePhone(p) {
+  if (!p) return '';
+  p = p.trim().replace(/\s/g, '');
+  if (p.startsWith('+90')) return '0' + p.slice(3);
+  if (p.startsWith('90') && p.length === 12) return '0' + p.slice(2);
+  return p;
+}
 // ── ADMIN İLAN VER ─────────────────────────────────────────
 function adminSaatFormat(input) {
   let v = input.value.replace(/\D/g, '');
@@ -975,7 +991,7 @@ async function submitAdminIlan() {
     arac_model:    isArac ? document.getElementById('afAracModelArac').value.trim() : document.getElementById('afAracModel').value.trim(),
     arac_kapasite: isArac ? (document.getElementById('afAracKapasiteArac').value || null) : (document.getElementById('afAracKapasite').value || null),
     ilan_veren: document.getElementById('afIlanVeren').value.trim() || 'Admin',
-    telefon:    document.getElementById('afTelefon').value.trim(),
+    telefon:    normalizePhone(document.getElementById('afTelefon').value),
     user_id:    ADMIN_ID
   }]);
 
