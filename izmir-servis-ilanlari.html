@@ -216,7 +216,7 @@ const sb = createClient('https://mvecoktdgcalobeeesjz.supabase.co','sb_publishab
 async function loadIstanbulIlanlar() {
   const grid = document.getElementById('ilanGrid');
   const { data, error } = await sb.from('ilanlar').select('*')
-    .or('nereden_sehir.ilike.%izmir%,nereye_sehir.ilike.%izmir%')
+    .or('nereden_sehir.ilike.%İZMİR%,nereye_sehir.ilike.%İZMİR%,nereden_sehir.ilike.%izmir%,nereye_sehir.ilike.%izmir%,nereden_sehir.ilike.%İzmir%,nereye_sehir.ilike.%İzmir%')
     .order('created_at', { ascending: false })
     .limit(12);
 
