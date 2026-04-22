@@ -1435,9 +1435,9 @@ async function submitIlan() {
   const { error } = await sb.from('ilanlar').insert([{
     type: selectedType, aciklama,
     nereden_ilce: isArac ? document.getElementById('fCalismaIlce').value.trim() : document.getElementById('fNeredenIlce').value.trim(),
-    nereden_sehir: isArac ? document.getElementById('fCalismaSehir').value.trim() : document.getElementById('fNeredenSehir').value.trim(),
+    nereden_sehir: (isArac ? document.getElementById('fCalismaSehir').value.trim() : document.getElementById('fNeredenSehir').value.trim()).toLocaleUpperCase('tr-TR'),
     nereye_ilce: isArac ? document.getElementById('fIstikametIlce').value.trim() : document.getElementById('fNereyeIlce').value.trim(),
-    nereye_sehir: isArac ? document.getElementById('fIstikametSehir').value.trim() : document.getElementById('fNereyeSehir').value.trim(),
+    nereye_sehir: (isArac ? document.getElementById('fIstikametSehir').value.trim() : document.getElementById('fNereyeSehir').value.trim()).toLocaleUpperCase('tr-TR'),
     giris_saati: isArac ? document.getElementById('fGirisArac').value.trim() : document.getElementById('fGiris').value.trim(),
     cikis_saati: isArac ? document.getElementById('fCikisArac').value.trim() : document.getElementById('fCikis').value.trim(),
     servis_turu: isArac ? document.getElementById('fServisTuruArac').value.trim() : document.getElementById('fServisTuru').value.trim(),
