@@ -1421,7 +1421,7 @@ async function openIlanModal() {
       }
       if (profile.phone) {
         const el = document.getElementById('fTelefon');
-        el.value = profile.phone;
+        el.value = normalizePhone(profile.phone);
         el.readOnly = true;
         el.style.opacity = '0.65';
         el.style.cursor = 'not-allowed';
