@@ -176,7 +176,7 @@ function cardClick(id) {
   window.location.href = '/ilan/' + id;
 }
 
-async function loadIstanbulIlanlar() {
+async function loadOkulIlanlar() {
   const grid = document.getElementById('ilanGrid');
   const { data, error } = await sb.from('ilanlar').select('*')
     .or('nereden_sehir.ilike.%OKUL%,nereye_sehir.ilike.%okul%,nereden_sehir.ilike.%istanbul%,nereye_sehir.ilike.%istanbul%,nereden_sehir.ilike.%Okul%,nereye_sehir.ilike.%İstanbul%')
