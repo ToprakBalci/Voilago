@@ -179,7 +179,7 @@ function cardClick(id) {
 async function loadOkulIlanlar() {
   const grid = document.getElementById('ilanGrid');
   const { data, error } = await sb.from('ilanlar').select('*')
-    .or('nereden_sehir.ilike.%OKUL%,nereye_sehir.ilike.%okul%,nereden_sehir.ilike.%istanbul%,nereye_sehir.ilike.%istanbul%,nereden_sehir.ilike.%Okul%,nereye_sehir.ilike.%İstanbul%')
+    .or('nereden_sehir.ilike.%OKUL%,nereye_sehir.ilike.%okul%,nereden_sehir.ilike.%Okul%,nereye_sehir.ilike.%istanbul%,nereden_sehir.ilike.%Okul%,nereye_sehir.ilike.%İstanbul%')
     .order('created_at', { ascending: false })
     .limit(12);
 
