@@ -176,10 +176,10 @@ function cardClick(id) {
   window.location.href = '/ilan/' + id;
 }
 
-async function loadIstanbulIlanlar() {
+async function loadMinibüsIlanlar() {
   const grid = document.getElementById('ilanGrid');
   const { data, error } = await sb.from('ilanlar').select('*')
-    .or('nereden_sehir.ilike.%MİNİBÜS%,nereye_sehir.ilike.%minibüs%,nereden_sehir.ilike.%Minibüs%,nereye_sehir.ilike.%istanbul%,nereden_sehir.ilike.%İstanbul%,nereye_sehir.ilike.%İstanbul%')
+   .or('aciklama.ilike.%minib%,aciklama.ilike.%sprinter%,aciklama.ilike.%crafter%,servis_turu.ilike.%minib%,arac_marka.ilike.%mercedes%,arac_marka.ilike.%volkswagen%,arac_marka.ilike.%fiat%')
     .order('created_at', { ascending: false })
     .limit(12);
 
