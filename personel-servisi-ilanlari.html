@@ -176,10 +176,10 @@ function cardClick(id) {
   window.location.href = '/ilan/' + id;
 }
 
-async function loadIstanbulIlanlar() {
+async function loadPersonelIlanlar() {
   const grid = document.getElementById('ilanGrid');
   const { data, error } = await sb.from('ilanlar').select('*')
-    .or('nereden_sehir.ilike.%PERSONEL%,nereye_sehir.ilike.%personel%,nereden_sehir.ilike.%istanbul%,nereye_sehir.ilike.%istanbul%,nereden_sehir.ilike.%Personel%,nereye_sehir.ilike.%İstanbul%')
+    .or('nereden_sehir.ilike.%PERSONEL%,nereye_sehir.ilike.%personel%,nereden_sehir.ilike.%Personel%,nereye_sehir.ilike.%istanbul%,nereden_sehir.ilike.%Personel%,nereye_sehir.ilike.%İstanbul%')
     .order('created_at', { ascending: false })
     .limit(12);
 
